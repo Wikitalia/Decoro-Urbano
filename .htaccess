@@ -2,7 +2,7 @@ RewriteEngine On
 RewriteBase /
 
 #Foto segnalazione
-RewriteRule ^images/segnalazioni/(.*).jpg /resize2.php?s=$1 [L,QSA]
+RewriteRule ^images/segnalazioni/(.*).jpg /resize.php?s=$1 [L,QSA]
 
 RewriteCond %{HTTP_HOST} ^decorourbano\.org$ [NC]
 RewriteRule ^(.*)$ http://www.decorourbano.org/$1 [L,R=301]

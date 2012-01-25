@@ -136,29 +136,53 @@ function resize_crop($original_image_gd,$crop_height,$crop_width) {
 
 }
 
-$crop_height=isset($_GET['h'])?$_GET['h']:0;
-$crop_width=isset($_GET['w'])?$_GET['w']:0;
+if (isset($_GET['s'])) {
 
-$cache_file = clean_string($crop_width.'_'.$crop_height.'_'.$_GET['f']);
+	$el = explode('-',$_GET['s']);
+	
+	$len = count($el);
+	
+	$idu = $el[$len-4];
+	$ids = $el[$len-3];
+	
+	$source_file_name = '/images/segnalazioni/'.$idu.'/'.$ids.'/1.jpeg';
+	
+	$target_width = $el[$len-2];
+	$target_height = $el[$len-1];
+	
+	$crop_width=isset($target_width)?$target_width:0;
+	$crop_height=isset($target_height)?$target_height:0;	
+
+} else {
+
+	$crop_width=isset($_GET['w'])?$_GET['w']:0;
+	$crop_height=isset($_GET['h'])?$_GET['h']:0;
+	$source_file_name=$_GET['f'];
+
+}
+
+$cache_file = clean_string($crop_width.'_'.$crop_height.'_'.$source_file_name);
 $cache_path = 'images/cache/';
 
 $cache_full_path = $cache_path.$cache_file;
 
+if ($crop_width == 0 && $crop_height == 0 && is_file($_SERVER['DOCUMENT_ROOT'].$source_file_name)) {
 
+	header ('Content-length: ' .filesize($_SERVER['DOCUMENT_ROOT'].$source_file_name));
+	header ("Content-type: image/jpeg");
+	readfile($_SERVER['DOCUMENT_ROOT'].$source_file_name);
 
-if (is_file($_SERVER['DOCUMENT_ROOT'].$cache_full_path)) {
-
+} elseif (is_file($_SERVER['DOCUMENT_ROOT'].$cache_full_path)) {
 
 	header ('Content-length: ' .filesize($cache_full_path));
 	header ("Content-type: image/jpeg");
 	readfile($cache_full_path);
 
-
 } else {
 
-	if (substr($_GET['f'],0,7) == 'http://' || substr($_GET['f'],0,8) == 'https://') {
+	if (substr($source_file_name,0,7) == 'http://' || substr($source_file_name,0,8) == 'https://') {
 	
-		$data = file_get_contents($_GET['f']);
+		$data = file_get_contents($source_file_name);
 	
 		$original_image_gd = imagecreatefromstring($data);
 		$cropped_image_gd = resize_crop($original_image_gd,$crop_height,$crop_width);
@@ -170,7 +194,7 @@ if (is_file($_SERVER['DOCUMENT_ROOT'].$cache_full_path)) {
 	
 	} else {
 	
-		$file_name=$_SERVER['DOCUMENT_ROOT'].$_GET['f'];
+		$file_name=$_SERVER['DOCUMENT_ROOT'].$source_file_name;
 	
 		if (!is_file($file_name)) {
 			header("HTTP/1.0 404 Not Found");
