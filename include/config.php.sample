@@ -47,7 +47,6 @@ $settings['sito']['dominio'] = '';
 $settings['sito']['percorso'] = '/var/www/'.$settings['sito']['dominio'].'/';
 $settings['sito']['url_ns'] = 'http://www.'.$settings['sito']['dominio'];
 $settings['sito']['url'] = $settings['sito']['url_ns'].'/';
-$settings['sito']['url_mobile'] = 'http://m.'.$settings['sito']['dominio'].'/';
 $settings['sito']['debug'] = 0;
 $settings['sito']['hashsalt'] = '';
 $settings['sito']['encrypt_key'] = '';
@@ -64,7 +63,7 @@ $settings['apps']['currentiPhoneVersion'] = '1.3';
 $settings['apps']['currentAndroidVersion'] = '8';
 
 // Documenti 
-$settings['docs']['presentazione'] = 'http://www.'.$settings['sito']['dominio'].'/docs/Decoro_Urbano.pdf';
+$settings['docs']['presentazione'] = $settings['sito']['url'].'docs/Decoro_Urbano.pdf';
 
 // Pagine
 $settings['sito']['prehome'] = $settings['sito']['url'];//.'prehome/';
