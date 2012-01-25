@@ -1,0 +1,57 @@
+/*
+ * ----------------------------------------------------------------------------
+ * Decoro Urbano version 0.2.1
+ * ----------------------------------------------------------------------------
+ * Copyright Maiora Labs Srl (c) 2012
+ * ----------------------------------------------------------------------------   
+ * 
+ * This file is part of Decoro Urbano.
+ * 
+ * Decoro Urbano is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Decoro Urbano is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Decoro Urbano.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* CSS Document */
+
+#login, #logout {
+		 background:transparent;
+		 filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#77000000,endColorstr=#77000000);
+		 zoom: 1;
+	} 
+	#login input[type="text"], #login input[type="password"] {
+			width:32%;
+		}
+/*
+#invSegnCategoria .ui-button-text {
+		font-size:.95em;
+		width:100px;
+	}
+*/
+.loadingMask {
+	background:transparent;
+	 filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#77000000,endColorstr=#77000000);
+	 zoom: 1;
+}
+
+#login input[type="submit"] {
+	width:22%;
+	font-size:0.7em;
+}
+#login input[type="text"], #login input[type="password"] {
+	height:16px;
+}
+
+/* header */
+#topBox {
+	background:url(../images/opacity.png);
+}

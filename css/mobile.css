@@ -1,0 +1,105 @@
+/*
+ * ----------------------------------------------------------------------------
+ * Decoro Urbano version 0.2.1
+ * ----------------------------------------------------------------------------
+ * Copyright Maiora Labs Srl (c) 2012
+ * ----------------------------------------------------------------------------   
+ * 
+ * This file is part of Decoro Urbano.
+ * 
+ * Decoro Urbano is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Decoro Urbano is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Decoro Urbano.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* CSS Document */
+
+body {
+	margin:0;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	-webkit-text-size-adjust:none;
+	color:#5D5D5D;
+}
+.container {
+	min-width:250px;
+	padding:10px;
+}
+	#body {
+		width:100%;
+	}
+		#header {
+			background:#539315;
+		}
+	
+	#footer {
+		border-top:1px dashed #ccc;
+		text-align:right;
+		font-size:0.8em;
+	}
+	
+/* Lista segnalazioni */ 
+
+#segnalazioniCerca {
+	margin-bottom:10px;
+}
+.segnalazioniContainer {
+	width:96%;
+	padding:2%;
+	border:1px solid #ccc;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background:-webkit-gradient(linear, left top, left bottom,  from(#e0e0e0), to(#fff)); 
+}
+/*
+.segnalazioneContainer:hover {
+	background:-webkit-gradient(linear, left top, left bottom,  from(#e0ebe1), to(#fff)); 
+}
+*/
+	.segnalazioniUtente {
+		margin-bottom:5px;
+		padding-bottom:5px;
+		border-bottom:1px dashed #ccc;
+	}
+	.segnalazioniDesc {
+		margin-bottom:5px;
+		padding-bottom:5px;
+		border-bottom:1px dashed #ccc;
+	}
+	.segnalazioniAddr {
+		
+	}
+
+/* Dettaglio segnalazione */
+#segnalazioneContainer {
+	width:96%;
+	padding:2%;
+	border:1px solid #ccc;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background:-webkit-gradient(linear, left top, left bottom,  from(#e0e0e0), to(#fff)); 
+}
+	#segnalazioneUtente {
+		margin-bottom:5px;
+		padding-bottom:5px;
+		border-bottom:1px dashed #ccc;
+	}
+	#segnalazioneDesc {
+		margin-bottom:5px;
+		padding-bottom:5px;
+		border-bottom:1px dashed #ccc;
+	}
+	#segnalazioneAddr {
+		
+	}

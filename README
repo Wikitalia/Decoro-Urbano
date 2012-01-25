@@ -1,0 +1,26 @@
+Installazione pacchetto
+- Estrarre l'archivio in un percorso accessibile dal web server
+- Importare il DB contenuto della directory db/
+- Configurare i parametri necessari nel file include/config.php
+- Modificare i permessi sulle seguenti directory per consentire la scrittura al web server:
+	- ajax/uploads
+	- images/avatar
+	- images/cache
+	- images/segnalazioni
+	- include/smarty/private/templates_c
+
+
+
+Struttura directory
+- admin/: contiene le pagine del pannello di amministrazione di DecoroUrbano
+- ajax/: contiene gli script che vengono richiamati da richieste AJAX
+- app/: contiene gli script di interfaccia con le app mobile di DecoroUrbano
+- comuni/: contiene le pagine del pannello di amministrazione dei Comuni
+- css/: contiene i file CSS
+- email/: contiene i template smarty delle email HTML che vengono inviate da DecoroUrbano
+- include/: contiene file di utilità e le librerie di Decoro Urbano
+- js/: contiene gli script Javascript utilizzati
+- pagine/: contiene la lista dei controller che vengono caricati dal file index.php per visualizzare la pagina richiesta
+- templates/: contiene i template smarty delle pagine del sito
+- testi/: contiene i file contenenti i testi del sito nelle diverse lingue
+- index.php: unica pagina pubblica, effettua il routing delle richieste, caricando il giusto controller e il giusto template

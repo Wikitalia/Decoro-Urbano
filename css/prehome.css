@@ -1,0 +1,322 @@
+/*
+ * ----------------------------------------------------------------------------
+ * Decoro Urbano version 0.2.1
+ * ----------------------------------------------------------------------------
+ * Copyright Maiora Labs Srl (c) 2012
+ * ----------------------------------------------------------------------------   
+ * 
+ * This file is part of Decoro Urbano.
+ * 
+ * Decoro Urbano is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Decoro Urbano is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Decoro Urbano.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* CSS Document */
+#bodyPrehome {
+	
+}
+	#topCategories {
+		background:url(../images/prehome/iconeTop.png) no-repeat center;
+		height:152px;
+		margin-top:20px;
+		cursor:pointer;
+	}
+	#topIntro, #midContainer {
+		margin:15px 0 0 0;
+		border-bottom:1px dotted #ccc;
+		padding-bottom:15px;
+		cursor:pointer;
+	} 
+		#topIntro h1 {
+			font-family: 'Nunito';
+			font-size:40px;
+			color:#632016;
+			text-align:center;
+			letter-spacing:-1px;
+			margin:0;
+			padding:0;
+		}
+		#topIntro h2 {
+			font-family:Arial, sans-serif;
+			font-size:15px;
+			color:#363636;
+			text-align:center;
+			font-weight:normal;
+			margin:5px 0 0 0;
+			padding:0;
+		}
+ 		#cittadiniAttivi {
+ 			text-align:center;
+			font-size:16px;
+			color:#363636;
+			padding-bottom:15px;
+			border-bottom:1px dotted #ccc;
+ 		}
+		#cittadiniAttivi b{
+			font-size:55px;
+			font-family:Arial, Helvetica, sans-serif;
+			color:#f8692e;
+			}
+	
+		#leftMobile {
+			background:url(../images/prehome/prehomeMobile.png) no-repeat top center;
+			width:515px;
+			height:135px;
+			padding-top:270px;
+			cursor:pointer;
+		}
+		#rightRegister {
+			width:375px;
+			height:338px;
+			float:right;
+			background:url(../images/prehome/registratiBox.png) no-repeat;
+		}
+			#rightRegister h3 {
+				width:280px;
+				margin-left:30px;
+				padding:0;
+				font-size:16px;
+				font-family: 'Nunito';
+				font-weight:bold;
+				float:left;
+			}
+			#rightRegister #rightRegisterIntro {
+				width:320px;
+				margin:5px 0 10px 30px;
+				padding:0 0 5px 0;
+				float:left;
+				border-bottom:1px dotted #d7d7d7;
+			}
+			#rightRegister img {
+				float:right;
+				margin:12px 20px 0 0;
+			}
+			#rightRegister form {
+				display:block;
+				float:left;
+				margin:5px 0 0 30px;
+			}
+				#rightRegister form label {
+					display:block;
+					float:left;
+					width:110px;
+					text-align:right;
+					margin:5px 7px 0 0;
+				}
+				#rightRegister div {
+					margin-bottom:8px;
+				}
+				#rightRegister form input[type="text"], #rightRegister form input[type="password"] {
+					width:190px;
+					height:25px;
+					-webkit-box-shadow: 0 -1px 0 rgba(0, 0, 0, .1),inset 0 1px 2px rgba(0, 0, 0, .0);
+					-moz-box-shadow: 0 -1px 0 rgba(0, 0, 0, .1),inset 0 1px 2px rgba(0, 0, 0, .0);
+					box-shadow: 0 -1px 0 rgba(0, 0, 0, .1),inset 0 1px 2px rgba(0, 0, 0, .0);
+					background-color: white;
+					color: #5d5d5d;
+					opacity: .7;
+					
+					-webkit-transition: opacity 1s;
+					-moz-transition: opacity 1s;
+					-o-transition: opacity 1s;
+					-webkit-appearance: textfield;
+					padding: 1px;
+					border: 2px inset #e0e0e0;
+					-webkit-rtl-ordering: logical;
+					-webkit-user-select: text;
+					cursor: auto;
+	
+					background-color: #FAFAFA;
+					-webkit-border-radius: 8px;
+					border-radius: 8px;
+					margin-right:2px;
+				}
+			
+		#midBoxes {
+			margin-bottom:25px;
+		}
+			#midBoxes h4 {
+				font-family: 'Nunito';
+				font-weight:bold;
+				font-size:18px;
+				margin:0;
+				border-bottom:1px dotted #d7d7d7;
+				padding:2px 10px;
+			}
+			#leftBox {
+				width:453px;
+				height:259px;
+				border:1px solid #d7d7d7;
+				padding:1px;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+				background:url(../images/prehome/boxBackground.gif) top repeat-x;
+			}
+				#leftBox h4 {
+					width:433px;
+					background:#f8692e;
+					-webkit-border-top-left-radius: 5px;
+					-webkit-border-top-right-radius: 5px;
+					-moz-border-radius-topleft: 5px;
+					-moz-border-radius-topright: 5px;
+					border-top-left-radius: 5px;
+					border-top-right-radius: 5px;
+					color:white;
+					border-bottom:none;
+				}
+				#leftBox #comune2Intro {
+					width:433px;
+					padding:10px;
+					font-size:14px;
+					border-bottom:1px dotted #d7d7d7;
+					line-height:18px;
+					margin-bottom:10px;
+				}
+				#leftBox #comune2Box {
+					width:157px;
+					height:97px;
+					margin-left:10px;
+					background:url(../images/prehome/pressKitDownload.png) no-repeat;
+					cursor:pointer;
+				}
+				#leftBox ul {
+					margin:10px 0 0 172px;
+					padding:0;
+					list-style:none;
+				}
+					#leftBox ul li {
+						font-size:12px;
+						margin-bottom:5px;
+					}
+				#comune2Contatti {
+					width:433px;
+					padding:5px 10px;
+					margin-top:10px;
+					border-top:1px dotted #d7d7d7;
+				}
+			#rightBox {
+				width:453px;
+				border:1px solid #d7d7d7;
+				padding:1px;
+				float:right;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+				background:url(../images/prehome/boxBackground.gif) top repeat-x;
+			}
+				#rightBox h4 {
+					margin-bottom:10px;
+				}
+				#ultimeSegnalazioni {
+					height:220px;
+					overflow:hidden;
+				}
+				.ultimeSegnalazioni {
+					margin-bottom:9px;
+					padding-bottom:9px;
+					cursor:pointer;
+				}
+					.ultimeSegnalazioni .leftAvatar {
+						width:40px;
+						padding-left:10px;
+					}
+					.ultimeSegnalazioni .rightContents {
+						width:390px;
+					}
+					
+
+			#twitterBox {
+				border-top:1px dotted #d7d7d7;
+				border-bottom:1px dotted #d7d7d7;
+				padding:5px 0;
+				font-family:Georgia, "Times New Roman", Times, serif;
+			}
+				#twitterText {
+					width:690px;
+					font-size:15px;
+				}
+				#twitterFollowBox {
+					margin-top:5px; 
+					width:200px; 
+				}
+			
+			#bottomBox {
+				background:#f2f2f2;
+				padding:15px 15px 10px 15px;
+				width:910px;
+			}
+				#topSegnBox {
+					width:253px;
+					height:249px !important;
+					margin-right:20px;
+				}
+					#topSegnBox h5 {
+						width:233px;
+						height:21px;
+						padding:5px 10px;
+						margin:0;
+						color:white;
+						font-size:16px;
+						font-family: 'Nunito';
+						background:#3a891d;
+					}
+					#topSegnBox .bottomBoxBody {
+						width:231px;
+						padding:9px 10px;
+						border:1px solid #ccc;
+						border-top-style:none;
+					}
+						.bottomBoxSegnalazione {
+							padding-bottom:10px;
+						}
+						.bottomBoxSegnInfos {
+							width:190px;
+							margin-left:10px;
+						}
+				#newSegnBox {
+					width:207px;
+				}		
+					#newSegnBox h5 {
+						width:187px;
+						height:21px;
+						padding:5px 10px;
+						margin:0;
+						color:white;
+						font-size:16px;
+						font-family: 'Nunito';
+						background:#3a891d;
+					}
+					#newSegnBox .bottomBoxBody {
+						width:205px;
+						padding:0;
+						border:1px solid #ccc;
+						border-top-style:none;
+					}
+						#newSegnBox .bottomBoxBody img {
+							float:left;
+							margin:1px 0 0 1px;
+							width:67px;
+						}
+				#facebookBox {
+					width:410px;
+					float:right;
+					border-bottom: solid 1px #94A3C4;
+				}
+
+               #cittadiniAttivi i{
+                       font-size:10px;
+                       font-style:normal;
+                       line-height:22px;
+                       }
+					

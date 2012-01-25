@@ -1,0 +1,1037 @@
+/*
+ * ----------------------------------------------------------------------------
+ * Decoro Urbano version 0.2.1
+ * ----------------------------------------------------------------------------
+ * Copyright Maiora Labs Srl (c) 2012
+ * ----------------------------------------------------------------------------   
+ * 
+ * This file is part of Decoro Urbano.
+ * 
+ * Decoro Urbano is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Decoro Urbano is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Decoro Urbano.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@charset "utf-8";
+/* CSS Document */
+
+.divider {
+	background:url(../images/divider.gif) bottom repeat-x;	
+	width:100%;
+	height:2px;
+	overflow:hidden;
+	margin:20px 0;
+}
+
+.pageTitle {
+	font-size:1.2em;
+	font-weight:bold;
+	color:#195e28;
+	margin:0;
+	padding:0;
+}
+
+.smallThumb {
+	width:40px;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+	outline:none;
+}
+
+/* Icone */
+.weDUIcon {
+	width:84px;
+	height:37px;
+	background:url(../images/icons.png) no-repeat  -1px -169px;
+	position:relative;
+	top:82px;
+	right:-336px;
+	cursor:pointer;
+}
+.weDUIcon:hover {
+	width:84px;
+	background:url(../images/icons.png) no-repeat  -83px -170px;
+}
+
+.leftArrow {
+	background:url(../images/icons.png) no-repeat  -320px 0;
+	width:17px;
+	height:18px;
+	cursor:pointer;
+	margin-right:5px;
+	float:right;
+}
+.leftArrow:hover {
+		background:url(../images/icons.png) no-repeat  -320px -32px;
+}
+.leftArrow:active {
+		background:url(../images/icons.png) no-repeat  -320px -64px;
+}
+
+.rightArrow {
+	background:url(../images/icons.png) no-repeat  -288px 0;
+	width:17px;
+	height:18px;
+	margin-right:5px;
+	float:right;
+	cursor:pointer;
+}
+.rightArrow:hover {
+		background:url(../images/icons.png) no-repeat  -288px -32px;
+}
+.rightArrow:active {
+		background:url(../images/icons.png) no-repeat  -288px -64px;
+}
+
+.appleIcon {
+	width:15px;
+	height:18px;
+	background:url(../images/icons.png) no-repeat  -393px -170px;
+}
+.androidIcon {
+	width:15px;
+	height:18px;
+	background:url(../images/icons.png) no-repeat  -393px -192px;
+}
+
+.fbIcon {
+	width:18px;
+	height:18px;
+	background:url(../images/icons.png) no-repeat  -226px -147px;
+}
+.twIcon {
+	width:18px;
+	height:18px;
+	background:url(../images/icons.png) no-repeat  -246px -147px;
+}
+
+.accediFacebook {
+	width:225px;
+	height:23px;
+	background:url(../images/icons.png) no-repeat  0 -144px;
+	cursor:pointer;
+}
+
+.bigLeftArrow {
+	background:url(../images/icons.png) no-repeat  -335px -128px;
+	width:16px;
+	height:16px;
+	cursor:pointer;
+}
+.bigLeftArrow:hover {
+	background:url(../images/icons.png) no-repeat  -301px -128px;
+}
+
+.bigRightArrow {
+	background:url(../images/icons.png) no-repeat  -352px -128px;
+	width:16px;
+	height:16px;
+	cursor:pointer;
+}
+.bigRightArrow:hover {
+	background:url(../images/icons.png) no-repeat  -318px -128px;
+}
+
+.bigBottomArrow {
+	background:url(../images/icons.png) no-repeat  -352px -145px;
+	width:16px;
+	height:16px;
+	cursor:pointer;
+	border:0;
+	padding:0;
+}
+.bigBottomArrow:hover {
+	background:url(../images/icons.png) no-repeat  -318px -145px;
+}
+.bigTopArrow {
+	background:url(../images/icons.png) no-repeat  -335px -145px;
+	width:16px;
+	height:16px;
+	cursor:pointer;
+	border:0;
+	padding:0;
+}
+.bigTopArrow:hover {
+	background:url(../images/icons.png) no-repeat  -301px -145px;
+}
+
+.optionsIcon {
+	background:url(../images/icons.png) no-repeat  -26px -67px;
+	width:15px;
+	height:10px;
+	cursor:pointer;
+}
+.optionsIcon:hover {
+	background:url(../images/icons.png) no-repeat  -26px -54px;
+}
+.modifyIcon {
+	width:12px;
+	height:10px;
+	background:url(../images/icons.png) no-repeat  -45px -67px;
+	cursor:pointer;
+}
+.modifyIcon:hover {
+	background:url(../images/icons.png) no-repeat  -45px -54px;
+}
+
+.closeIcon {
+	background:url(../images/icons.png) no-repeat  -112px -80px;
+	width:12px;
+	height:12px;
+	cursor:pointer;
+}
+.closeIcon:hover {
+	background:url(../images/icons.png) no-repeat  -128px -80px;
+}
+
+.bigCloseIcon {
+	background:url(../images/icons.png) no-repeat  -270px -125px;
+	width:18px;
+	height:18px;
+	cursor:pointer;
+}
+.bigCloseIcon:hover {
+	background:url(../images/icons.png) no-repeat  -248px -125px;
+}
+
+.infoIcon {
+	background:url(../images/icons.png) no-repeat  -382px -144px;
+	width:25px;
+	height:25px;
+	cursor:pointer;
+}
+
+.positionIcon {
+	width:14px;
+	height:15px;
+	background:url(../images/icons.png) no-repeat  -16px -111px;
+}
+
+.addFriendIcon {
+	width:15px;
+	height:12px;
+	cursor:pointer;
+	background:url(../images/icons.png) no-repeat  -160px -32px;
+}
+.addFriendIcon:hover {
+	background:url(../images/icons.png) no-repeat  -176px -32px;
+}
+
+
+/* */
+.testoFumetto {
+	margin:20px 0 0 0;
+	width:660px;
+	padding:10px;
+	background:white;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+/* Icone categorie segnalazioni */
+.rifiutiIcon {
+	height:42px;
+	width:42px;
+	display:block;
+	margin:5px auto -10px auto;
+	background:url(../images/iconeCategorie.png) no-repeat 0 -42px;
+}
+.ui-state-active .rifiutiIcon, .rifiutiIconActive  {
+	background:url(../images/iconeCategorie.png) no-repeat 0 0;
+}
+.vandalismoIcon {
+	height:42px;
+	width:42px;
+	display:block;
+	margin:5px auto -10px auto;
+	background:url(../images/iconeCategorie.png) no-repeat -52px -42px;
+}
+.ui-state-active .vandalismoIcon, .vandalismoIconActive  {
+	background:url(../images/iconeCategorie.png) no-repeat -52px 0;
+	
+}
+
+.sosBucheIcon {
+	height:42px;
+	width:42px;
+	display:block;
+	margin:5PX auto -10px auto;
+	color:#5c5c5c;
+	background:url(../images/iconeCategorie.png) no-repeat -105px -42px;
+}
+.ui-state-active .sosBucheIcon, .sosBucheIconActive  {
+	background:url(../images/iconeCategorie.png) no-repeat -105px 0;
+}
+.degradoZoneVerdiIcon {
+	height:42px;
+	width:42px;
+	display:block;
+	margin:5px auto -10px auto;
+	background:url(../images/iconeCategorie.png) no-repeat -159px -42px;
+}
+.ui-state-active .degradoZoneVerdiIcon, .degradoZoneVerdiIconActive  {
+	background:url(../images/iconeCategorie.png) no-repeat -159px 0;
+}
+.segnaleticaStradaleIcon {
+	height:42px;
+	width:42px;
+	display:block;
+	margin:5px auto -10px auto;
+	background:url(../images/iconeCategorie.png) no-repeat -212px -42px;
+}
+.ui-state-active .segnaleticaStradaleIcon, .segnaleticaStradaleIconActive  {
+	background:url(../images/iconeCategorie.png) no-repeat -212px 0;
+}
+.affissioniAbusiveIcon {
+	height:42px;
+	width:42px;
+	display:block;
+	margin:5px auto -10px auto;
+	background:url(../images/iconeCategorie.png) no-repeat -265px -42px;
+}
+.ui-state-active .affissioniAbusiveIcon, .affissioniAbusiveIconActive  {
+	background:url(../images/iconeCategorie.png) no-repeat -265px 0;
+}
+
+/* Icone piccole categorie */
+.rifiutiSmallIcon {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -371px 0;
+}
+.ui-state-active .rifiutiSmallIcon, .rifiutiSmallIconActive {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -387px 0;
+}
+
+.vandalismoSmallIcon {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -374px -23px;
+}
+.ui-state-active .vandalismoSmallIcon, .vandalismoSmallIconActive {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -390px -23px;
+}
+
+.sosBucheSmallIcon {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -371px -49px;
+}
+.ui-state-active .sosBucheSmallIcon, .sosBucheSmallIconActive {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -387px -49px;
+}
+
+.degradoZoneVerdiSmallIcon {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -371px -73px;
+}
+.ui-state-active .degradoZoneVerdiSmallIcon, .degradoZoneVerdiSmallIconActive {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -387px -73px;
+}
+
+
+.segnaleticaStradaleSmallIcon {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -371px -98px;
+}
+.ui-state-active .segnaleticaStradaleSmallIcon, .segnaleticaStradaleSmallIconActive {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -387px -98px;
+}
+
+.affissioniAbusiveSmallIcon {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -371px -122px;
+}
+.ui-state-active .affissioniAbusiveSmallIcon, .affissioniAbusiveSmallIconActive {
+	width:15px;
+	height:17px;
+	background:url(/images/icons.png) no-repeat -387px -122px;
+}
+
+
+
+/* box segnalazione */
+
+.segnUtente {
+	border-bottom:1px dotted #ccc;
+	margin-bottom:10px;
+	padding-bottom:10px;
+}
+	.segnUtente img {
+		margin-right:10px;
+	}
+
+.segnListaBody {
+	width:650px;
+	overflow:hidden;
+}
+	.segnOpzioni {
+		position:relative; 
+		top:14px; 
+		left:-135px; 
+		width:120px; 
+		z-index:1000; 
+		background:white;
+		border:1px solid #327E04;
+		-webkit-border-radius: 5px;
+		-webkit-border-top-right-radius: 0;
+		-moz-border-radius: 5px;
+		-moz-border-radius-topright: 0;
+		border-radius: 5px;
+		border-top-right-radius: 0;
+		font-size:10px;
+		padding:10px;
+	}
+	.segnImmagini {
+		width:150px;
+	}
+		.miniMapCanvas * {
+			width:auto;
+		}
+		.segnImmagini img {
+			float:left;
+			cursor:pointer;
+		}
+	.segnDettagli {
+		width:100%;
+		border-bottom:1px dotted #ccc;
+		margin-bottom:10px;
+		padding-bottom:10px;
+	}
+		.segnDettagliLeft {
+			width:78%;
+		}
+		.segnDettagliRight {
+			width:20%;
+			float:right;
+			text-align:right;
+		}
+		.commentoBox {
+			margin-bottom:5px;
+		}
+			.commentoFumettoBox {
+				/*background:#effaed;*/
+				background:#f2f2f2;
+				width:92%;
+				padding:5px;
+			}
+			.commentoFumettoBoxComune {
+				/*background:#effaed;*/
+				background:#e6fcd7;
+				width:92%;
+				padding:5px;
+			}
+			.commentoFumettoBoxComune a:link, .commentoFumettoBoxComune a:visited{
+				color:#632016!important;
+			}
+			.commentoFumettoBoxComune a:hover{
+				color:#5d5d5d;!important;
+			}
+				.commentoFumettoBox .commentFumettino, .commentoFumettoBoxComune .commentFumettino{
+					width:auto;
+					position:relative;
+					top:-5px;
+					left:-17px;
+					margin-right:-12px;
+				}
+			.commentoBox img {
+				width:30px;
+				margin-right:10px;
+				float:left;
+			}
+			
+			.commentoBox textarea {
+				outline:none;
+				resize: none;
+				font-family:arial;
+				font-size:12px;
+				padding:3px;
+				color:#222222;
+				width:95%;
+				height:50px;
+				overflow:hidden;
+			}
+
+
+/* Margin */
+.margin0 {
+	margin:0 !important;
+}
+.marginT5 {
+	margin-top:5px !important;
+}
+.marginT10 {
+	margin-top:10px !important;
+}
+.marginT15 {
+	margin-top:15px !important;
+}
+.marginT20 {
+	margin-top:20px !important;
+}
+.marginT25 {
+	margin-top:25px !important;
+}
+.marginT30 {
+	margin-top:30px !important;
+}
+.marginT40 {
+	margin-top:40px !important;
+}
+.marginT50 {
+	margin-top:50px !important;
+}
+
+.marginT60 {
+	margin-top:60px !important;
+}
+
+
+.marginB5 {
+	margin-bottom:5px !important;
+}
+.marginB10 {
+	margin-bottom:10px !important;
+}
+.marginB15 {
+	margin-bottom:15px !important;
+}
+.marginB20 {
+	margin-bottom:20px !important;
+}
+.marginB30 {
+	margin-bottom:30px !important;
+}
+.marginB40 {
+	margin-bottom:40px !important;
+}
+.marginB50 {
+	margin-bottom:50px !important;
+}
+
+.marginL5 {
+	margin-left:5px !important;
+}
+.marginL10 {
+	margin-left:10px !important;
+}
+.marginL15 {
+	margin-left:15px !important;
+}
+.marginL20 {
+	margin-left:20px !important;
+}
+
+.marginL30 {
+	margin-left:30px !important;
+}
+.marginL40 {
+	margin-left:40px !important;
+}
+.marginL50 {
+	margin-left:50px !important;
+}
+
+
+.marginR5 {
+	margin-right:5px !important;
+}
+.marginR10 {
+	margin-right:10px !important;
+}
+
+.marginR15 {
+	margin-right:15px !important;
+}
+
+.marginR20 {
+	margin-right:20px !important;
+}
+
+.marginR30 {
+	margin-right:30px !important;
+}
+
+.marginR40 {
+	margin-right:40px !important;
+}
+
+.marginR50 {
+	margin-right:50px !important;
+}
+
+/* padding */
+.paddX5 {
+	padding-left:5px;
+	padding-right:5px;
+}
+.paddX10 {
+	padding-left:10px;
+	padding-right:10px;
+}
+.paddX15 {
+	padding-left:15px;
+	padding-right:15px;
+}
+.paddX20 {
+	padding-left:20px;
+	padding-right:20px;
+}
+.paddX25 {
+	padding-left:25px;
+	padding-right:25px;
+}
+.paddY5 {
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.paddY10 {
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.paddY15 {
+	padding-top:15px;
+	padding-bottom:15px;
+}
+.paddY20 {
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.paddY25 {
+	padding-top:25px;
+	padding-bottom:25px;
+}
+.paddL10 {
+	padding-left:10px;
+}
+/* align */
+.right {
+	float:right !important;
+}
+
+.left {
+	float:left;
+}
+.center {
+	float:none;
+	margin:0 auto;
+}
+.fNone {
+	float:none;
+}
+
+.textRight {
+	text-align:right;
+}
+.textLeft {
+	text-align:left;
+}
+.textCenter {
+	text-align:center;
+}
+.textJustify {
+	text-align:justify;
+}
+
+.w100 {
+	width:100% !important;
+}
+.auto {
+	width:auto !important;
+}
+.half {
+	width:49% !important;
+}
+.clear {
+	clear:both;
+}
+
+
+/* font size */
+.fontS9 {
+	font-size:9px;
+}
+.fontS10 {
+	font-size:10px;
+}
+.fontS11 {
+	font-size:11px;
+}
+.fontS12 {
+	font-size:12px;
+}
+.fontS13 {
+	font-size:13px;
+}
+.fontS14 {
+	font-size:14px;
+}
+
+.fontS16 {
+	font-size:16px;
+}
+
+.fontS18 {
+	font-size:18px;
+}
+
+.fontS20 {
+	font-size:20px;
+}
+
+.fontS22 {
+	font-size:22px;
+}
+
+.fontS24 {
+	font-size:24px;
+}
+
+.fontS26 {
+	font-size:26px;
+}
+
+.fontS28 {
+	font-size:28px;
+}
+
+.fontS30 {
+	font-size:30px;
+}
+
+.fontS32 {
+	font-size:32px;
+}
+
+.fontS34 {
+	font-size:34px;
+}
+/* font style */
+.fBold {
+	font-weight:bold;
+}
+.fItalic  {
+	font-style:italic;
+}
+.fNormal {
+	font-weight:normal;
+}
+
+/* font type */
+.fGeorgia {
+	font-family:Georgia, "Times New Roman", Times, serif;
+}
+.fNunito {
+	font-family: 'Nunito', san-serif;
+}
+.fArial {
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+/* font color */
+.fGreen {
+	/*color:#1e6129;*/
+	color:#0d871e;
+}
+
+.fBrown {
+	/*color:#632016;*/
+	color:#632016;
+}
+
+.fWhite {
+	/*color:#632016;*/
+	color:white;
+}
+
+.fRed {
+	color:#F30;
+}
+.fOrange {
+	color:#f8692e;
+}
+.fGray {
+	color:#5d5d5d;
+}
+.fLightGray {
+	color:#a8a8a8;
+}
+
+.fShade {
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+}
+
+.fUppercase {
+	text-transform:uppercase;
+}
+.fUnderline {
+	text-decoration:underline;
+}
+
+/* form */
+.skinnedForm {
+
+}
+	.skinnedForm input[type="submit"] {
+		background:#539315;
+		border:1px solid #327E04;
+		color:white;
+		font-weight:bolder;
+		font-size:15px;
+		padding:.3em 1em;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		border-radius: 8px;
+		cursor:pointer;
+	}
+	.skinnedForm input[type="submit"]:hover {
+		background:#67B021;
+	}
+	.skinnedForm input[type="text"], .skinnedForm input[type="password"] {
+		width:97%;
+		padding:.3em .2em;
+		border:1px solid #ccc;
+	}
+	.skinnedForm textarea {
+		width:97%;
+		height:110px;
+		resize: none;
+		padding:.3em .2em;
+		border:1px solid #ccc;
+	}
+	
+/* Elementi globali parte superiore pagine */
+.rightPageHeader {
+	margin:-15px -10px 0 -10px;
+	width:682px;
+	padding:20px 0 10px 10px;
+	background:white;
+	border-bottom:1px solid #bfbfbf;
+}
+	.rightHeadText {
+		width:550px;
+	}
+		.rightHeadText h3 {
+			font-size:15px;
+			margin-top:-5px;
+		}
+	.rightHeadIcon {
+		width:100px;
+		float:right;
+		text-align:right;
+	}
+		.rhiBacheca {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -378px -12px no-repeat;
+		}
+		.rhiProfilo {
+			width:80px;
+			height:80px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -260px 0 no-repeat;
+		}
+		.rhiImpostazioni {
+			width:80px;
+			height:80px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -260px -115px no-repeat;
+		}
+		.rhiInviaSegnalazione {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -147px -440px no-repeat;
+		}
+		.rhiApplicazioni {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -260px -232px no-repeat;
+		}
+		.rhiSupporta {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) 0 -341px no-repeat;
+		}
+		.rhiTopSegnalatori {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) 0 -233px no-repeat;
+		}
+		.rhiSuDU {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) 0 -120px no-repeat;
+		}
+		.rhiGuida {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) 0 -13px no-repeat;
+		}
+		.rhiFunzioni {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -268px -334px no-repeat;
+		}
+		.rhiContatti {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -148px -13px no-repeat;
+		}
+		.rhiRegistrati {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -147px -341px no-repeat;
+		}
+		.rhiPassDimenticata {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -268px -440px no-repeat;
+		}
+		.rhiComuniAttivi {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -377px -121px no-repeat;
+		}
+		.rhiCreaWidget {
+			width:94px;
+			height:92px;
+			float:right;
+			background:url(../images/DUBollini/bollini.png) -377px -233px no-repeat;
+		}
+
+/* background color */
+.br {
+	background:red;
+}
+.lightGrayBG {
+	background:#efefef;
+}
+
+/* controlli */
+.checkFailed {
+	display:block;
+	background:url(../images/control_problem.png) no-repeat;
+	width:18px;
+	height:18px;
+	float:right;
+}
+
+.checkPassed {
+	display:block;
+	background:url(../images/control_ok.png) no-repeat;
+	width:18px;
+	height:18px;
+	float:right;
+}
+
+/* Buttons */
+.greenButt {
+	background:#539315;
+	border:1px solid #327E04;
+	color:white;
+	font-weight:bolder;
+	font-size:15px;
+	padding:.3em 1em;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	cursor:pointer;
+}
+	.greenButt:hover {
+		background:#67B021;
+	}
+
+.pointer {
+	cursor:pointer;	
+}
+
+/* loading */
+.loadingMask {
+	position:fixed;
+	left:0;
+	top:0;
+	width:100%;
+	background: rgba(0, 0, 0, 0.6);
+	z-index:10000;
+	text-align:center;
+}
+	.loadingPopUp {
+		position:relative;
+		margin:15% auto 0 auto;
+		float:none;
+		padding:20px 0;
+		width:200px;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		border-radius: 8px;
+		background:white;
+	}
+
+/* text decoration */
+.tdNone {
+	text-decoration:none !important;
+}
+
+/* bordi */
+.borderBDashed {
+	border-bottom:1px dotted #d7d7d7;
+}
+.noBordo {
+	border:0!important;
+}
+/* altezze */
+.h90 {
+	height:90px;
+}
+.h55 {
+	height:55px;
+}
+.h43 {
+	height:43px;
+}
+/* larghezze */
+.w90 {
+	width:90px;
+}
+.w243 {
+	width:243px;
+}
+.w380 {
+	width:380px;
+}

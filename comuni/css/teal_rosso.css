@@ -1,0 +1,411 @@
+@charset "utf-8";
+/** ============================== Blue ============================== **/
+
+html { 					color: #3b3b3b;				/** Overall font body color **/ }
+
+
+
+
+/** ============================== background for main content area ============================== **/
+
+#content_bg { background: #4c0e0f url(../images/content_bg.jpg) repeat-x; }
+
+
+
+/**  ============================== Anchor Styling  ============================== **/
+
+a { 					color: #4c0e0f; }
+a:hover { 				color: #000; }
+
+
+
+
+/** ============================== Element Styling ============================== **/
+
+h1 { 					color: #202020; }
+h2 { 					color: #4d4d4d; }
+h3 { 					color: #161616; }
+h4 { 					color: #373737; }
+h5 { 					color: #727272; }
+h6 { 					color: #373737; }
+
+hr { 					color: #c0c0c0;
+						border-bottom-color: #c0c0c0;
+						}
+blockquote { 			color: #000;
+						background-image: url(../images/blockquote_bg.gif);
+						}
+
+
+
+/** ============================== Form Styling ============================== **/
+
+fieldset { 				border:1px solid #d2d1d1; }
+fieldset legend { 		color: #3a3a3a; }
+form label { 			color: #585858; }
+form p small { 			color: #777; }
+form textarea, form .wysiwyg {
+						color:#111111; }
+form input.textfield, form select, form textarea, form .wysiwyg {
+						background: #ffffff url(../images/textfield_bg.gif) repeat-x top; /*Define background for input elements here*/
+						border: 1px solid #d2d1d1;
+						}
+/************** Focus styles **************/ 
+form input.textfield:focus, form select:focus, form textarea:focus {
+						background: #fbfafb url(../images/textfield_active_bg.gif) repeat-x top; /*Define bacground for focussed form elements here*/
+						border: 1px solid #aeaeae;
+						}
+/************** Error styles ***************/ 
+form input.error, form select.error, form textarea.error, form .wysiwyg.error, form input.error:focus, form select.error:focus, form textarea.error:focus, form .wysiwyg.error:focus { 	
+						border: 1px solid #ff8388; }
+
+/************** Disabled form Elements *************/
+button[disabled]:active, button[disabled], input[type="reset"][disabled]:active, input[type="reset"][disabled], input[type="button"][disabled]:active, input[type="button"][disabled], select[disabled] > input[type="button"], select[disabled] > input[type="button"]:active, input[type="submit"][disabled]:active, input[type="submit"][disabled], .textfield[disabled], .textfield_large[disabled] {
+						border: 1px solid #d6d6d6;
+						color: GrayText;
+						cursor: inherit;
+						background: #dbdbdb url(none);
+						}
+/************** Form Hints and Errors *********/
+
+.form_error { 			color: #ca0000;
+						background: url(../images/form_error.png) no-repeat;
+						}
+.form_hint { 			color: #7c7c7c;
+						background: url(../images/form_info.png) no-repeat;
+						}
+						
+
+
+/** ============================== Buttons ============================== **/
+
+.button { 				background: #fff url(../images/button_bg.gif) repeat-x left bottom;
+						border: 1px solid #c6c6c6;
+						color: #595959;
+						}
+.button:hover { 		background: #fff url(../images/button_bg_hover.gif) repeat-x left bottom;
+						border: 1px solid #c6c6c6;
+						}
+.button2 { 				background: #ad2022 url(../images/button2_bg.gif) repeat-x left bottom;
+						border: 1px solid #a0879d;
+						color: #fff;
+						}
+.button2:hover { 		background: #f32d30 url(../images/button2_bg_hover.gif) repeat-x left bottom;
+						border: 1px solid #a9c8ed;
+						}
+
+						
+						
+
+
+/** ============================== Header ============================== **/
+
+#header_bg { 			background: url(../images/header_bg.png) repeat-x; }
+#header_top { 			color: #ffffff; }
+#header_top a { 		color:#fff; }
+
+/********* Logo *********/
+#logo { 				background: url(../../images/logo.png) no-repeat left bottom;   /*Specify logo Here*/
+						height: 33px;
+						width: 472px;
+						}
+/********* Search field in header ***/
+.search_field { 		border: 1px solid #a2a2a2; }
+
+
+
+
+
+/** ============================== Main Navigation ============================== **/
+
+#main_nav a { color:#242424; }			/* main navigation link color */
+#main_nav a:hover { 	color: #000; }				/* main navigation hover link color */
+#main_nav li a.current { 							/* main navigation active link color */
+						color:#fff !important;
+						background: #4c0e0f url(../images/nav_active_tab_bg.gif) repeat-x left top;
+						}
+						
+
+
+
+/** ============================== Sub Navigation ============================== **/
+
+#main_nav li ul li a { color: #db7071; } /* Sub navigation link color */
+#main_nav li ul li a:hover {
+						color: #fff; }/* Sub navigation hover link color */
+#main_nav li ul li a.current {
+						background:url(../images/active_sub_menu_bg.gif) no-repeat center bottom; /* Pointer for active link in Sub navigation */
+						color:#fff;/* Sub navigation active link color */
+						}
+						
+						
+						
+/** ============================== Navigation in box header ============================== **/
+
+.box .header .sub_nav li a {
+						color:#494949; }
+.box .header .sub_nav li a:hover {
+						color:#000; }
+.sub_nav .current, .sub_nav .current:hover, .sub_nav .current a {
+						background:#FFF;
+						color:#4c0e0f !important;
+						}
+
+
+
+/** ============================== Vertical Nav ============================== **/
+
+.vertical_nav li a { 	color:#333; }
+.vertical_nav li a:hover {
+						color:#000; }
+.vertical_nav li .current {
+						background:url(../images/vertical_nav_bg.gif) no-repeat left top;
+						color:#000 !important;
+						}
+/*****Box body with vertical Navigation *****/
+.body_vertical_nav { 	background: url(../images/vertical_nav_bg.jpg) repeat-y left top; }
+
+
+
+
+
+/** ============================== Horizontal Nav ============================== **/
+
+.horizontal_nav { 		background: #FFF url(../images/horizontal_nav_bg.gif) repeat-x left bottom; }
+.horizontal_nav li a { 	color:#4c0e0f; }
+.horizontal_nav li a:hover {
+						color:#000; }
+.horizontal_nav li a.current{
+						background:#FFF;
+						border-top: 1px solid #4c0e0f;
+						border-right: 1px solid #4c0e0f;
+						border-left: 1px solid #4c0e0f;
+						border-bottom-style: none;
+						color:#4c0e0f !important;
+						}
+
+						
+						
+						
+						
+
+
+/** ============================== Accordion ============================== **/
+
+#accordion, .accordion { background-color:#fff;
+						border:1px solid #e6e6e6;
+						}
+/* accordion header */
+#accordion h2, .accordion h2  { 		background:#f7f8f8 url(../images/accordion_heading_bg.gif) repeat-x bottom;
+						color:#111010;
+						border:1px solid #fff;
+						border-bottom:1px solid #ddd;
+						}
+/* currently active header */
+#accordion h2.current ,  .accordion h2.current{ background-color:#fff; }
+/* Accordion pane */
+#accordion div.pane, .accordion div.pane { 	color:#5e5e5e;
+						background: url(../images/pane_bg.gif) repeat-x top;
+						}
+
+
+
+
+
+/** ============================== Small Box ============================== **/
+
+.small_box { 			background:#fdfdfd; }
+.small_box .header { 	background: url(../images/small_box_header_bg.gif) repeat-x bottom;
+						color:#4c0e0f;
+						}
+
+
+
+
+
+
+/** ============================== Box ============================== **/
+
+.box { 					background:#fdfdfd; }
+.box .header {
+						background: url(../images/box_header_bg.gif) repeat-x bottom;
+						color:#4c0e0f;
+						}
+
+
+
+
+
+
+/** ============================== Tables ============================== **/
+
+.grid_table {
+						border-top: 1px solid #dddddd;
+						border-bottom: 5px solid #4c0e0f;
+						border-right: 1px solid #dddddd;
+						border-left: 1px solid #dddddd;
+						color:#202020;
+						}
+.grid_table th {
+						color: #3a3a3a;
+						border-bottom: 4px solid #4c0e0f;
+						}
+.grid_table td { 		border-bottom: 1px solid #d6d6d6; }
+
+/******* Hover styles for grid items *******/
+.grid_table thead tr:hover {
+						background: #fff; }
+.grid_table th:hover { 	background: #fffaea; }
+.grid_table tr:hover { 	color: #000;
+						background: #fffaea;
+						}
+
+/*********** Selected items and dropdown ************/
+tr.grid_dropdown, tr.active {
+						color:#000;
+						}
+tr.active td { 			background: #f9f9f9 url(../images/grid_active_bg.gif) repeat-x bottom; }
+tr.grid_dropdown td { 	background: #f7f7f6 url(../images/grid_dropdown_bg.gif) repeat-x;
+						border-bottom: 1px solid #bcbcbc;
+						}
+/************ Minimize/Mazimize controls *****************/
+.grid_table .toggle { 	background:url(../images/expand_collapse.png) top left; /*Sprite size should be 10 x 10 pixels or change in style.css */ }
+
+
+
+
+
+
+/** ============================== Data Tables ============================== **/
+
+table.display thead th { border-bottom: 4px solid #4c0e0f; }
+
+table.display tfoot th { border-top: 4px solid #4c0e0f; }
+						
+						
+						
+						
+/** ============================== Pagination ============================== **/
+
+.pagination { 			background: url(../images/pagination_bg.gif) repeat-x top; /*pagination bg */ }
+.pagination li a { 		color:#a41e20; } /*pagination anchor color */
+.pagination li a:hover {
+						color:#000; } /*pagination anchor color on hover*/
+.pagination li.active a {
+						color:#000;  /*active pagination anchor color*/
+						background:url(../images/pagination_active.png) no-repeat top;  /*active pagination pointer*/
+						}
+						
+
+
+
+/** ============================== Footer ============================== **/
+
+#footer { 				background:url(../images/footer_bg.gif) repeat-x top #282828;
+						color:#CCC;
+						}
+
+
+#footer a {				color:#fff;
+						text-decoration:underline;
+						}
+
+
+						
+/** ==============================  Bulleted List ============================== **/
+
+.bulleted_list li { 	background: url(../images/bullet_right.png) no-repeat 0px 7px; /* List with custom bullets */ }
+
+
+
+
+
+/**  ==============================  Users List  ============================== **/
+
+.user_list li { 		border-bottom: 1px solid #CCC; }
+
+
+
+
+/**  ==============================  Borders  ============================== **/
+
+.border_blue { border-bottom: solid 1px #393939; }
+.border_lt_blue { border-bottom: solid 6px #bebebe; }
+.border_grey { 			border-bottom: solid 6px #e7e7e7; }
+
+
+
+
+
+/** ============================== Display styles for Error Messages, Notifications and General Info ============================== **/
+
+div.info { 				background: #CADCFF url(../images/info_box_bg.gif) repeat-x left top;
+						border: 1px solid #c3d7ff;
+						color: #3760b5;
+						}
+div.warning { 			background: #fff6d0 url(../images/warning_box_bg.gif) repeat-x left top;
+						border: 1px solid #bc6c34;
+						color: #bc6c34;
+						}
+div.error { 			background: #ffd6d0 url(../images/error_box_bg.gif) repeat-x left top;
+						border: 1px solid #ff0606;
+						color: #b22723;
+						}
+
+
+
+/** ============================== Tooltip ============================== **/
+
+.tooltip, .tooltip.bottom {
+						background:#000;
+						color:#fff;
+						}
+
+
+
+
+/** ============================== Jump Menu ============================== **/
+
+.jump_menu_btn { 		background:url(../images/jump_menu.png) top left;  /*Sprite for jump button 158 x 28px*/ }
+.jump_menu_list { 		background:#f5f5f5;
+						border:solid 1px #d5d5d5;
+						}
+.jump_menu_list li a{
+						color:#333;
+	}
+.jump_menu_list li a:hover {
+						color:#000;
+						background:#fff;
+						}
+
+
+
+/** ============================== Login Page ==================================== **/
+
+body#login_page { 		background-color:#4c0e0f; } /*Background color for login page*/
+
+
+
+
+/** ============================== Overlay ============================== **/
+
+#facebox { 				/* border color */
+						border:10px solid #666;
+						}
+#facebox div { 			border:1px solid #3B5998;
+						background-color:#fff;
+						}
+#facebox h2 { 			background: #FFF url(../images/box_header_bg.gif) repeat-x;
+						}
+#exposeMask { 			background:#000 !important; }/* background color for overlay and expose mask */ 
+
+
+
+
+/** ============================== Calendar ============================== **/
+.jCalMo .overDay {		color:#FFF; background:#4c0e0f; } /* Hover on a single date */
+
+
+/**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**/
+/**==================             End of Theme                     ==================**/
+/**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**/

@@ -1,0 +1,94 @@
+/*
+ * ----------------------------------------------------------------------------
+ * Decoro Urbano version 0.2.1
+ * ----------------------------------------------------------------------------
+ * Copyright Maiora Labs Srl (c) 2012
+ * ----------------------------------------------------------------------------   
+ * 
+ * This file is part of Decoro Urbano.
+ * 
+ * Decoro Urbano is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Decoro Urbano is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Decoro Urbano.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* CSS Document */
+/* globals */
+
+#leftSideBar a {
+	display:block;
+	width:100%;
+	height:100%;
+	text-decoration:none;	
+}
+.naviLeft {
+	margin:0;
+	padding:0;
+	list-style:none;	
+	line-height:1.3em;
+}	
+	.naviLeft li {
+		margin:0 0 1px 0;
+		padding:0;
+		display:block;
+	}
+	.naviLeft li:hover {
+		background:#67B021;	
+		margin:0 0 1px 0;
+		padding:0;
+		display:block;
+	}
+		.naviLeft li:hover a {
+			color:white;
+		}
+	.naviLeft li.title {
+		font-size:1.1em;
+		font-weight:bold;
+		color:#632016;	
+		margin:0;
+		padding:0;
+	}
+		.naviLeft li:hover.title {
+			background:none;
+			padding:0;
+		}
+	.naviLeft li.selected {
+		background:#539315;	
+		font-weight:bold;
+		padding:2px;
+	}
+		.naviLeft li.selected a {
+			color:white;	
+		}
+
+.leftBlock {
+	width:96%;
+	padding:10px 2%;
+}
+
+.leftBlockBorder {
+	/*background:url(../images/divider.gif) bottom repeat-x;*/
+	border-bottom:1px dotted #bfbfbf;
+	width:96%;
+	padding:5px 0;
+	margin:0 2%;
+}
+
+/* FB Facepile */
+.connections .grid_item {
+	width:30px !important;
+}
+	.connections .grid_item img {
+		width:15px !important;
+	}
+
+/* profile */

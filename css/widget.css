@@ -1,0 +1,278 @@
+/*
+ * ----------------------------------------------------------------------------
+ * Decoro Urbano version 0.2.1
+ * ----------------------------------------------------------------------------
+ * Copyright Maiora Labs Srl (c) 2012
+ * ----------------------------------------------------------------------------   
+ * 
+ * This file is part of Decoro Urbano.
+ * 
+ * Decoro Urbano is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Decoro Urbano is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Decoro Urbano.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* CSS Document */
+
+@font-face {
+  font-family: 'helvetica-bold';
+  src: url('helvetica-bold.eot');
+  src: local(''), url('helvetica-bold.ttf') format('opentype');
+}
+@font-face {
+  font-family: 'helvetica-bold';
+  src: local(''), url('helvetica-bold.ttf') format('opentype');
+}
+
+body {
+	margin:0;
+	padding:0;
+	font-family:Helvetica, sans-serif;
+	}
+
+img{
+border:0;
+}
+
+#widgetWrap {
+	width:100%;
+	height:auto;
+	float:left;
+	}
+#logoDu {
+	width:100%;
+	height:37px;
+	background:url(/images/backLogo.png) repeat-x;
+	text-align:center;
+  float:left;
+	}
+#comuneWrap {
+	width:100%;
+	height:75px;
+	float:left;
+  background:#ededed;
+  border-bottom: 1px solid #CCCCCC;
+  background:url(/images/widget_back.png) repeat-x;
+	}
+	#logoComune {
+		width:75px;
+		height:75px;
+		float:left;
+		background:white;
+    text-align:center;
+		}
+	#comune {
+		width:auto;
+		height:75px;
+		float:left;
+		
+		}
+		#nomeComune {
+			width:auto;
+			height:35px;
+			float:left;
+			color:#632016;
+			font-size:16px;
+			font-weight:bold;
+			line-height:17px;
+			padding:5px;
+      clear:both;
+			}
+
+  		#nomeComune a:link, #nomeComune a:visited{
+        text-decoration:none;
+        color:#632016;
+  			}
+
+		#statusComune {
+			width:auto;
+			height:20px;
+			float:left;
+			font-size:15px;
+			color:#f8692e;
+			font-weight:bold;
+			padding:7px 0 0 5px;
+      clear:both;
+			}
+#mappaSegnalazioni {
+		width:100%;
+		height:340px;
+		float:left;
+		background:#ccc;
+    clear:both;
+	}
+
+#segnalazioniRisolte {		
+		background:url(/images/backSegnalazioniRisolte.png) repeat-x top #10842e;
+		border-bottom:1px #ccc solid;
+	}
+#segnalazioniCarico {
+		background:url(/images/backSegnalazioniCarico.png) repeat-x top #e71326;
+		border-bottom:1px #ccc solid;
+	}
+#segnalazioniTotali {
+		background:url(/images/backSegnalazioniTotali.png) repeat-x top #f1f1f1;
+		border-bottom:1px #ccc solid;
+		color:#666!important;
+	}
+#paginaComune {
+		background:#8f8f8f;
+		border-bottom:1px #ccc solid;
+		width:100%;
+		padding:5px 0px 5px 0;
+		text-align:right;
+		color:#fff;
+		font: 12px "helvetica-bold",helvetica,sans-serif!important;
+		float:left;
+	}
+	#paginaComune a{
+		text-decoration:none;
+		color:#fff;
+    padding-right:6px;
+	}
+#ultimeSegnalazioniWrap, #segnalatoriWrap, #segnalazioniWrap, #utentiWrap, #twitterWrap{
+		width:100%;
+		height:auto;
+		float:left;
+	}
+	.title {
+			width:100%;
+			float:left;
+			background:#0d822e;
+			padding-top:5px;
+      padding-bottom:5px;
+			font: 16px "helvetica-bold",helvetica,sans-serif;
+			color:white;
+			letter-spacing:1px;
+		}
+		.segnalazioni {
+			width:100%;
+			height:50px;
+			float:left;
+			padding:10px 0px;
+      margin-left:0px;
+			border-bottom:1px #ccc dotted;
+			cursor: pointer;
+      clear:both;
+		}
+
+    .segnalazioni_box{
+    padding-left:6px;
+    padding-right:6px;
+    }
+
+		.segnalatore {
+				font: 12px "helvetica-bold",helvetica,sans-serif;
+				color:#666;
+			}
+		.segnalatore span, .segnalatore a{
+				color:#0d822e;
+				text-decoration:none;
+			}
+		.dettaglio {
+				font:12px Georgia, "Times New Roman", Times, serif;
+				color:#666;				
+			}
+		.posizione {
+				color:#0d822e;
+				font: 10px helvetica,sans-serif;
+			}
+		.piattaforma {
+				color:#666;
+				font-size:10px;
+			}
+		.piattaforma a{
+				color:#0d822e;
+				text-decoration:underline;
+		}
+		
+		.utenti {
+			width:240px;
+			height:auto;
+			float:left;
+			padding:10px 5px;
+			border-bottom:1px #ccc dotted;
+			}
+		.utenti span{
+			color:#0d822e;
+			font: 14px "helvetica-bold",helvetica,sans-serif;
+			line-height:18px;
+		}
+		.utenti img{
+			margin-right:10px;
+		}
+		.utenti div{
+			color:#666;
+			font-size:12px;
+		}
+		
+.numSegnalazioni {	
+		width:100%;
+		height:auto;
+		float:left;
+		font: 42px "helvetica-bold",helvetica,sans-serif;
+		color:#FFF;
+		
+		
+	}
+	.numSegnalazioni div{
+		font: 16px "helvetica-bold",helvetica,sans-serif!important;
+		float:right;
+		text-align:left;
+		margin:0;
+		line-height:18px!important;
+    padding-right:7px;
+    padding-top:15px;
+    font-weight:bold!important;
+	}
+	.numSegnalazioni span{
+		float:left;
+		text-shadow: 1px 1px white, -1px -1px #444;
+		letter-spacing:3px;
+    padding-left:7px;
+    padding-top:0px;
+	}
+	
+.twitter {
+	width:240px;
+	float:left;
+	background:#4ab5e6;
+	padding:5px;
+	font: 16px "helvetica-bold",helvetica,sans-serif;
+	color:white;
+	letter-spacing:1px;
+	}
+.btmtwitter{
+	width:240px;
+	float:left;
+	background:#4ab5e6;
+	padding:5px;
+	font: 12px "helvetica-bold",helvetica,sans-serif;
+	color:white;
+	letter-spacing:1px;
+	text-decoration:none;
+	text-align:right;
+	}
+.btmtwitter a{
+	text-decoration:none;
+	color:white;
+}
+/* global */
+.right {
+		float:right!important;
+	}
+.fright {
+		text-align:right!important;
+	}
+.paddTop10 {
+	padding-top:10px;
+}

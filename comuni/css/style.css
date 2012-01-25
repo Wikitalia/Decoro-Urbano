@@ -1,0 +1,876 @@
+
+/**============================== Reset CSS ==============================**/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tfoot, thead, tr, th, td { 					margin: 0px;
+						padding: 0px;
+						border: 0px;
+						outline: 0px;
+						vertical-align: baseline;
+						}
+body { 					margin:0px;
+						width:100%;
+						height:100%;
+						position:relative;
+						padding-bottom:80px;
+						background:rgb(40,40,40);
+						}
+blockquote, q { 		quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after {
+						content: '';
+						content: none;
+						}
+:focus { 				outline: 0; }
+ins { 					text-decoration: none; }
+del { 					text-decoration: line-through; }
+table { 				border-collapse: collapse; }
+
+
+
+
+
+/**============================== General Positioning Classes ==============================**/
+
+.wf { 					width:100%; }
+.tar { 					text-align:right; }
+.tal { 					text-align:left; }
+.tac { 					text-align:center; }
+.fl { 					float:left; }
+.fr { 					float:right; }
+.clearfix:after { 		visibility: hidden;
+						display: block;
+						font-size: 0;
+						content: " ";
+						clear: both;
+						height: 0;
+						}
+
+
+/**============================== Body Styles & Wrapper ==============================**/
+
+html { 					font: 62.5% Arial, Helvetica, sans-serif;
+						line-height: 2.4em;
+						}
+.wrapper { 				width:95%;				/** Change this to px to make the layout fixed! **/
+						margin: 0px auto;
+						position:relative;
+						}
+
+#content_bg { 			padding-bottom:20px; }
+
+.content { 				font-size:1.3em;
+						padding-top: 35px;
+						
+						}
+
+
+/**============================== Element Styling ==============================**/
+
+a { 					text-decoration:none; }
+
+
+h1, h2, h3, h4, h5, h6 {
+						margin-top:20px;								/** Equal margin on top for all headings **/
+						margin-bottom:.3em;								/** Variable margin on bottom for all headings **/
+						font: normal 1em Arial, Helvetica, sans-serif;	/** Reset all Headings **/
+						}
+h1 { 					font-size: 2.4em; }
+h2 { 					font-size: 2.1em; }
+h3 { 					font-size: 1.9em; }
+h4 { 					font-size: 1.8em; }
+h5 { 					font-size: 1.7em; }
+h6 { 					font-size: 1.5em; }
+
+hr { 					height:1px;
+						margin:2em 0px;
+						border-bottom: 1px solid;
+						border-top-style: none;
+						border-right-style: none;
+						border-left-style: none;
+						}
+td, th { 				padding:5px;
+						display:table-cell;
+						}
+p { 					margin: 0em 0px 1em; }
+ol { 					list-style:decimal inside; }
+ul { 					list-style:disc inside; }
+blockquote { 			font-style:italic;
+						padding-left:4em;
+						background: no-repeat left top;
+						margin:3em 0px 3em 0px;
+						}
+
+
+
+/**============================== Form Styling ==============================**/
+
+fieldset { 				padding: 1em; }
+fieldset legend { 		font-weight: bold; }
+form label { 			font-size:1.0em;
+						font-weight:bold;
+						display:block;
+						margin-bottom:5px;
+						margin-top: 15px;
+						}
+form p small { 			font-size: 0.75em;
+						display:block;
+						}
+form input.textfield, form select, form textarea, form .wysiwyg {
+						padding:6px;
+						margin-right:10px;
+						}
+form input.verysmall-fixed { 		width:40px; }
+form input.small { 		width:40%; }
+form input.med { 		width:60%; }
+form input.large { 		width:95%; }
+form textarea, form .wysiwyg {
+						font-family: Arial, Helvetica, sans-serif;
+						width: 95%;
+						font-size:1em;
+						}
+form input[type="checkbox"], form input[type="radio"] {
+						padding: 0;
+						background: none;
+						border: 0;
+						}
+.wysiwyg { 				width:auto !important; }
+
+
+/******* Form Hints and Errors **********/
+.form_error { 			font-style: italic;
+						font-size: 0.9em;
+						padding-left: 20px;
+						}
+.form_hint { 			font-style: italic;
+						font-size: 0.9em;
+						padding-left: 20px;
+						}
+
+
+
+
+/**============================== Buttons ==============================**/
+
+.button, .button2 { 	padding: 6px 25px 7px 25px;
+						cursor: pointer;
+						font-weight:bold;
+						margin-right:10px;
+						}
+.button:active, .button2:active { 
+						padding: 6px 25px 7px 25px; }
+
+
+/**============================== Header ==============================**/
+
+#header_bg { 			height:194px; }
+#header_top { 			font-size:1.2em;
+						padding-top:8px;
+						height: 27px;
+						}
+#header_top a { 		text-decoration:none;
+						margin-right:15px;
+						}
+#header_top a:hover { 	text-decoration:underline; }
+
+
+/************ Logo ***********/
+#logo { 				float:left;
+						margin:18px 0px 0px;
+						display:block;
+						text-indent:-9999px;
+						}
+
+/************ Search field in Header ************/
+.header_search { 		float:right;
+						margin-top: 25px;
+						width:280px;
+						}
+.search_field { 		font-style: italic;
+						width: 220px;
+						padding: 5px 30px 5px 5px;
+						float:right;
+						right:-20px;
+						position:relative;
+						z-index:2;
+						margin:0px;
+						}
+.search_icon { 			float:right;
+						position:relative;
+						top:5px;
+						right:5px;
+						z-index:3;
+						}
+
+
+/**============================== Main Navigation ==============================**/
+
+#main_nav { 			font-size:1.4em;
+						list-style: none;
+						margin:32px 0 0;
+						text-transform: uppercase;
+						}
+#main_nav a { 			text-decoration:none; }
+#main_nav li { 			display:inline;
+						float:left;
+						}
+#main_nav li a { 		display:block;
+						padding:8px 18px 10px;
+						margin:0px;
+						}
+#main_nav li a.current {
+						margin:0px;
+						display:inline-block;
+						}
+
+
+/**============================== Sub Navigation ==============================**/
+
+#main_nav li ul { 		position: absolute;
+						left:0px;
+						top:155px;
+						height: 28px;
+						}
+#main_nav li ul li {
+						text-transform:capitalize;
+						list-style: none;
+						float: left;
+						font-size: 0.85em;
+						margin-right: 0px;
+						height: 25px;
+						}
+#main_nav li ul li a { 	text-decoration: none; }
+#main_nav li ul li a:hover {
+						text-decoration: underline; }
+#main_nav li ul li a.current {
+						font-weight:bold;
+						height: 21px;
+						text-decoration: none;
+						}
+
+/**============================== Navigation in box header ==============================**/
+
+.box .header .sub_nav {
+						position:absolute;
+						top:0px;
+						right:0px;
+						}
+.box .header .sub_nav li {
+						text-transform:uppercase;
+						list-style:none;
+						display:inline-block;
+						margin:0px 5px;
+						font-size:0.6em;
+						letter-spacing: 0.05em;
+						float:left;
+						}
+.box .header .sub_nav li a {
+						display:block;
+						text-decoration:none;
+						padding:5px 10px;
+						}
+.sub_nav .current, .sub_nav .current:hover, .sub_nav .current a {
+						display:block;
+						padding:5px 10px;
+						}
+
+
+/** ============================== Vertical Nav ============================== **/
+
+.vertical_nav { 		padding:0px 0px 0px 10px;
+						font-size:1em;
+						float: left;
+						width: 170px;
+						list-style-position:outside;
+						}
+.vertical_nav li { 		list-style:none;
+						margin:0px 0px 10px 0px;
+						}
+.vertical_nav li a { 	padding-left:10px; }
+.vertical_nav li .current {
+						display:block;
+						height:25px;
+						text-decoration:none !important;
+						}
+
+/************* Box body with vertical Navigation *************/
+.body_vertical_nav { 	padding:20px 0px; }
+.body_vertical_nav .main_column {
+						margin: 0px 0px 0px 180px;
+						padding:0px 15px;
+						}
+.panes .pane { 			display:none; }					/* Hide Panes */
+
+
+/** ============================== Horizontal Nav ============================== **/
+
+.horizontal_nav { 		padding:10px 0px 0px 10px;
+						margin-bottom:25px;
+						height:37px;
+						font-size:0.9em;
+						}
+.horizontal_nav li { 	float:left;
+						padding:8px 10px;
+						list-style:none;
+						margin-right:5px;
+						}
+.horizontal_nav li a { 	text-decoration:none; }
+.horizontal_nav li a:hover {
+						text-decoration:underline; }
+.horizontal_nav li.active {
+						padding:6px 15px; }
+.horizontal_nav li.active a {
+						font-weight: bold;
+						text-decoration:none;
+						}
+
+
+/** ==============================  Accordion  ============================== **/
+
+/* accordion header */
+#accordion h2 { 		margin:0;
+						font-size:1.0em;
+						padding:5px 15px;
+						font-weight:normal;
+						cursor:pointer;
+						position:relative;
+						}
+/* currently active header */
+#accordion h2.current { cursor:default; }
+/* accordion header arrows */
+#accordion h2 .arrow_down, #accordion h2 .arrow_right {
+						position:absolute;
+						top:10px;
+						right:10px;
+						}
+#accordion h2 .arrow_down {
+						display:none }
+#accordion h2.current .arrow_right {
+						display:none; }
+#accordion h2.current .arrow_down {
+						display:block; }
+/* Accordion pane */
+#accordion div.pane { 	display:none;
+						padding:10px 20px;
+						font-size:1em;
+						}
+
+
+
+
+/**============================== Page Layout with Sidebar ==============================**/	
+
+.sidebar { 				width:250px;                     /*specify sidebar width here*/
+						float:right;
+						margin:0px 0px 0px 25px;
+						}
+.main_column { 			margin-right: 270px;}   		/*specify column width here, should be sidebar width + 20px*/
+	
+.column-left { 			width: 49%;
+						float: left;
+						}
+.column-right { 		width: 49%;
+						float: right;
+						}
+
+/**============================== Small Box in Sidebar ==============================**/
+
+.small_box { 			margin-bottom:15px; }
+.small_box .header { 	height: 30px;
+						font-size:1.3em;
+						line-height: 1.8em;
+						padding:0px 12px;
+						}
+.small_box .header img {
+						position:relative;
+						top:2px;
+						float:right;
+						}
+.small_box .body {
+						padding: 15px 12px;
+						font-size:.9em;
+						}
+
+
+
+/**============================== Box ==============================**/
+
+.box { 					margin-bottom:15px; }
+.box .header {
+						height: 40px;
+						font-size:1.5em;
+						line-height: 1.8em;
+						padding:0px 15px;
+						position:relative;
+						}
+.box .header img {
+						position:relative;
+						top:5px;
+						margin-right: 10px;
+						}
+.box .body { 			padding: 20px; }
+
+
+/**============================== Tables ==============================**/
+
+.grid_table { 			font-size: 0.9em;
+						margin-bottom:25px;
+						}
+.grid_table th { 		font-size:1.1em;
+						padding: 10px;
+						text-align:left;
+						}
+.grid_table td { 		padding:10px; }
+.grid_table td small { 	font-size:0.9em;
+						display:block;
+						}
+/** Selected items and dropdown for grid **/					
+tr.grid_dropdown td { 	padding: 20px; }
+
+
+/** Minimize/Mazimize controls **/								
+.grid_table .toggle { 	display:block;
+						width:10px;
+						height:10px;
+						margin:0px auto;
+						}
+.grid_table .collapse { background-position:top right; }
+
+
+
+
+/** ============================== Pagination ============================== **/
+
+.pagination { 			text-align:center;
+						height:30px;
+						margin:0px -20px;
+						}
+.pagination li { 		display:inline;
+						list-style:none;
+						position:relative;
+						top:10px;
+						}
+.pagination li a { 		padding:15px 10px;
+						line-height:20px;
+						height:50px;
+						}
+						
+
+/** ============================== Footer ============================== **/
+
+#footer { 				text-align:center;
+						padding:20px 0px;
+						height:50px;
+						position:absolute;
+						width:100%;
+						bottom:0px;
+						font-size:1.1em;
+						}
+
+
+
+
+/** ============================== Bulleted List ============================== **/		
+
+.bulleted_list li { 	list-style: none;
+						padding-left: 15px;
+						line-height: 17px;
+						margin-bottom: 15px;
+						list-style-position:outside;																														
+						}
+
+
+/** ============================== User List ============================== **/
+.user_list {
+						margin:0px;
+						padding:0px;
+						list-style-position:outside;
+						}
+
+.user_list li { 		font-size:1.2em;
+						padding: 15px 2px;
+						list-style:none;
+						margin:0px;
+						min-height:50px;
+						}
+					
+.user_list li img { 	display:inline;
+						margin-right:5px;
+						float:left;
+						}
+.user_list li small { 	display:block;
+						font-size:0.8em;
+						}
+
+/** ==============================  Display styles for Error Messages, Notifications and General Info ============================== **/
+
+div.info, div.warning, div.error {
+						margin: 1.5em 0;
+						height:25px;
+						padding:10px;
+						position:relative;
+						clear:both;
+
+						}
+.info .icon, .warning .icon, .error .icon {
+						margin-right:15px;
+						float:left;
+						}
+.close_notification { 	position:absolute;
+						top:0px;
+						right:8px;
+						}
+
+
+
+/** ============================== Tooltip ============================== **/
+.tooltip, .tooltip.bottom {
+						display:none;
+						font-size:1.2em;
+						padding:5px 10px;
+						line-height:1.3em;
+						text-align:center;
+						}
+
+/**  ============================== Jump Menu ============================== **/
+
+.jump_menu { 			position:absolute;
+						top:120px;
+						right:0px;
+						z-index:500;
+						}
+.jump_menu_btn { 		width:158px;
+						height:28px;
+						cursor:pointer;
+						z-index:500;
+						display:block;
+						text-indent:-9999px;
+						position:relative;
+						}
+.jump_menu_btn.active { background-position:bottom left;}
+.jump_menu_list { 		display:none;
+						position:absolute;
+						top:10px;
+						right:0px;
+						padding:20px 0px 10px;
+						font-size:1.2em;
+						width:155px;
+
+						}
+.jump_menu_list li { 	list-style:none; }
+.jump_menu_list li a { 	display:block;
+						text-decoration:none;
+						padding:5px 20px;
+						}
+.jump_menu_list li a img {
+						float:left;
+						position:relative;
+						left:-10px;
+						}
+
+/**============================== Login Page ====================================**/
+
+#login_page .wrapper { 	width:450px; }
+#login_page .content { 	padding-top:100px; }
+
+
+
+
+/** ============================== Overlay ============================== **/
+
+#facebox { 				/* overlay is hidden before loading */
+						display:none;
+						width:400px;
+						}
+#facebox div { 			padding:10px;
+						font-size:1.2em;
+						}
+#facebox h2 { 			margin:-10px;
+						margin-bottom:1em;
+						padding:5px 10px;
+						}
+#facebox .close { 		position:static; }
+
+
+/**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**/
+/**==================            End of Page CSS                   ==================**/
+/**++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**/
+
+
+
+
+
+/**============================== Visualize ====================================**/
+.visualize { border: 1px solid #888; position: relative; background: #fafafa; margin:20px auto; }
+.visualize canvas { position: absolute; }
+.visualize ul, .visualize li { margin: 0; padding: 0; }
+.visualize .visualize-info { padding: 3px 5px; background: #fafafa; border: 1px solid #888; position: absolute; top: -20px; right: 10px; }
+.visualize .visualize-title { display: block; color: #333; margin-bottom: 3px; font-size: 1.1em; }
+.visualize ul.visualize-key { list-style: none; }
+.visualize ul.visualize-key li { list-style: none; float: left; margin-right: 10px; padding-left: 10px; position: relative; }
+.visualize ul.visualize-key .visualize-key-color { width: 6px; height: 6px; left: 0; position: absolute; top: 50%; margin-top: -3px; }
+.visualize ul.visualize-key .visualize-key-label { color: #000; }
+.visualize-pie .visualize-labels { list-style: none; }
+.visualize-pie .visualize-label-pos, .visualize-pie .visualize-label { position: absolute; margin: 0; padding:0; }
+.visualize-pie .visualize-label { display: block; color: #fff; font-weight: bold; font-size: 1em; }
+.visualize-pie-outside .visualize-label { color: #000; font-weight: normal; }
+.visualize-labels-x, .visualize-labels-y { position: absolute; left: 0; top: 0; list-style: none; }
+.visualize-labels-x li, .visualize-labels-y li { position: absolute; bottom: 0; }
+.visualize-labels-x li span.label, .visualize-labels-y li span.label { position: absolute; color: #555; }
+.visualize-labels-x li span.line, .visualize-labels-y li span.line { position: absolute; border: 0 solid #ccc; }
+.visualize-labels-x li { height: 100%; }
+.visualize-labels-x li span.label { top: 100%; margin-top: 5px; }
+.visualize-labels-x li span.line { border-left-width: 1px; height: 100%; display: block; }
+.visualize-labels-x li span.line { border: 0; } /*hide vertical lines on area, line, bar*/
+.visualize-labels-y li { width: 100%; }
+.visualize-labels-y li span.label { right: 100%; margin-right: 5px; display: block; width: 100px; text-align: right; }
+.visualize-labels-y li span.line { border-top-width: 1px; width: 100%; }
+.visualize-bar .visualize-labels-x li span.label { width: 100%; text-align: center; }
+
+
+/**============================== jCal Calendar ====================================**/
+
+/* default dimensions and justification for each month including title */
+.jCal { /* each day width + border-left + border-right */ width:224px; height:21px; text-align:center; vertical-align:top; }
+/* default dimensions and justification for each month not including title */
+.jCalMo { width:224px;		/* each day width + border-left + border-right */ float:left; overflow:visible; height:100%; padding-right:2px; padding-left:2px; white-space:nowrap; }
+/* top month display block - i.e. January */
+.jCal .month, .jCal .monthSelect, .jCal .monthName, .jCal .monthYear { line-height:16px; height:16px; text-align:center; vertical-align:bottom; font-family:Tahoma; font-size:8pt; color:#000000; cursor:pointer; float:left; }
+/* month name per calendar style - includes left/right padding and alignment */
+.jCal .monthName { padding-left:2px; padding-right:2px; text-align:right; width:92px; }
+/* year per calendar style - includes left/right padding and alignment */
+.jCal .monthYear { float:right; padding-left:2px; padding-right:2px; text-align:left; width:92px; }
+/* width of monthName + monthYear */
+.jCal .month { width:192px; }
+/* hilight style for new month combobox pulldown for hover */
+.jCal .monthSelect { background:#EEE url(../images/eeGrad2.gif) bottom repeat-x; }
+/* do not edit - this enables the new month combobox selector */
+.jCal .monthSelector { position:absolute; }
+/* do not edit - this enables the new month combobox selector "shadow" for capturing auto-hide */
+.jCal .monthSelectorShadow { position:absolute; background:#808080; padding:0px; }
+/* this is the hover for the month name */
+.jCal .monthNameHover { background:#EDEDED url(../images/double-arrow-vert.gif) center left no-repeat; color:#808080; }
+/* this is the hover for the year */
+.jCal .monthYearHover { background:#EDEDED url(../images/double-arrow-vert.gif) center right no-repeat; color:#808080; }
+/* this is the hover for the new month or year hover in the new combobox selection */
+.jCal .monthSelectHover { background:#5a88e4; color:#FFF; }
+/* day block dimensions and style - for all day blocks */
+.jCalMo .dow, .jCalMo .day, .jCalMo .pday, .jCalMo .aday, .jCalMo .overDay, .jCalMo .invday, .jCalMo .selectedDay { width:30px; font-family:Tahoma; font-size:8pt; color:#000000; border-right:1px solid #CCC; border-bottom:1px solid #CCC; border-left:1px solid #EEE; text-align:center; cursor:default; float:left; }
+/* day of week header specific style */
+.jCalMo .dow { background:#EEE url(../images/eeGrad.gif) bottom repeat-x; border-bottom:0px; }
+/* actual calendar day default style */
+.jCalMo .day, .jCalMo .invday { height:30px; text-align:center; }
+/* selectable calendar day specific style */
+.jCalMo .day { cursor:pointer; background:#FFF; }
+/* blacked-out calendar day specific style */
+.jCalMo .invday { color:#808080; background:#eeeeee; text-decoration:line-through; }
+/* previous and subsequent months calendar day specific style */
+.jCalMo .pday, .jCalMo .aday { height:30px; background:#e3e3e3; color:#CCC; }
+/* selected day */
+.jCalMo .selectedDay { color:#FFF; /* must use rgb() syntax for jquery.color.js compliance */ background:#333; }
+/* mouseover hilighted selectable day */
+.jCalMo .overDay { color:#FFF; background:#5a88e4; } /* must use rgb() syntax for jquery.color.js compliance */
+/* left month navigation button - no need to change */
+.jCal .left { background:url(../images/_left.gif) no-repeat center center; width:16px; height:16px; vertical-align:middle; cursor:pointer; float:left; }
+/* right month navigation button - no need to change */
+.jCal .right { background:url(../images/_right.gif) center center no-repeat; width:16px; height:16px; vertical-align:middle; cursor:pointer; float:right; }
+/* no need to change - this is for carousel opacity */
+.jCalMask, .jCalMove { position:absolute; overflow:hidden; }
+
+
+/**============================== Wysiwyg ====================================**/
+div.wysiwyg { border: 1px solid #cccccc; padding: 5px; background-color: #ffffff; }
+div.wysiwyg * { margin: 0; padding: 0; }
+div.wysiwyg ul.panel { border-bottom: 1px solid #cccccc; float: left; width: 100%; padding: 0 0 0 0; }
+div.wysiwyg ul.panel li { list-style-type: none; float: left; margin: 1px 2px 3px 0; background: #ffffff; }
+div.wysiwyg ul.panel li.separator { height: 16px; margin: 0 4px; border-left: 1px solid #cccccc; }
+div.wysiwyg ul.panel li a { text-indent: -5000px; display: block; width: 16px; height: 16px; background: url(../images/jquery.wysiwyg.gif) no-repeat -64px -80px; border: 0; cursor: pointer; padding: 1px; }
+div.wysiwyg ul.panel li a.active { background-color: #f9f9f9; border: 1px solid #cccccc; border-left-color: #aaaaaa; border-top-color: #aaaaaa; padding: 0; }
+div.wysiwyg ul.panel li a.bold { background-position: 0 -16px; }
+div.wysiwyg ul.panel li a.italic { background-position: -16px -16px; }
+div.wysiwyg ul.panel li a.strikeThrough { background-position: -32px -16px; }
+div.wysiwyg ul.panel li a.underline { background-position: -48px -16px; }
+div.wysiwyg ul.panel li a.justifyLeft { background-position: 0 0; }
+div.wysiwyg ul.panel li a.justifyCenter { background-position: -16px 0; }
+div.wysiwyg ul.panel li a.justifyRight { background-position: -32px 0; }
+div.wysiwyg ul.panel li a.justifyFull { background-position: -48px 0; }
+div.wysiwyg ul.panel li a.indent { background-position: -64px 0; }
+div.wysiwyg ul.panel li a.outdent { background-position: -80px 0; }
+div.wysiwyg ul.panel li a.subscript { background-position: -64px -16px; }
+div.wysiwyg ul.panel li a.superscript { background-position: -80px -16px; }
+div.wysiwyg ul.panel li a.undo { background-position: 0 -64px; }
+div.wysiwyg ul.panel li a.redo { background-position: -16px -64px; }
+div.wysiwyg ul.panel li a.insertOrderedList { background-position: -32px -48px; }
+div.wysiwyg ul.panel li a.insertUnorderedList { background-position: -16px -48px; }
+div.wysiwyg ul.panel li a.insertHorizontalRule { background-position: 0 -48px; }
+div.wysiwyg ul.panel li a.h1 { background-position: 0 -32px; }
+div.wysiwyg ul.panel li a.h2 { background-position: -16px -32px; }
+div.wysiwyg ul.panel li a.h3 { background-position: -32px -32px; }
+div.wysiwyg ul.panel li a.h4 { background-position: -48px -32px; }
+div.wysiwyg ul.panel li a.h5 { background-position: -64px -32px; }
+div.wysiwyg ul.panel li a.h6 { background-position: -80px -32px; }
+div.wysiwyg ul.panel li a.cut { background-position: -32px -64px; }
+div.wysiwyg ul.panel li a.copy { background-position: -48px -64px; }
+div.wysiwyg ul.panel li a.paste { background-position: -64px -64px; }
+div.wysiwyg ul.panel li a.increaseFontSize { background-position: -16px -80px; }
+div.wysiwyg ul.panel li a.decreaseFontSize { background-position: -32px -80px; }
+div.wysiwyg ul.panel li a.createLink { background-position: -80px -48px; }
+div.wysiwyg ul.panel li a.insertImage { background-position: -80px -80px; }
+div.wysiwyg ul.panel li a.html { background-position: -47px -46px; }
+div.wysiwyg ul.panel li a.removeFormat { background-position: -80px -63px; }
+div.wysiwyg ul.panel li a.empty { background-position: -64px -80px; }
+div.wysiwyg iframe { border: 0; clear: left; width:100% !important; height:auto !important; }
+
+
+
+/**============================== Data Tables ====================================**/
+
+
+.dataTables_wrapper { position: relative; min-height: 302px; padding:10px; }
+.dataTables_processing { top: 50%; left: 50%; width: 250px; height: 30px; margin-left: -125px; margin-top: -15px; padding: 14px 0 2px 0; border: 1px solid #ddd; text-align: center; color: #999; font-size: 14px; background-color: white; }
+.dataTables_length { float: right; clear:left; }
+.dataTables_filter { width: 50%; margin-bottom:2em; }
+.dataTables_info { float: left; margin-top:2em; }
+.dataTables_paginate { width: 44px; margin-top:2em; float: right; text-align: right; }
+/* Pagination nested */
+.paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next { height: 19px; width: 19px; margin-left: 3px; float: left; }
+.paginate_disabled_previous { background-image: url('../images/back_disabled.jpg'); }
+.paginate_enabled_previous { background-image: url('../images/back_enabled.jpg'); }
+.paginate_disabled_next { background-image: url('../images/forward_disabled.jpg'); }
+.paginate_enabled_next { background-image: url('../images/forward_enabled.jpg'); }
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables display
+ */
+table.display { margin: 0 auto; width: 100%; }
+table.display thead th { padding: 0px 10px 0px 0px; font-weight: bold; cursor: pointer; }
+table.display tfoot th { padding: 3px 10px; font-weight: bold; }
+table.display tr.heading2 td { border-bottom: 1px solid #aaa; }
+table.display td { padding: 3px 10px; }
+table.display td.center { text-align: center; }
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables sorting
+ */
+
+.sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+.sorting { background: url('../images/sort_both.png') no-repeat center right; }
+.sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
+.sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables row classes
+ */
+table.display tr.odd.gradeA { background-color: #f4f4f4; }
+table.display tr.even.gradeA { background-color: #FFF; }
+table.display tr.odd.gradeA { background-color: #f4f4f4; }
+table.display tr.even.gradeA { background-color: #FFF; }
+table.display tr.odd.gradeC { background-color: #ddddff; }
+table.display tr.even.gradeC { background-color: #eeeeff; }
+table.display tr.odd.gradeX { background-color: #ffdddd; }
+table.display tr.even.gradeX { background-color: #ffeeee; }
+table.display tr.odd.gradeU { background-color: #ddd; }
+table.display tr.even.gradeU { background-color: #eee; }
+tr.odd { background-color: white; }
+tr.even { background-color: white; }
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Misc
+ */
+.top, .bottom { padding: 15px; background-color: #F5F5F5; border: 1px solid #CCCCCC; }
+.top .dataTables_info { float: none; }
+.clear { clear: both; }
+.dataTables_empty { text-align: center; }
+tfoot input { margin: 0.5em 0; width: 100%; color: #444; }
+tfoot input.search_init { color: #999; }
+td.group { background-color: #d1cfd0; border-bottom: 2px solid #A19B9E; border-top: 2px solid #A19B9E; }
+td.details { background-color: #d1cfd0; border: 2px solid #A19B9E; }
+.example_alt_pagination div.dataTables_info { width: 40%; }
+.paging_full_numbers { width: 400px; height: 22px; line-height: 22px; }
+.paging_full_numbers span.paginate_button, .paging_full_numbers span.paginate_active { border: 1px solid #aaa; padding: 2px 5px; margin: 0 3px; cursor: pointer; }
+.paging_full_numbers span.paginate_button { background-color: #ddd; }
+.paging_full_numbers span.paginate_button:hover { background-color: #ccc; }
+.paging_full_numbers span.paginate_active { background-color: #99B3FF; }
+table.display tr.even.row_selected td { background-color: #B0BED9; }
+table.display tr.odd.row_selected td { background-color: #9FAFD1; }
+/*
+ * Sorting classes for columns
+ */
+/* For the standard odd/even */
+tr.odd td.sorting_1 { background-color: #D3D6FF; }
+tr.odd td.sorting_2 { background-color: #DADCFF; }
+tr.odd td.sorting_3 { background-color: #E0E2FF; }
+tr.even td.sorting_1 { background-color: #EAEBFF; }
+tr.even td.sorting_2 { background-color: #F2F3FF; }
+tr.even td.sorting_3 { background-color: #F9F9FF; }
+/* For the Conditional-CSS grading rows */
+/*
+ 	Colour calculations (based off the main row colours)
+  Level 1:
+		dd > c4
+		ee > d5
+	Level 2:
+	  dd > d1
+	  ee > e2
+ */
+tr.odd.gradeA td.sorting_1 { background-color: #eeeeee; }
+tr.odd.gradeA td.sorting_2 { background-color: #d1ffd1; }
+tr.odd.gradeA td.sorting_3 { background-color: #d1ffd1; }
+tr.even.gradeA td.sorting_1 { background-color: #FFFFFF; }
+tr.even.gradeA td.sorting_2 { background-color: #e2ffe2; }
+tr.even.gradeA td.sorting_3 { background-color: #e2ffe2; }
+tr.odd.gradeC td.sorting_1 { background-color: #c4c4ff; }
+tr.odd.gradeC td.sorting_2 { background-color: #d1d1ff; }
+tr.odd.gradeC td.sorting_3 { background-color: #d1d1ff; }
+tr.even.gradeC td.sorting_1 { background-color: #d5d5ff; }
+tr.even.gradeC td.sorting_2 { background-color: #e2e2ff; }
+tr.even.gradeC td.sorting_3 { background-color: #e2e2ff; }
+tr.odd.gradeX td.sorting_1 { background-color: #ffc4c4; }
+tr.odd.gradeX td.sorting_2 { background-color: #ffd1d1; }
+tr.odd.gradeX td.sorting_3 { background-color: #ffd1d1; }
+tr.even.gradeX td.sorting_1 { background-color: #ffd5d5; }
+tr.even.gradeX td.sorting_2 { background-color: #ffe2e2; }
+tr.even.gradeX td.sorting_3 { background-color: #ffe2e2; }
+tr.odd.gradeU td.sorting_1 { background-color: #c4c4c4; }
+tr.odd.gradeU td.sorting_2 { background-color: #d1d1d1; }
+tr.odd.gradeU td.sorting_3 { background-color: #d1d1d1; }
+tr.even.gradeU td.sorting_1 { background-color: #d5d5d5; }
+tr.even.gradeU td.sorting_2 { background-color: #e2e2e2; }
+tr.even.gradeU td.sorting_3 { background-color: #e2e2e2; }
+/*
+ * Row highlighting example
+ */
+.ex_highlight #example tbody tr.even:hover, #example tbody tr.even td.highlighted { background-color: #ECFFB3; }
+.ex_highlight #example tbody tr.odd:hover, #example tbody tr.odd td.highlighted { background-color: #E6FF99; }
+/*
+ * KeyTable
+ */
+table.KeyTable td { border: 3px solid transparent; }
+table.KeyTable td.focus { border: 3px solid #3366FF; }
+table.display tr.gradeA { background-color: #FFFFFF; }
+table.display tr.gradeC { background-color: #ddddff; }
+table.display tr.gradeX { background-color: #ffdddd; }
+table.display tr.gradeU { background-color: #ddd; }
+
+
+
+.mootabs_title {
+	float: left;
+	background-color: #f0f0f0;
+	padding: 6px 8px 0px 8px;
+	margin-right: 2px;
+	cursor: pointer;
+	height: 24px;
+	
+-webkit-border-top-left-radius: 6px;
+-webkit-border-top-right-radius: 6px;
+-moz-border-radius-topleft: 6px;
+-moz-border-radius-topright: 6px;
+border-top-left-radius: 6px;
+border-top-right-radius: 6px;	
+	
+}
+
+				#popup_container {
+				  border-width: 1px;
+				  border:1px solid grey;
+				  position: absolute;
+				  background-color: white;
+				  display: none;
+				  /*margin:0 0 0 170px;*/
+				}
