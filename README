@@ -12,15 +12,17 @@ Installazione pacchetto
 
 
 Struttura directory
-- admin/: contiene le pagine del pannello di amministrazione di DecoroUrbano
 - ajax/: contiene gli script che vengono richiamati da richieste AJAX
 - app/: contiene gli script di interfaccia con le app mobile di DecoroUrbano
 - comuni/: contiene le pagine del pannello di amministrazione dei Comuni
 - css/: contiene i file CSS
+- db/: contiene la struttura del DB
 - email/: contiene i template smarty delle email HTML che vengono inviate da DecoroUrbano
+- ext/: contiene gli script che vengono richiamati da widget o servizi per soggetti terzi
 - include/: contiene file di utilità e le librerie di Decoro Urbano
 - js/: contiene gli script Javascript utilizzati
 - pagine/: contiene la lista dei controller che vengono caricati dal file index.php per visualizzare la pagina richiesta
+- script/: contiene gli script richiamati localmente sul server
 - templates/: contiene i template smarty delle pagine del sito
 - testi/: contiene i file contenenti i testi del sito nelle diverse lingue
 - index.php: unica pagina pubblica, effettua il routing delle richieste, caricando il giusto controller e il giusto template
