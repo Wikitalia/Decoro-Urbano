@@ -1,3 +1,14 @@
+Requisiti
+Decoro Urbano è un'applicazione web based progettata per un ambiente LAMP. L'ambiente nativo è costituito da:
+- Debian Lenny
+- Apache 2.2.x con modulo mod_rewrite attivato
+- PHP 5.2.x con estensioni GD, CURL, MB_STRING
+- MySQL 5.1.x
+Decoro Urbano può essere eseguita sia su un web server proprio che su un hosting condiviso che rispetti i requisiti indicati.
+Per quanto non sia stata testata in ambiente Windows, questo sistema operativo dovrebbe essere pienamente supportato.
+Feedback relativi alla compatibilità di Decoro Urbano posso essere inviati a dev@decorourbano.org
+
+
 Installazione pacchetto
 - Estrarre l'archivio in un percorso accessibile dal web server
 - Importare il DB contenuto della directory db/
