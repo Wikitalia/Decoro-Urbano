@@ -39,6 +39,22 @@ CREATE TABLE IF NOT EXISTS `tab_commenti_impropri` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `tab_enti`
+--
+
+CREATE TABLE IF NOT EXISTS `tab_enti` (
+  `id_ente` int(11) NOT NULL AUTO_INCREMENT,
+  `id_tipo` int(11) NOT NULL,
+  `id_comune` int(11) NOT NULL,
+  `nome` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `inoltro_attivo` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_ente`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `tab_segnalazioni`
 --
 
