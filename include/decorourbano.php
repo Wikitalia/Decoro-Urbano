@@ -67,6 +67,24 @@ function comuni_get($term) {
 
 }
 
+/**
+ * Restituisce gli enti relativi al comune il cui id corrisponde al parametro inserito
+ * 
+ * Questa funzione restituisce gli enti inseriti dai comuni con i relativi parametri (nome, email, inoltro attivato o meno)
+ * @param int $id_comune id del comune di cui restituire gli enti
+ * @return array lista degli enti che corrispondono all'id_comune inserito
+ */
+function enti_get($id_comune) {
+
+	$q='SELECT tt.nome as nome_tipo, te.nome, te.email, tt.id_tipo, te.inoltro_attivo
+			FROM tab_tipi tt
+			LEFT JOIN tab_enti te
+			ON tt.id_tipo = te.id_tipo and id_comune = '.$id_comune;
+	$enti_comune = data_query($q);
+	
+	return $enti_comune;
+
+}
 
 /**
  * Restituisce gli utenti più attivi

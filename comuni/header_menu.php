@@ -35,32 +35,11 @@
         </ul>
 			</li>
 
-			<!--li><a href="menu_gestione.php" <? if ($id_menu_principale == "30") echo "class='current'" ?>>Menu</a>
+			<li><a href="enti_gestione.php" <? if ($id_menu_principale == "30") echo "class='current'" ?>>Enti/Uffici</a>
 				<ul>
-					<li><a href="menu_gestione.php" <? if ($id_menu_secondario == "31") echo "class='current'" ?>>Gerarchie & contenuti</a></li>
+					<li><a href="enti_gestione.php" <? if ($id_menu_secondario == "31") echo "class='current'" ?>>Gestione Enti/Uffici</a></li>
 				</ul>
 			</li>
-
-			<li><a href="localita_gestione.php" <? if ($id_menu_principale == "40") echo "class='current'" ?>>Località</a>
-				<ul>
-				  <li><a href="localita_gestione.php" <? if ($id_menu_secondario == "41") echo "class='current'" ?>>Elenco Località</a></li>
-					<li><a href="localita_gestione_modifica.php" <? if ($id_menu_secondario == "42") echo "class='current'" ?>>Nuova Località</a></li>
-        </ul>
-			</li>
-
-			<li><a href="realizzazioni_gestione.php" <? if ($id_menu_principale == "50") echo "class='current'" ?>>Realizzazioni</a>
-				<ul>
-				  <li><a href="realizzazioni_gestione.php" <? if ($id_menu_secondario == "51") echo "class='current'" ?>>Elenco Realizzazioni</a></li>
-					<li><a href="realizzazioni_gestione_modifica.php" <? if ($id_menu_secondario == "52") echo "class='current'" ?>>Nuova Realizzazione</a></li>
-        </ul>
-			</li>
-
-			<li><a href="ftp_utenti_gestione.php" <? if ($id_menu_principale == "60") echo "class='current'" ?>>Utenti FTP</a>
-				<ul>
-				  <li><a href="ftp_utenti_gestione.php" <? if ($id_menu_secondario == "61") echo "class='current'" ?>>Elenco Utenti</a></li>
-					<li><a href="ftp_utenti_gestione_modifica.php" <? if ($id_menu_secondario == "62") echo "class='current'" ?>>Nuovo utente</a></li>
-        </ul>
-			</li-->
 
 		</ul>
 		<!--End Main Navigation-->
