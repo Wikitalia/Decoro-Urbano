@@ -25,14 +25,13 @@
 
 <script type="text/javascript" src="{$settings.sito.url}js/mappa_segnala.js"></script>
 
-		<script>
-			$(function() {
-				$( "#invSegnCategoria" ).buttonset();
-			});
-			
-			var tipo = 0;
-			
-		</script>		
+<script>
+	$(function() {
+		$( "#invSegnCategoria" ).buttonset();
+	});
+	var tipo = 0;
+</script>
+
 <div class="rightPageHeader">
 	<div class="rightHeadText"><h3 class="fontS18 marginB5 fBrown">{#titolo#}</h3>
 		{#inviaIntro#} <a href="{$settings.sito.guida}">{#guida#}</a>
@@ -80,15 +79,6 @@
 		    </noscript>         
 			</div>
 		</div>
-		{*
-		<div>
-			<div class="marginT10">
-				<b>{#inoltraEnte#}</b><br />
-				<input type="checkbox" name="inoltro_ente" id="inoltro_ente" checked="checked" /><span class="fontS10">{#inoltraDesc1#} <span id="citta_enti">{#inoltraDesc2#}</span></span>
-				<div id="elenco_enti"></div>
-			</div>
-		</div>
-		*}
 		<div class="marginT10 fontS10">
 			{#noSegnDuplicate#} <a href="{$settings.sito.guida}" target="_blank">{#guida#}</a>
 		</div>
@@ -240,9 +230,6 @@ function ajaxSubmit() {
 	var indirizzo = $("#indirizzo").val();
 	//var lat = $("#lat").val();
 	//var lng = $("#lng").val();
-	
-	var inoltro_ente = ($('#inoltro_ente').is(":checked"))?1:0;
-	var ente = $("#ente").val();
 
 	if (!verifica('')) {
 		$('#modalControlli').html(err_msg);
@@ -282,9 +269,6 @@ function ajaxSubmit() {
 	dataString += '&regione='+regione;
 	dataString += '&nazione='+nazione;
 	dataString += '&codice_nazione='+codice_nazione;
-	
-	dataString += '&inoltro_ente='+inoltro_ente;
-	dataString += '&ente='+ente;
 	
 	dataString += '&client={$settings.client.nome}';
 	dataString += '&versione={$settings.client.versione}';

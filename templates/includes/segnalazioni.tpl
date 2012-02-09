@@ -136,7 +136,9 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 					</div>\
 				</div>\{*segnDettagliRight*}
 				<div style="width:100%" id="infoSegnalazione">\
-					<div id="statoSegnalazione" class="f'+coloreStato+'"><img src="{$settings.sito.url}/images/'+img_stato+'" alt="Stato Segnalazione" class="imgStato">'+stato+' <a href="#"  title="Cosa significa in carico?" id="b_c">{*<img src="{$settings.sito.url}/images/question.png" alt="informazioni" >*}</a></div> \
+					<div id="statoSegnalazione" class="f'+coloreStato+'"><img src="{$settings.sito.url}/images/'+img_stato+'" alt="Stato Segnalazione" class="imgStato">'+stato+' <a href="#"  title="Cosa significa in carico?" id="b_c">{*<img src="{$settings.sito.url}/images/question.png" alt="informazioni" >*}</a>';
+		if (segnalazione.id_ente > 0) segnalazioneListaHTML+='<br />Inoltrata a: "'+segnalazione.nome_ente+'"';
+					segnalazioneListaHTML+='</div>\
 					{*<div id="prioritaSegnalazione">\
 					Priorit&agrave;: <b class="highPriority fBrown">Media</b> <img src="{$settings.sito.url}/images/question.png" alt="informazioni"></div>*}\
 					<div id="doIT" style="float:right;display:block;margin-right:30px;"><div class="doITsubscrive">{*<img src="{$settings.sito.url}/images/question.png" alt="informazioni"> *}Sottoscrivi:</div>\

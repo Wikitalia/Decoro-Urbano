@@ -864,9 +864,9 @@ font-size:10px;
 		background: white;
 }
 #statoSegnalazione {
-	width:287px;
+	width:400px;
 	float:left;
-	padding:13px 0 0;
+	padding:5px 0 0;
 	font-weight:bold;
 }
 #statoSegnalazione .imgStato{

@@ -66,18 +66,14 @@ if (isset($_POST["salva_enti"])) {
 
 			$condizioni = array('id_comune' => $campi_db['id_comune'], 'id_tipo' => $campi_db['id_tipo']);
 			
-			$ente = data_get('tab_enti', $condizioni);
+			/*$ente = data_get('tab_enti', $condizioni);
 			
 			if (count($ente)) {
+				data_update('tab_enti', array('eliminato' => 1), $condizioni);
+			}*/
 			
-				data_update('tab_enti', $campi_db, $condizioni);
-			
-			} else {
-			
-				data_insert('tab_enti', $campi_db);
-			
-			}
-			
+			data_update('tab_enti', array('eliminato' => 1), $condizioni);
+			data_insert('tab_enti', $campi_db);
 			
 		}
 	

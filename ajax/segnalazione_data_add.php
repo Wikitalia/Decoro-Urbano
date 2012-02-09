@@ -100,9 +100,6 @@ $versione = $_POST['versione'];
 $sid = session_id();
 
 
-$inoltro_ente = (int) $_POST['inoltro_ente'];
-
-
 $comune = comune_get($citta);
 $id_comune = $comune['id_comune'];
 
@@ -141,12 +138,6 @@ if ($comune['stato'] == 1) {
         $fields['stato'] = $settings['segnalazioni']['in_attesa_comune'];
     else
         $fields['stato'] = $settings['segnalazioni']['in_moderazione'];
-}
-
-
-if ($inoltro_ente) {
-    $fields['inoltro_ente'] = 1;
-    $fields['id_ente'] = (int) $_POST['ente'];
 }
 
 $fields = cleanArray($fields);

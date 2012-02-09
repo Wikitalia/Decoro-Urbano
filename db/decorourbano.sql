@@ -49,8 +49,9 @@ CREATE TABLE IF NOT EXISTS `tab_enti` (
   `nome` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `inoltro_attivo` tinyint(1) NOT NULL DEFAULT '0',
+  `eliminato` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_ente`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,6 @@ CREATE TABLE IF NOT EXISTS `tab_enti` (
 CREATE TABLE IF NOT EXISTS `tab_segnalazioni` (
   `id_segnalazione` int(11) NOT NULL AUTO_INCREMENT,
   `id_tipo` int(11) NOT NULL,
-  `inoltro_ente` tinyint(1) NOT NULL DEFAULT '0',
   `id_ente` int(11) NOT NULL DEFAULT '0',
   `lng` double NOT NULL,
   `lat` double NOT NULL,

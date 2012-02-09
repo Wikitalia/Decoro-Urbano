@@ -311,7 +311,7 @@ function segnalazioni_get($parametri) {
                  s.indirizzo_url, s.id_utente, s.messaggio, s.stato, s.client, 
                  s.data, s.data AS last_edit, u.id_fb, u.nome, u.cognome, u.mostra_cognome, 
                  u.id_ruolo, t.nome AS tipo_nome, t.nome_url AS tipo_nome_url, 
-                 t.label AS tipo_label ";
+                 t.label AS tipo_label, e.id_ente, e.nome AS nome_ente, ";
     
     if ($user) {
         // se l'utente è loggato ed è necessario estrarre le informazioni sul follow
@@ -326,6 +326,7 @@ function segnalazioni_get($parametri) {
     // INIZIO COSTRUZIONE FROM
     $q_from = "FROM tab_segnalazioni AS s
                 INNER JOIN tab_utenti AS u ON u.id_utente = s.id_utente
+                LEFT JOIN tab_enti AS e ON e.id_ente = s.id_ente                 
                 LEFT JOIN tab_tipi AS t ON s.id_tipo = t.id_tipo ";
     
     if ($user) {
@@ -505,7 +506,7 @@ function segnalazioni_user_wall_get($parametri) {
     // INIZIO COSTRUZIONE FROM
     $q_from = " FROM tab_segnalazioni AS s
                     INNER JOIN tab_utenti AS u ON u.id_utente = s.id_utente
-                    LEFT JOIN tab_tipi AS t ON s.id_tipo = t.id_tipo 
+                    LEFT JOIN tab_tipi AS t ON s.id_tipo = t.id_tipo                     
                     LEFT JOIN tab_commenti AS c ON s.id_segnalazione = c.id_segnalazione 
                     LEFT JOIN tab_segnalazioni_follow AS sf ON s.id_segnalazione = sf.id_segnalazione ";
     
@@ -610,13 +611,14 @@ function segnalazione_dettaglio_get($id) {
     
     $id = (int) $id;
 
-    $q = "SELECT s.*, u.id_fb, u.nome, u.cognome, u.mostra_cognome, u.id_ruolo, t.nome AS tipo_nome, t.label AS tipo_label,
+    $q = "SELECT s.*, u.id_fb, u.nome, u.cognome, u.mostra_cognome, u.id_ruolo, t.nome AS tipo_nome, t.label AS tipo_label, e.id_ente, e.nome AS nome_ente,
                 (SELECT COUNT(*) 
                     FROM tab_segnalazioni_follow AS sf 
                     WHERE sf.id_segnalazione = s.id_segnalazione) AS n_follower
             FROM tab_segnalazioni AS s
                 INNER JOIN tab_utenti AS u ON u.id_utente = s.id_utente 
-                LEFT JOIN tab_tipi t ON s.id_tipo = t.id_tipo
+                LEFT JOIN tab_tipi AS t ON s.id_tipo = t.id_tipo
+                LEFT JOIN tab_enti AS e ON e.id_ente = s.id_ente
             WHERE u.confermato = 1 AND 
                     u.eliminato = 0 AND
                     s.eliminata = 0 AND 
