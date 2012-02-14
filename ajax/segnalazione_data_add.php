@@ -84,15 +84,21 @@ $descrizione = strip_tags($_POST['descrizione']);
 $lat = (float) $_POST['lat'];
 $lng = (float) $_POST['lng'];
 
-// parametri calcolati dalla posizione indicata nella mappa
-$civico = $_POST['civico'];
-$via = $_POST['via'];
-$cap = $_POST['cap'];
-$citta = $_POST['citta'];
-$provincia = $_POST['provincia'];
-$regione = $_POST['regione'];
-$nazione = $_POST['nazione'];
-$codice_nazione = $_POST['codice_nazione'];
+// calcolo dei parametri dalla posizione indicata nella mappa
+$geoCodeURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$lat.",".$lng."&sensor=false&language=it";
+$result = json_decode(file_get_contents($geoCodeURL), true);
+
+foreach($result['results'][0]['address_components'] as $address_component) {
+	$address[$address_component['types'][0]] = $address_component['long_name'];
+}
+
+$civico = $address['street_number'];
+$via = $address['route'];
+$citta = $address['locality'];
+$provincia = $address['administrative_area_level_2'];
+$regione = $address['administrative_area_level_1'];
+$nazione = $address['country'];
+$cap = $address['postal_code'];
 
 // parametri relativi alla modalità di invio
 $client = $_POST['client'];
