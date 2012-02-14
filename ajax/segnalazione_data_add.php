@@ -31,14 +31,6 @@
  * @param string descrizione descrizione della segnalazione
  * @param float lat latitudine del punto relativo alla segnalazione
  * @param float lng longitudine del punto relativo alla segnalazione
- * @param string civico numero civico dell'indirizzo ricavato tramite le API di Google Maps
- * @param string via indirizzo corrispondente alla posizione indicata dall'utente ricavato da Google Maps
- * @param string cap codice di avviamento postale ricavato tramite le API di Google Maps
- * @param string citta nome del comune ricavato tramite le API di Google Maps
- * @param string provincia nome della provincia ricavato tramite le API di Google Maps
- * @param string regione nome della regione ricavato tramite le API di Google Maps
- * @param string nazione nome del paese ricavato tramite le API di Google Maps
- * @param string codice_nazione codice identificativo della nazione ricavato tramite le API di Google Maps
  * @param string client stringa identificativa della modalità di invio della segnalazione, in questo caso sempre "Segnalazione WEB"
  * @param string versione stringa identificativa del numero di versione del client utilizzato
  */
@@ -84,15 +76,21 @@ $descrizione = strip_tags($_POST['descrizione']);
 $lat = (float) $_POST['lat'];
 $lng = (float) $_POST['lng'];
 
-// parametri calcolati dalla posizione indicata nella mappa
-$civico = $_POST['civico'];
-$via = $_POST['via'];
-$cap = $_POST['cap'];
-$citta = $_POST['citta'];
-$provincia = $_POST['provincia'];
-$regione = $_POST['regione'];
-$nazione = $_POST['nazione'];
-$codice_nazione = $_POST['codice_nazione'];
+// calcolo dei parametri dalla posizione indicata nella mappa
+$geoCodeURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$lat.",".$lng."&sensor=false&language=it";
+$result = json_decode(file_get_contents($geoCodeURL), true);
+
+foreach($result['results'][0]['address_components'] as $address_component) {
+	$address[$address_component['types'][0]] = $address_component['long_name'];
+}
+
+$civico = $address['street_number'];
+$via = $address['route'];
+$citta = $address['locality'];
+$provincia = $address['administrative_area_level_2'];
+$regione = $address['administrative_area_level_1'];
+$nazione = $address['country'];
+$cap = $address['postal_code'];
 
 // parametri relativi alla modalità di invio
 $client = $_POST['client'];
