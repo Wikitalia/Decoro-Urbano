@@ -8364,4 +8364,3 @@ INSERT INTO `tab_tipi` (`id_tipo`, `nome`, `nome_url`, `label`) VALUES
 (4, 'Zone verdi', 'zone-verdi', 'degradoZoneVerdi'),
 (5, 'Segnaletica', 'segnaletica', 'segnaleticaStradale'),
 (6, 'Affissioni abusive', 'affissioni-abusive', 'affissioniAbusive');
-
