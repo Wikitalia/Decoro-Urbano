@@ -1,0 +1,59 @@
+RewriteEngine On
+RewriteBase /
+
+#Foto segnalazione
+RewriteRule ^images/segnalazioni/(.*).jpg /resize.php?s=$1 [L,QSA]
+
+RewriteCond %{HTTP_HOST} ^decorourbano\.org$ [NC]
+RewriteRule ^(.*)$ http://www.decorourbano.org/$1 [L,R=301]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/ [L,R=301]
+
+#Sottodominio
+RewriteCond %{HTTP_HOST} !^www\.decorourbano\.org$
+RewriteCond %{HTTP_HOST} ^([a-z0-9-]+)\.decorourbano\.org$
+RewriteRule ^$ /index.php?page=listaSegnalazioni&subdomain=%1 [L,QSA]
+
+#Segnalazione
+RewriteRule ^(.*)/(.*)/(.*)/(.*)/$ /index.php?page=dettaglioSegnalazione&ids=$4 [L,QSA]
+
+#Pagine
+RewriteRule ^prehome/ /index.php?page=prehome [L,QSA]
+RewriteRule ^principale/ /index.php?page=principale [L,QSA]
+RewriteRule ^modifica-profilo/ /index.php?page=modificaProfilo [L,QSA]
+RewriteRule ^impostazioni/ /index.php?page=impostazioni [L,QSA]
+RewriteRule ^logout/ /index.php?page=logout [L,QSA]
+RewriteRule ^vedi-profilo/ /index.php?page=vediProfilo [L,QSA]
+RewriteRule ^registrati/ /index.php?page=registrati [L,QSA]
+RewriteRule ^conferma-registrazione/ /index.php?page=confermaRegistrazione [L,QSA]
+RewriteRule ^mappa/ /index.php?page=mappa [L,QSA]
+RewriteRule ^pass-dimenticata/ /index.php?page=passDimenticata [L,QSA]
+RewriteRule ^invia-segnalazione/ /index.php?page=inviaSegnalazione [L,QSA]
+RewriteRule ^lista-segnalazioni/ /index.php?page=listaSegnalazioni [L,QSA]
+RewriteRule ^lista-segnalazioni2/ /index.php?page=listaSegnalazioni2 [L,QSA]
+RewriteRule ^dettaglio-segnalazione/ /index.php?page=dettaglioSegnalazione [L,QSA]
+RewriteRule ^applicazioni/ /index.php?page=applicazioni [L,QSA]
+RewriteRule ^amici/ /index.php?page=amici [L,QSA]
+RewriteRule ^gruppi/ /index.php?page=gruppi [L,QSA]
+RewriteRule ^eventi/ /index.php?page=eventi [L,QSA]
+RewriteRule ^top-segnalatori/ /index.php?page=topSegnalatori [L,QSA]
+RewriteRule ^top-gruppi/ /index.php?page=topGruppi [L,QSA]
+RewriteRule ^news/ /index.php?page=news [L,QSA]
+RewriteRule ^decoro-urbano/ /index.php?page=suDU [L,QSA]
+RewriteRule ^awards/ /index.php?page=awards [L,QSA]
+RewriteRule ^guida/ /index.php?page=guida [L,QSA]
+RewriteRule ^funzioni-decoro-urbano/ /index.php?page=funzioniDU [L,QSA]
+RewriteRule ^patrocini/ /index.php?page=patrocini [L,QSA]
+RewriteRule ^supporta/ /index.php?page=supporta [L,QSA]
+RewriteRule ^tos/ /index.php?page=tos [L,QSA]
+RewriteRule ^cdu/ /index.php?page=tos [L,QSA]
+RewriteRule ^privacy/ /index.php?page=privacy [L,QSA]
+RewriteRule ^domande-frequenti/ /index.php?page=FAQs [L,QSA]
+RewriteRule ^contatti/ /index.php?page=contatti [L,QSA]
+RewriteRule ^comuni-attivi/ /index.php?page=comuniAttivi [L,QSA]
+RewriteRule ^errore/ /index.php?page=errore [L,QSA]
+RewriteRule ^paginaNonTrovata/ /index.php?page=paginaNonTrovata [L,QSA]
+RewriteRule ^open-data-open-source/ /index.php?page=open [L,QSA]
+RewriteRule ^wikitalia/ /index.php?page=wikitalia [L,QSA]
+RewriteRule ^crea-widget/ /index.php?page=creaWidget [L,QSA]
