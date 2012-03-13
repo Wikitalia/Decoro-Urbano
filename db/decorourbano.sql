@@ -39,6 +39,23 @@ CREATE TABLE IF NOT EXISTS `tab_commenti_impropri` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `tab_competenze`
+--
+
+CREATE TABLE IF NOT EXISTS `tab_competenze` (
+  `id_competenza` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nome_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `stato` int(11) NOT NULL,
+  `data_affiliazione` int(11) NOT NULL,
+  `__upd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_competenza`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `tab_enti`
 --
 
@@ -62,10 +79,11 @@ CREATE TABLE IF NOT EXISTS `tab_enti` (
 CREATE TABLE IF NOT EXISTS `tab_segnalazioni` (
   `id_segnalazione` int(11) NOT NULL AUTO_INCREMENT,
   `id_tipo` int(11) NOT NULL,
+  `id_competenza` int(11) NOT NULL DEFAULT '0',
   `id_ente` int(11) NOT NULL DEFAULT '0',
   `lng` double NOT NULL,
   `lat` double NOT NULL,
-  `id_comune` int(11) NOT NULL,
+  `id_comune` int(11) NOT NULL DEFAULT '0',
   `stringa_indirizzo` text COLLATE utf8_unicode_ci NOT NULL,
   `civico` text COLLATE utf8_unicode_ci NOT NULL,
   `indirizzo` text COLLATE utf8_unicode_ci NOT NULL,
@@ -148,6 +166,7 @@ CREATE TABLE IF NOT EXISTS `tab_utenti` (
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id_ruolo` int(11) NOT NULL,
   `id_comune` int(11) NOT NULL DEFAULT '0',
+  `id_competenza` int(11) NOT NULL DEFAULT '0',
   `confermato` tinyint(1) NOT NULL DEFAULT '0',
   `email_commento` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Qualcuno commenta una mia segnalazione',
   `email_condivisione` tinyint(1) NOT NULL DEFAULT '1',
@@ -169,8 +188,8 @@ CREATE TABLE IF NOT EXISTS `tab_utenti` (
 -- Dump dei dati per la tabella `tab_utenti`
 --
 
-INSERT INTO `tab_utenti` (`id_utente`, `id_fb`, `nome`, `cognome`, `nome_associazione`, `citta`, `quartiere`, `sito`, `facebook_url`, `twitter`, `about`, `email`, `telefono`, `password`, `id_ruolo`, `id_comune`, `confermato`, `email_commento`, `email_condivisione`, `email_segnalazione`, `email_gestione_comune`, `email_top`, `email_comunicazioni`, `fb_share`, `mostra_cognome`, `profilo_pubblico`, `inviato`, `data`, `eliminato`, `__upd`) VALUES
-(1, 0, 'Mario', 'Rossi', '', 'Roma', '', '', '', '', '', 'mario.rossi@example.com', '', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1300000000, 0, '2012-01-25 17:12:50');
+INSERT INTO `tab_utenti` (`id_utente`, `id_fb`, `nome`, `cognome`, `nome_associazione`, `citta`, `quartiere`, `sito`, `facebook_url`, `twitter`, `about`, `email`, `telefono`, `password`, `id_ruolo`, `id_comune`, `id_competenza`, `confermato`, `email_commento`, `email_condivisione`, `email_segnalazione`, `email_gestione_comune`, `email_top`, `email_comunicazioni`, `fb_share`, `mostra_cognome`, `profilo_pubblico`, `inviato`, `data`, `eliminato`, `__upd`) VALUES
+(1, 0, 'Mario', 'Rossi', '', 'Roma', '', '', '', '', '', 'mario.rossi@example.com', '', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1300000000, 0, '2012-01-25 17:12:50');
 
 -- --------------------------------------------------------
 
