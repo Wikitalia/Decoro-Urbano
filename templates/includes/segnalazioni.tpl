@@ -131,8 +131,12 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 				</div>\{*segnDettagliLeft*}
 				<div class="segnDettagliRight">\
 					<div class="auto right textRight">\
-						<div class="marginT5 textRight marginB5">\
-						</div>\
+						<div class="marginT5 textRight marginB5">';
+						if (segnalazione.id_competenza) {
+							segnalazioneListaHTML += '<span>{#gestioneCompetenza#}</span>\
+							<img src="{$settings.sito.url}images/loghi_competenze/'+segnalazione.nome_url_competenza+'.png" />';
+						}
+						segnalazioneListaHTML += '</div>\
 					</div>\
 				</div>\{*segnDettagliRight*}
 				<div style="width:100%" id="infoSegnalazione">\
@@ -391,21 +395,10 @@ function mappa_init(segnalazione, zoom) {
       new google.maps.Point(0,0),
       new google.maps.Point(21, 37));*/
       
-  if (segnalazione['stato'] >= 300)
-		var image = new google.maps.MarkerImage('/images/risolta_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
-  else if (segnalazione['stato'] >= 200)
-	  var image = new google.maps.MarkerImage('/images/carico_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
-  else
-	  var image = new google.maps.MarkerImage('/images/marker_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
+  var image = new google.maps.MarkerImage(segnalazione.marker,
+    new google.maps.Size(40, 40),
+    new google.maps.Point(0,0),
+    new google.maps.Point(19, 40));
 	
 	var marker = new google.maps.Marker({
 	  position: posizione,

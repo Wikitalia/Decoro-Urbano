@@ -132,22 +132,25 @@
 
 <div class="leftBlockBorder">
     <ul class="naviLeft">
-        <li class="title">{#docum#}</li>
-        <li {if $page=='suDU'}class="selected"{/if}><a href="{$settings.sito.suDU}">{#suDU#}</a></li>
-        <li {if $page=='guida'}class="selected"{/if}><a href="{$settings.sito.guida}">{#guida#}</a></li>
-				<li {if $page=='FAQs'}class="selected"{/if}><a href="{$settings.sito.FAQs}">{#FAQs#}</a></li>
+        <li class="title">{#social#}</li>
+				<li><a href="{$settings.sito.url}blog/" target="_blank">{#duBlog#}</a></li>
+        <li><a href="{$settings.social.facebook}" target="_blank"><div class="fbIcon  marginR5"></div> {#socialFB#}</a></li>
+        <li><a href="{$settings.social.twitter}" target="_blank"><div class="twIcon  marginR5"></div> {#socialTwitter#}</a></li>
+        <li><a href="{$settings.sito.ideascale}">{#ideeDU#}</a></li>
 				<li {if $page=='contatti'}class="selected"{/if}><a href="{$settings.sito.contatti}">{#comuniContattaci#}</a></li>
-				{*<li {if $page=='funzioniDU'}class="selected"{/if}><a href="{$settings.sito.funzioniDU}">{#funzDU#}</a></li>
-				<li {if $page=='awards'}class="selected"{/if}><a href="{$settings.sito.awards}">Gli "iDU" di Decoro Urbano</a></li>*}
     </ul>
 </div>
 
 <div class="leftBlock">
     <ul class="naviLeft">
-        <li class="title">{#social#}</li>
-				 <li><a href="{$settings.sito.url}blog/" target="_blank">{#duBlog#}</a></li>
-        <li><a href="{$settings.social.facebook}" target="_blank"><div class="fbIcon  marginR5"></div> {#socialFB#}</a></li>
-        <li><a href="{$settings.social.twitter}" target="_blank"><div class="twIcon  marginR5"></div> {#socialTwitter#}</a></li>
+        <li class="title">{#docum#}</li>
+        <li {if $page=='suDU'}class="selected"{/if}><a href="{$settings.sito.suDU}">{#suDU#}</a></li>
+        <li><a href="{$settings.sito.wikitalia}" target="_blank">{#wikitalia#}</a></li>
+        <li {if $page=='guida'}class="selected"{/if}><a href="{$settings.sito.guida}">{#guida#}</a></li>
+				<li {if $page=='FAQs'}class="selected"{/if}><a href="{$settings.sito.FAQs}">{#FAQs#}</a></li>
+				{*<li {if $page=='funzioniDU'}class="selected"{/if}><a href="{$settings.sito.funzioniDU}">{#funzDU#}</a></li>
+				<li {if $page=='awards'}class="selected"{/if}><a href="{$settings.sito.awards}">Gli "iDU" di Decoro Urbano</a></li>*}
     </ul>
-			<iframe src="http://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fdecorourbano&amp;width=237&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;height=345" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:237px; height:345px; margin-top:5px;" allowTransparency="true"></iframe>
+		<iframe src="http://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fdecorourbano&amp;width=237&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;height=345" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:237px; height:345px; margin-top:5px;" allowTransparency="true"></iframe>
 </div>
+

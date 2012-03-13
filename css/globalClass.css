@@ -423,13 +423,28 @@ input[type="text"], input[type="password"], textarea, select {
 		padding-bottom:10px;
 	}
 		.segnDettagliLeft {
-			width:78%;
+			width:68%;
 		}
 		.segnDettagliRight {
-			width:20%;
+			width:30%;
 			float:right;
 			text-align:right;
 		}
+    
+		.segnDettagliRight img{
+			width:200px;
+      float:left;
+      display:block;
+		}   
+    
+		.segnDettagliRight span{
+			width:200px;
+      float:left;
+      font-size:11px;
+      padding-bottom:3px;
+		}       
+    
+    
 		.commentoBox {
 			margin-bottom:5px;
 		}

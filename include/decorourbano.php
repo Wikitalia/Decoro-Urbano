@@ -274,6 +274,7 @@ function segnalazioni_get($parametri) {
     $formato = (isset($parametri['formato']) && is_numeric($parametri['formato']))?((int)$parametri['formato']):(0);   
     $regione = $parametri['regione'];
     $id_comune = (isset($parametri['id_comune']) && is_numeric($parametri['id_comune']))?((int)$parametri['id_comune']):(0);
+    $id_competenza = (isset($parametri['id_competenza']) && is_numeric($parametri['id_competenza']))?(int) $parametri['id_competenza']:-1;	
     $recenti = (isset($parametri['recenti']) && is_numeric($parametri['recenti']))?((int)$parametri['recenti']):(0);
     $stato = (isset($parametri['stato']) && is_numeric($parametri['stato']))?((int)$parametri['stato']):(0);
     $nuove = (isset($parametri['nuove']) && is_numeric($parametri['nuove']))?((int)$parametri['nuove']):(0);
@@ -311,7 +312,8 @@ function segnalazioni_get($parametri) {
                  s.indirizzo_url, s.id_utente, s.messaggio, s.stato, s.client, 
                  s.data, s.data AS last_edit, u.id_fb, u.nome, u.cognome, u.mostra_cognome, 
                  u.id_ruolo, t.nome AS tipo_nome, t.nome_url AS tipo_nome_url, 
-                 t.label AS tipo_label, e.id_ente, e.nome AS nome_ente, ";
+                 t.label AS tipo_label, e.id_ente, e.nome AS nome_ente,
+								 cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza, ";
     
     if ($user) {
         // se l'utente è loggato ed è necessario estrarre le informazioni sul follow
@@ -326,7 +328,8 @@ function segnalazioni_get($parametri) {
     // INIZIO COSTRUZIONE FROM
     $q_from = "FROM tab_segnalazioni AS s
                 INNER JOIN tab_utenti AS u ON u.id_utente = s.id_utente
-                LEFT JOIN tab_enti AS e ON e.id_ente = s.id_ente                 
+                LEFT JOIN tab_enti AS e ON e.id_ente = s.id_ente
+                LEFT JOIN tab_competenze AS cz ON s.id_competenza = cz.id_competenza
                 LEFT JOIN tab_tipi AS t ON s.id_tipo = t.id_tipo ";
     
     if ($user) {
@@ -360,6 +363,10 @@ function segnalazioni_get($parametri) {
     if ($id_comune) {
         $q_where .= " AND s.id_comune = ".$id_comune;
     }
+    
+		if ($id_competenza >= 0) {
+				$q_where .= " AND s.id_competenza =".$id_competenza;
+		}
 
     if (count($tipi)) {
         $q_where .= " AND (";
@@ -422,6 +429,9 @@ function segnalazioni_get($parametri) {
             
             // aggiunge il base url dell'immagine
             $segnalazioni[$key]['foto_base_url'] = segnalazione_image_url_get($segnalazione);
+            
+            // aggiunge l'url al marker corretto da utilizzare in base a tipo/stato/genere
+            $segnalazioni[$key]['marker'] = segnalazione_marker_url_get($segnalazione);
             
             // se richiesto, recupera di commenti della segnalazione
             if ($commenti) {
@@ -612,11 +622,13 @@ function segnalazione_dettaglio_get($id) {
     $id = (int) $id;
 
     $q = "SELECT s.*, u.id_fb, u.nome, u.cognome, u.mostra_cognome, u.id_ruolo, t.nome AS tipo_nome, t.label AS tipo_label, e.id_ente, e.nome AS nome_ente,
+    				cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza,
                 (SELECT COUNT(*) 
                     FROM tab_segnalazioni_follow AS sf 
                     WHERE sf.id_segnalazione = s.id_segnalazione) AS n_follower
             FROM tab_segnalazioni AS s
                 INNER JOIN tab_utenti AS u ON u.id_utente = s.id_utente 
+                LEFT JOIN tab_competenze AS cz ON s.id_competenza = cz.id_competenza
                 LEFT JOIN tab_tipi AS t ON s.id_tipo = t.id_tipo
                 LEFT JOIN tab_enti AS e ON e.id_ente = s.id_ente
             WHERE u.confermato = 1 AND 
@@ -661,7 +673,10 @@ function segnalazione_dettaglio_get($id) {
         $segnalazione[0]['tipo_nome_url'] = fixForUri($segnalazione[0]['tipo_nome']);
         $segnalazione[0]['citta_url'] = fixForUri($segnalazione[0]['citta']);
         $segnalazione[0]['indirizzo_url'] = fixForUri($segnalazione[0]['indirizzo']);
-		$segnalazione[0]['foto_base_url'] = segnalazione_image_url_get($segnalazione[0]);
+				$segnalazione[0]['foto_base_url'] = segnalazione_image_url_get($segnalazione[0]);
+		
+				// aggiunge l'url al marker corretto da utilizzare in base a tipo/stato/genere
+				$segnalazione[0]['marker'] = segnalazione_marker_url_get($segnalazione[0]);
 		
         // costruisce il link all'avater dell'utente
         $segnalazione[0]['avatar'] = user_avatar_get($segnalazione[0]);
@@ -745,6 +760,38 @@ function segnalazione_commenti_get($id) {
     } else {
         return array();
     }
+}
+
+/**
+ * Restituisce l'url del marker da utilizzare per una segnalazione
+ * 
+ * Questa funzione restituisce una stringa contenente l'url in base a tipo/stato/genere della segnalazione
+ * 
+ * @param array $segnalazione array contenente i dati relativi alla segnalazione di cui recuperare il marker
+ * @return string
+ */
+function segnalazione_marker_url_get($segnalazione) {
+
+  if ($segnalazione['id_competenza']) {
+	  if ($segnalazione['stato'] >= 300) {
+			$marker = '/images/'.$segnalazione[0]['nome_url_competenza'].'_risolta.png';
+	  } else if ($segnalazione['stato'] >= 200) {
+		  $marker = '/images/'.$segnalazione['nome_url_competenza'].'_carico.png';
+	  } else {
+		  $marker = '/images/'.$segnalazione['nome_url_competenza'].'_marker.png';
+	  }
+	} else {      
+	  if ($segnalazione['stato'] >= 300) {
+			$marker = '/images/risolta_'.$segnalazione['tipo_label'].'.png';
+	  } else if ($segnalazione['stato'] >= 200) {
+		  $marker = '/images/carico_'.$segnalazione['tipo_label'].'.png';
+	  } else {
+		  $marker = '/images/marker_'.$segnalazione['tipo_label'].'.png';
+	  }
+	}
+	
+	return $marker;
+	
 }
 
 /**
@@ -1509,9 +1556,21 @@ function get_abitanti_attivi() {
 	return $res;
 }
 
+/**
+ * Restituisce l'elenco delle possibili competenze per la gestione delle segnalazioni (i Comuni sono gestiti a parte e non rientrano in questo elenco)
+ * 
+ * @param int $id_competenza email Filtra le competenza sulla base dell'id
+ * @param string $nome_url_competenza Filtra le competenza sulla base del sottodominio (deve essere univoco)
+ * @return array
+ */
+function competenze_get($id_competenza = 0, $nome_url_competenza = '') {
 
+	$filtro = array();
+	if ($id_competenza) $filtro['id_competenza'] = $id_competenza;
+	if ($nome_url_competenza) $filtro['nome_url'] = $nome_url_competenza;		
 
+	$competenze = data_get('tab_competenze',$filtro);
+	
+	return $competenze;
 
-
-
-
+}

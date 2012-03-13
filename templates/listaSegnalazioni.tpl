@@ -96,23 +96,16 @@ function aggiungi_segnalazione(posizione,segnalazione) {
       
   if (segnalazione['stato'] >= 300) {
   	stato = 'Risolta';
-		var image = new google.maps.MarkerImage('/images/risolta_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
   } else if (segnalazione['stato'] >= 200) {
   	stato = 'In carico';
-	  var image = new google.maps.MarkerImage('/images/carico_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
   } else {
   	stato = 'In attesa';
-	  var image = new google.maps.MarkerImage('/images/marker_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
   }
+
+  var image = new google.maps.MarkerImage(segnalazione.marker,
+    new google.maps.Size(40, 40),
+    new google.maps.Point(0,0),
+    new google.maps.Point(19, 40));
 
 	var marker = new google.maps.Marker({
 	    position: myLatlng,
@@ -274,6 +267,18 @@ window.onload=function() {
 			{/foreach}
 		</div>
 	</div>
+	{else if $locType == 'competenza'}
+	<script>
+		zoom = 6;  
+	</script>
+	<div id="listaSegnCompetenza">
+		<div id="listaSegnCompetenzaTitolo">
+			<div class="fontS20  ">{#gestioneCompetenza#}</div>
+		</div>
+		<div id="listaSegnCompetenzaLogo">
+			<img style="width:100%;" src="{$settings.sito.url}images/loghi_competenze/agcom.png" />
+		</div>
+	</div>
 	{else}
 	<script>
 	//var initialLocation = new google.maps.LatLng({$regione.lat}, {$regione.lng});
@@ -403,6 +408,7 @@ window.onload=function() {
       
       {else if $locType == 'regione'} {* Regione *}
       
+      {else if $locType == 'competenza'} {* Regione *}
 			
 			{else} {* Italia intera *}
 			

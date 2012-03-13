@@ -47,7 +47,7 @@
  * segnalazioni relative a regione o comune
  */
 
-// recupera il parametro dottodominio che rappresenta la regione o il comune
+// recupera il parametro dottodominio che rappresenta la regione o il comune o la competenza
 // su cui filtrare le segnalazioni
 $subdomain = cleanField($_GET['subdomain']);
 $smarty->assign('subdomain', $subdomain);
@@ -56,8 +56,23 @@ $regioni = $settings['geo']['regioni'];
 
 $smarty->assign('regioni', $regioni);
 
-// nel caso in cui il sottodominio rappresenti una regione
-if (array_key_exists($subdomain, $regioni)) {
+if ($subdomain && count($competenza = competenze_get(0,$subdomain))) {
+	// nel caso in cui il sottodominio rappresenti una competenza
+
+	$parametri['id_competenza'] = $competenza[0]['id_competenza'];
+	$segnalazioni = segnalazioni_get2($parametri);
+
+	$segnalazioni = json_encode($segnalazioni);
+	$segnalazioni = escapeJSON($segnalazioni);
+	
+	$smarty->assign('segnalazioni',$segnalazioni);
+	$smarty->assign('locType','competenza');
+	
+	$smarty->assign('pageTitle','Segnalazioni in gestione '.$competenza[0]['nome']);
+
+} else if (array_key_exists($subdomain,$regioni)) {
+    // altrimenti nel caso in cui il sottodominio rappresenti una regione
+
     // inizializzo il tipo di pagina per la regione
     $smarty->assign('locType', 'regione');
 

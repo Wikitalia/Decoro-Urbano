@@ -60,6 +60,9 @@ if (!in_array($regione, $settings['geo']['regioni'])) {
 // filtro sulle segnalazioni di uno specifico comune
 $id_comune=(isset($_GET['idc']))?(int) $_GET['idc']:0;
 
+// filtro sulle segnalazioni di una specifica competenza
+$id_competenza=(isset($_GET['id_competenza']))?(int) $_GET['id_competenza']:-1;
+
 // gestione del filtro sulle categorie
 $tipi = array();
 $tipi[1]=($_GET['tipo1']=='1')?1:0;
@@ -111,6 +114,7 @@ if (isset($_GET['minLat']) && isset($_GET['maxLat']) && isset($_GET['minLng']) &
 
 $parametri['regione'] = $regione;
 $parametri['id_comune'] = $id_comune;
+$parametri['id_competenza'] = $id_competenza;
 $parametri['id_user'] = $user;
 $parametri['tipi'] = $tipi;
 $parametri['recenti'] = $recenti;

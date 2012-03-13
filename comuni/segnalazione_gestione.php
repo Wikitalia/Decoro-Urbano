@@ -59,12 +59,15 @@ if (isset($_GET["id"])) {
 }
 
 $comune = data_get('tab_comuni',array('id_comune'=>$user['id_comune']));
-
 $result = segnalazione_dettaglio_get($id_segnalazione);
+
+if (!($user['id_ruolo'] == $settings['user']['ruolo_utente_competenza'] && $user['id_competenza'] == $result[0]['id_competenza']) && !($user['id_ruolo'] == $settings['user']['ruolo_utente_comune'] && $user['id_comune'] == $result[0]['id_comune'])) {
+	exit;
+}
 
 $messaggio = $result[0]["messaggio"];
 $id_utente = $result[0]["id_utente"];
-$utente = $result[0]["nome"].' '.$result[0]["cognome"];
+$utente = trim($result[0]["nome"].' '.$result[0]["cognome"]);
 $tipo_label = $result[0]["tipo_label"];
 $tipo = $result[0]["tipo_nome"];
 $regione = $result[0]["regione"];
@@ -233,8 +236,8 @@ function incarico_segnalazione(id) {
 				
 					
 
-						<button onclick="incarico_segnalazione(<?=$id_segnalazione?>)" style="width:130px;">In carico</button><br/>
-						<button onclick="risolvi_segnalazione(<?=$id_segnalazione?>)" style="width:130px;">Risolta</button><br/>
+						<button onclick="incarico_segnalazione(<?=$id_segnalazione?>)" style="width:130px;">In carico</button><br />
+						<button onclick="risolvi_segnalazione(<?=$id_segnalazione?>)" style="width:130px;">Risolta</button><br />
 						
 						<br /><br />
 					
@@ -275,7 +278,7 @@ function incarico_segnalazione(id) {
 							
 							</script>
                <span style="font-size:12px;line-height:12px;">
-               <br/>
+               <br />
               <b>Utente:</b> <?=$utente?><br />
               <b>Categoria:</b> <?=$tipo?><br />
 							<b>Messaggio:</b> <?=$messaggio?><br />

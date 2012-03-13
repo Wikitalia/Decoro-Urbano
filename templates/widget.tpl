@@ -40,8 +40,6 @@
 <meta http-equiv="content-language" content="it" />
 
 <link rel="icon" href="{$settings.sito.url}/images/favicon.png" />
-<link rel="stylesheet" type="text/css" href="{$settings.sito.url}css/gglobal.css" />
-<link rel="stylesheet" type="text/css" href="{$settings.sito.url}css/gglobalClass.css" />
 <link rel="stylesheet" type="text/css" href="{$settings.sito.url}css/widget.css" />
 <link href='http://fonts.googleapis.com/css?family=Nunito&subset=latin&v2' rel='stylesheet' type='text/css'>
 <link type="text/css" href="{$settings.sito.url}css/jqueryui/jquery-ui-1.8.12.custom.css" rel="stylesheet" />	
@@ -140,27 +138,22 @@
 		      
 		  if (segnalazione['stato'] >= 300) {
 		  	stato = 'Risolta';
-				var image = new google.maps.MarkerImage('/images/risolta_'+segnalazione['tipo_label']+'.png',
-		      new google.maps.Size(40, 40),
-		      new google.maps.Point(0,0),
-		      new google.maps.Point(19, 40));
 		  } else if (segnalazione['stato'] >= 200) {
 		  	stato = 'In carico';
-			  var image = new google.maps.MarkerImage('/images/carico_'+segnalazione['tipo_label']+'.png',
-		      new google.maps.Size(40, 40),
-		      new google.maps.Point(0,0),
-		      new google.maps.Point(19, 40));
 		  } else {
 		  	stato = 'In attesa';
-			  var image = new google.maps.MarkerImage('/images/marker_'+segnalazione['tipo_label']+'.png',
-		      new google.maps.Size(40, 40),
-		      new google.maps.Point(0,0),
-		      new google.maps.Point(19, 40));
 		  }
 		
+			//if ('{$user.id_utente}' == '1') alert(segnalazione.marker);
+		
+		  var image = new google.maps.MarkerImage(segnalazione.marker,
+		    new google.maps.Size(40, 40),
+		    new google.maps.Point(0,0),
+		    new google.maps.Point(19, 40));
+		
 			var marker = new google.maps.Marker({
-			    position: myLatlng,
-			    icon: image
+		    position: myLatlng,
+		    icon: image
 			});
 		
 			google.maps.event.addListener(marker, 'click', function() {

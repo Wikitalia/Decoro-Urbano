@@ -41,13 +41,19 @@ require_once('../include/funzioni.php');
 require_once('../include/decorourbano.php');
 require_once('../include/controlli.php');
 
+$infobox=(isset($_GET['infobox']))?$_GET['infobox']:'false'; // Default = false
+$cluster=(isset($_GET['cluster']))?$_GET['cluster']:'true'; // Default = true
 $limit_numero=(isset($_GET['l']))?(int) $_GET['l']:0;
 $nome_url_comune=(isset($_GET['comune']))?cleanField($_GET['comune']):'';
 
 $q = 'SELECT * FROM tab_comuni WHERE nome_url = "'.$nome_url_comune.'"';
 $comune = data_query($q);
 
-$parametri['id_comune'] = $comune[0]['id_comune'];
+if (count($comune)) $parametri['id_comune'] = $comune[0]['id_comune'];
+else {
+	$comune[0]['lat'] = 42;
+	$comune[0]['lng'] = 12;
+}
 $parametri['limit'] = $limit_numero;
 $parametri['formato'] = 0;
 
@@ -100,11 +106,23 @@ du_map.init = function(selector, initialLocation, zoom) {
 	this.map = new google.maps.Map($(selector)[0], mapOptions);
 	
   google.maps.event.addListener(this.map, 'click', function() {
-		//ib.close();
+		<?
+		if ($infobox == 'true') {
+		?>
+		ib.close();
+		<?
+		}
+		?>
   });
   
   google.maps.event.addListener(this.map, 'zoom_changed', function() {
-		//ib.close();
+		<?
+		if ($infobox == 'true') {
+		?>
+		ib.close();
+		<?
+		}
+		?>
   });
 
 }
@@ -112,7 +130,10 @@ du_map.init = function(selector, initialLocation, zoom) {
 var boxText = document.createElement("div");
 boxText.style.cssText = "width:290px; float:right; margin:0; padding: 5px;";
 
-/*var infoBoxOptions = {
+<?
+if ($infobox == 'true') {
+?>
+var infoBoxOptions = {
 	content: boxText,
 	disableAutoPan: false,
 	maxWidth: 0,
@@ -126,11 +147,21 @@ boxText.style.cssText = "width:290px; float:right; margin:0; padding: 5px;";
 	enableEventPropagation: false
 };
 
-var ib = new InfoBox(infoBoxOptions);*/
+var ib = new InfoBox(infoBoxOptions);
+<?
+}
+?>
 
 function segnalazioni_mostra() {
 
-	//ib.close();
+	<?
+	if ($infobox == 'true') {
+	?>
+	ib.close();
+	<?
+	}
+	?>
+	
 	du_map.markers.splice(0,du_map.markers.length);
 	
 	if (markerClusterer) {
@@ -154,35 +185,67 @@ function aggiungi_segnalazione(posizione,segnalazione) {
 	var myLatlng = new google.maps.LatLng(segnalazione['lat'],segnalazione['lng']);
       
   var stato = '';
-      
+  
   if (segnalazione['stato'] >= 300) {
   	stato = 'Risolta';
-		var image = new google.maps.MarkerImage('/images/risolta_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
   } else if (segnalazione['stato'] >= 200) {
   	stato = 'In carico';
-	  var image = new google.maps.MarkerImage('/images/carico_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
   } else {
   	stato = 'In attesa';
-	  var image = new google.maps.MarkerImage('/images/marker_'+segnalazione['tipo_label']+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(19, 40));
   }
+
+  var image = new google.maps.MarkerImage(segnalazione.marker,
+    new google.maps.Size(40, 40),
+    new google.maps.Point(0,0),
+    new google.maps.Point(19, 40));
+
+<?
+if ($cluster == 'true') {
+?>
 
 	var marker = new google.maps.Marker({
 	    position: myLatlng,
 	    icon: image
 	});
+	
+	if (!markerClusterer) {
+		markerClusterer = new MarkerClusterer(du_map.map, du_map.markers);
+		markerClusterer.setGridSize(35);
+		markerClusterer.setMaxZoom(15);
+		markerClusterer.setMinClusterSize(2);
 
+		var styles=markerClusterer.getStyles();
+		styles[0]['url'] = '<?=$settings['sito']['url']?>images/ico_group_10.png';
+		styles[1]['url'] = '<?=$settings['sito']['url']?>images/ico_group_25.png';
+		styles[2]['url'] = '<?=$settings['sito']['url']?>images/ico_group_50.png';
+		styles[3]['url'] = '<?=$settings['sito']['url']?>images/ico_group_100.png';
+		markerClusterer.setStyles(styles);
+	}
+	markerClusterer.addMarker(marker);
+	//var c = markerClusterer.getCluster(marker);
+	
+<?
+} else {
+?>
+
+	var marker = new google.maps.Marker({
+			map: du_map.map,
+	    position: myLatlng,
+	    icon: image
+	});
+
+<?
+}
+?>
+
+      
 	google.maps.event.addListener(marker, 'click', function() {
 
-		/*ib.close();
+<?
+if ($infobox == 'true') {
+?>
+
+		ib.close();
 
 		infoBoxHTML = '\
 			<img src="/images/popupFreccia.png" alt="" style="position:relative; left:-26px;  top:25px; margin-right:-26px; float:left;" />\
@@ -208,27 +271,21 @@ function aggiungi_segnalazione(posizione,segnalazione) {
 		infoBoxHTML += '</div></div>';
 		
 		boxText.innerHTML = infoBoxHTML;
-		ib.open(du_map.map, marker);*/
+		ib.open(du_map.map, marker);
+		
+<?
+} else {
+?>
 		
 		window.open('<?=$settings['sito']['url']?>'+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/','_blank');
 
+<?
+}
+?>
+
 	});
 	
-	if (!markerClusterer) {
-		markerClusterer = new MarkerClusterer(du_map.map, du_map.markers);
-		markerClusterer.setGridSize(35);
-		markerClusterer.setMaxZoom(15);
-		markerClusterer.setMinClusterSize(2);
 
-		var styles=markerClusterer.getStyles();
-		styles[0]['url'] = '<?=$settings['sito']['url']?>images/ico_group_10.png';
-		styles[1]['url'] = '<?=$settings['sito']['url']?>images/ico_group_25.png';
-		styles[2]['url'] = '<?=$settings['sito']['url']?>images/ico_group_50.png';
-		styles[3]['url'] = '<?=$settings['sito']['url']?>images/ico_group_100.png';
-		markerClusterer.setStyles(styles);
-	}
-	markerClusterer.addMarker(marker);
-	//var c = markerClusterer.getCluster(marker);
 
 }
 

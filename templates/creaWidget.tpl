@@ -65,14 +65,14 @@ function updateWidget() {
 	
 	if ($('#width').val()!='' && !isNaN($('#width').val())) {
 		width = parseInt($('#width').val())
-		if (width<250) {
-			$('#width').val('250');
-			alert('Non è possibile specificare un valore inferiore a 250 pixel');
-			width = 250;
+		if (width<200) {
+			$('#width').val('200');
+			alert('Non è possibile specificare un valore inferiore a 200 pixel');
+			width = 200;
 		}
 	} else {
-		$('#width').val('250');
-		width = 250;
+		$('#width').val('200');
+		width = 200;
 	}
 	$('#height').val(height);
 	widget_link += "\" width=\""+width+"\" height=\""+height+"\" frameborder=0></iframe>";

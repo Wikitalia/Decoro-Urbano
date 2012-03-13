@@ -141,6 +141,10 @@ $settings['sito']['title']['paginaNonTrovata'] = 'Pagina non trovata';
 $settings['sito']['login_url'] = $settings['sito']['url'];
 $settings['sito']['logout_url'] = $settings['sito']['url'];
 
+// Link esterni
+$settings['sito']['ideascale'] = 'http://idee.'.$settings['sito']['dominio'].'/';
+$settings['sito']['wikitalia'] = 'http://www.wikitalia.it';
+
 // Autorizzazioni di accesso per le singole pagine
 // '<nome_pagina>' => array{<utente_non_loggato>, <utente_loggato>, <admin>}
 // utente_non_loggato -> 1: autorizzato; 0: non autorizzato
@@ -226,6 +230,7 @@ $settings['admin_comuni']['debug'] = 0;
 $settings['user']['ruolo_utente_admin'] = 1;
 $settings['user']['ruolo_utente_normale'] = 2;
 $settings['user']['ruolo_utente_comune'] = 3;
+$settings['user']['ruolo_utente_competenza'] = 4;
 
 $settings['segnalazioni']['in_moderazione'] = 0;
 $settings['segnalazioni']['rifiutata'] = 1;

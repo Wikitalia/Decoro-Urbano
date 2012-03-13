@@ -152,7 +152,7 @@ $comune = data_get('tab_comuni', array('id_comune' => $user['id_comune']));
                 var latSpan = northEast.lat() - southWest.lat();
 
                 $.ajax({
-                    url: '/<?= $settings['sito']['directory'] ?>ajax/segnalazioni_get.php?idc=<?= $user['id_comune'] ?>',
+                    url: '/<?= $settings['sito']['directory'] ?>ajax/segnalazioni_get.php?idc=<?=$user['id_comune']?>&id_competenza=0',
                     dataType: "json",
                     data: ({
                         minLat : Math.min(southWest.lat(),northEast.lat()),

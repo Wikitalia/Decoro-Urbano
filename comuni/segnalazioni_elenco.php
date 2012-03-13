@@ -163,6 +163,7 @@ $comune = data_get('tab_comuni', array('id_comune' => $user['id_comune']));
 
 // recupera la lista delle segnalazioni
 $parametri['id_comune'] = $user['id_comune'];
+$parametri['id_competenza'] = 0;
 $segnalazioni = segnalazioni_get($parametri);
 
 if (count($segnalazioni))
