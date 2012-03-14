@@ -313,7 +313,7 @@ function segnalazioni_get($parametri) {
                  s.data, s.data AS last_edit, u.id_fb, u.nome, u.cognome, u.mostra_cognome, 
                  u.id_ruolo, t.nome AS tipo_nome, t.nome_url AS tipo_nome_url, 
                  t.label AS tipo_label, e.id_ente, e.nome AS nome_ente,
-								 cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza, ";
+								 cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza";
     
     if ($user) {
         // se l'utente è loggato ed è necessario estrarre le informazioni sul follow
