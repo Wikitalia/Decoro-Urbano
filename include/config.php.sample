@@ -1,4 +1,4 @@
-<?php
+						 <?php
 
 /*
  * ----------------------------------------------------------------------------
@@ -239,8 +239,10 @@ $settings['segnalazioni']['rimossa_errore'] = 3;
 $settings['segnalazioni']['in_attesa_non_verificata'] = 100;
 $settings['segnalazioni']['in_attesa_moderata'] = 101;
 $settings['segnalazioni']['in_attesa_verificata'] = 102;
-$settings['segnalazioni']['in_attesa_comune'] = 103;
+$settings['segnalazioni']['in_attesa_comune'] = 103; // Inserita da utenza comune
+$settings['segnalazioni']['in_attesa_competenza'] = 104; // Inoltrata a utenza competenza
 $settings['segnalazioni']['in_carico'] = 200;
+$settings['segnalazioni']['in_carico_automatica'] = 201;
 $settings['segnalazioni']['risolta'] = 300;
 $settings['segnalazioni']['in_attesa'] = 100;
 
