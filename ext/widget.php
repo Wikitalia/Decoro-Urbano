@@ -42,7 +42,6 @@ require_once('../include/smarty.php');
 require_once('../include/decorourbano.php');
 
 $smarty->assign('settings', $settings);
-//$smarty->config_load($settings['sito']['percorso'].'testi/ITA.conf',$page);
 
 // Il widget può essere generato solo associato ad comune (da verificare)
 if ($_GET['c']) {
