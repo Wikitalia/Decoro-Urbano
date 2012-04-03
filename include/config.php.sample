@@ -2,7 +2,7 @@
 
 /*
  * ----------------------------------------------------------------------------
- * Decoro Urbano version 0.2.1
+ * Decoro Urbano version 0.4.0
  * ----------------------------------------------------------------------------
  * Copyright Maiora Labs Srl (c) 2012
  * ----------------------------------------------------------------------------   
@@ -189,10 +189,6 @@ $auth = array(
     'confermaRegistrazione' => array(1, 1, 1),
     'errore' => array(1,1,1),
     'paginaNonTrovata' => array(1,1,1),
-    /* Pagine Mobile */
-    'indexMobile' => array(1, 1, 1),
-    'infoMobile' => array(1, 1, 1),
-    'segnalazioneMobile' => array(1, 1, 1),
     'open' => array(1, 1, 1),
     'wikitalia' => array(1, 1, 1),
     'comuniAttivi' => array(1, 1, 1)
@@ -223,8 +219,8 @@ $settings['segnalazioni']['conferma_automatica'] = 1;
 $settings['commenti']['conferma_automatica'] = 1;
 
 $settings['admin_comuni']['directory'] = "comuni/";
-$settings['admin_comuni']['nome_sito'] = '';
-$settings['admin_comuni']['proprietario'] = '';
+$settings['admin_comuni']['nome_sito'] = 'Decoro Urbano - Amministrazione';
+$settings['admin_comuni']['proprietario'] = 'Maiora Labs Srl';
 $settings['admin_comuni']['url'] = $settings['sito']['url'].$settings['admin_comuni']['directory'];
 $settings['admin_comuni']['percorso'] = $settings['sito']['percorso'].$settings['admin_comuni']['directory'];
 $settings['admin_comuni']['debug'] = 0;
