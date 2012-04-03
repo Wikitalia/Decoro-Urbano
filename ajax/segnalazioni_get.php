@@ -29,6 +29,8 @@
  * 
  * @param string reg nome della regione
  * @param int idc id del comune
+ * @param int id_competenza id della competenza
+ * @param string genere genere della segnalazione (buone-pratiche, degrado)
  * @param int tipoX attiva il filtro sulla categoria X
  * @param int idu id dell'utente
  * @param booelan w restituisce le segnalazioni del wall di un utente
@@ -47,9 +49,13 @@ require_once("../include/db_open.php");
 require_once("../include/db_open_funzioni.php");
 require_once("../include/decorourbano.php");
 require_once("../include/funzioni.php");
+require_once("../include/controlli.php");
 
 // regione
 $regione=(isset($_GET['reg']))?fixForUri($_GET['reg']):0;
+
+// genere
+$genere=(isset($_GET['genere']))?$_GET['genere']:0;
 
 // se il parametro passato per la regione non è presente nella lista delle regioni
 // cancellalo
@@ -112,6 +118,7 @@ if (isset($_GET['minLat']) && isset($_GET['maxLat']) && isset($_GET['minLng']) &
 }
 
 
+$parametri['genere'] = $genere;
 $parametri['regione'] = $regione;
 $parametri['id_comune'] = $id_comune;
 $parametri['id_competenza'] = $id_competenza;
@@ -127,6 +134,8 @@ $parametri['vecchie'] = $vecchie;
 $parametri['distanza'] = $distanza;
 $parametri['area'] = $area;
 $parametri['formato'] = 1;
+
+$parametri = cleanArray($parametri);
  
 
 if ($wall==1) {

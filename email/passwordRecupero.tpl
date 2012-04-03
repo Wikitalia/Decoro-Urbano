@@ -21,7 +21,7 @@
  * along with Decoro Urbano.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{config_load file="testi_email.conf" section="segnalazioneCondivisione"}
+{config_load file="testi_email.conf" section="passwordRecupero"}
 {include file="_header.tpl"}
 
 <h1 class="fRed fBig">Ciao <span class="fItalic">{$nome_utente}</span>!<br /><br /></h1>

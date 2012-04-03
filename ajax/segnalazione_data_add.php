@@ -38,6 +38,16 @@
 session_start();
 
 require_once("../include/config.php");
+
+// Impostazione politiche di error reporting in funzione del flag di debug
+if ($settings['sito']['debug']) {
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}
+
 require_once("../include/db_open.php");
 require_once("../include/db_open_funzioni.php");
 require_once("../include/funzioni.php");
@@ -47,15 +57,15 @@ require_once('../include/decorourbano.php');
 $facebook = null;
 
 // verifica la presenza dei parametri
-if (!$_POST['id_tipo'] || !checkNumericField($_POST['id_tipo']) ||
+if (($_POST['genere'] != 'bp' && !$_POST['id_tipo']) || !checkNumericField($_POST['id_tipo']) ||
     !$_POST['indirizzo'] ||
     !$_POST['descrizione'] ||
     !$_POST['lat'] || !is_numeric($_POST['lat']) ||
     !$_POST['lng'] || !is_numeric($_POST['lng'])) {
     $out['status'] = 'params_error';
+    echo json_encode($out);
     exit;
 }
-
 
 // recupera i dati dell'utente loggato
 $user = logged_user_get();
@@ -69,12 +79,26 @@ if (!$user) {
 
 $id_utente = (int) $user['id_utente'];
 
+// Buona pratica/degrado
+$genere = (isset($_POST['genere']))?$_POST['genere']:'degrado';
+$genere = ($genere == 'bp')?'buone-pratiche':$genere;
+
 // parametri inseriti dall'utente
 $id_tipo = (int) $_POST['id_tipo'];
 $indirizzo = $_POST['indirizzo'];
 $descrizione = strip_tags($_POST['descrizione']);
 $lat = (float) $_POST['lat'];
 $lng = (float) $_POST['lng'];
+
+if ($id_tipo) {
+	// recupera il nome della categoria in cui è stata inserita la segnalazione
+	$tipo = data_get('tab_tipi', array('id_tipo' => $id_tipo), '', array('nome' => ''));
+	$tipo_nome = $tipo[0]['nome'];
+} elseif ($genere == 'buone-pratiche') {
+	$tipo_nome = "Buone Pratiche";
+}
+
+$tipo_nome_url = fixForUri($tipo_nome);
 
 // calcolo dei parametri dalla posizione indicata nella mappa
 $geoCodeURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$lat.",".$lng."&sensor=false&language=it";
@@ -97,13 +121,13 @@ $client = $_POST['client'];
 $versione = $_POST['versione'];
 $sid = session_id();
 
-
 $comune = comune_get($citta);
 $id_comune = $comune['id_comune'];
 
 // compila i campi della segnalazione
 $fields = array(
     'id_utente' => $id_utente,
+    'genere' => $genere,
     'id_tipo' => $id_tipo,
     'confermata' => $settings['segnalazioni']['conferma_automatica'],
     'data' => time(),
@@ -146,71 +170,97 @@ if (!($id_segnalazione = data_insert('tab_segnalazioni', $fields)))
 
 // Se l'inserimento è andato a buon fine, sposta le foto dalla cartella temporanea
 // a quella definitiva
-$destDir = $settings['sito']['percorso'] . '/images/segnalazioni/' . $id_utente . '/' . $id_segnalazione;
-$tempDir = $settings['sito']['percorso'] . "/ajax/uploads/" . $sid;
+$destDir = $settings['sito']['percorso'] . 'images/segnalazioni/' . $id_utente . '/' . $id_segnalazione;
+$tempDir = $settings['sito']['percorso'] . "ajax/uploads/" . $sid;
 
-// se la cartella di destinazione non esiste, viene creata
-if (!(file_exists($destDir))) {
-    mkdir($destDir, 0755, true);
-}
+$foto = 0;
 
 // rinomina i nomi dei file delle immaggini
 if ($handle = opendir($tempDir)) {
-    while (false !== ($file = readdir($handle))) {
-        if (!is_dir($file)) {
-            //rename ($tempDir."/".$file, $destDir."/".$file);
-            rename($tempDir . "/" . $file, $destDir . "/1.jpeg");
-        }
-    }
-    closedir($handle);
-    // rimuove la cartella temporanea
-    rrmdir($tempDir);
-}
+	while (false !== ($file = readdir($handle))) {
+		if ($file != '.' && $file != '..' && !is_dir($tempDir . "/" . $file)) {
+			if (is_file($tempDir . "/" . $file)) {
 
-// recupera il nome della categoria in cui è stata inserita la segnalazione
-$tipo = data_get('tab_tipi', array('id_tipo' => $id_tipo), '', array('nome' => ''));
+				// se la cartella di destinazione non esiste, viene creata
+				if (!(file_exists($destDir))) {
+			    mkdir($destDir, 0755, true);
+				}
+				
+				rename($tempDir . "/" . $file, $destDir . "/1.jpeg");
+				data_update('tab_segnalazioni', array('foto'=>1), array('id_segnalazione'=>$id_segnalazione));
+				
+				$foto = 1;
+			}
+		}
+	}
+	closedir($handle);
+	// rimuove la cartella temporanea
+	rrmdir($tempDir);
+}
 
 // costruisce l'url della segnalazione con il formato:
 // <base_url>/<categoria>/<comune>/<indirizzo>/<id_segnalazione>
 // ad es.: http://www.decorourbano.org/sos-buche/rome/via-capo-spartivento/535/
-$link_segnalazione = $settings['sito']['url'] . fixForUri($tipo[0]['nome']) . '/' . fixForUri($citta) . '/' . fixForUri($via) . '/' . $id_segnalazione . '/';
+$dati_per_url = array_merge($fields, array('id_segnalazione'=>$id_segnalazione,'tipo_nome_url' => $tipo_nome_url));
+$link_segnalazione = segnalazione_url_get($dati_per_url);
 
-// costruisce l'url dell'immagine ridimensionata dell'immagine della segnalazione.
-// l'url richiama lo script resize.php che ridimensiona l'immagine, con un meccanismo di cache
-// finalizzato a conservare le immagini già ridimensionate
-$variabili['foto_base_url'] = '/images/segnalazioni/'.fixForUri($tipo[0]['nome']).'-'.$fields['citta_url'].'-'.$fields['indirizzo_url'].'-'.$id_utente.'-'.$id_segnalazione.'-';
-$imgSegnalazione = $settings['sito']['url_ns'].$variabili['foto_base_url'].'280-215.jpg';
+if ($foto) {
 
-// costruisce l'url per visualizzare la segnalazione su google maps in base alla latitudine
-// e longitudine della segnalazione
-// ad es.:
-// http://maps.google.com/maps/api/staticmap?size=480x480&markers=icon:http://www.decorourbano.org/images/marker_DU.png|700+E+9th+St+NY&sensor=false
-$imgMappa = 'http://maps.google.com/maps/api/staticmap?size=280x215&markers=icon:'.$settings['sito']['url'].'images/marker_DU.png|' . $lat . ',' . $lng . '&sensor=false&zoom=14';
+	
+	// costruisce l'url dell'immagine ridimensionata dell'immagine della segnalazione.
+	// l'url richiama lo script resize.php che ridimensiona l'immagine, con un meccanismo di cache
+	// finalizzato a conservare le immagini già ridimensionate
+	$foto_base_url = segnalazione_image_url_get($dati_per_url);
+	$imgSegnalazione = $settings['sito']['url_ns'].$foto_base_url.'285-215.jpg';
+	
+	// costruisce l'url per visualizzare la segnalazione su google maps in base alla latitudine
+	// e longitudine della segnalazione
+	// ad es.:
+	// http://maps.google.com/maps/api/staticmap?size=480x480&markers=icon:http://www.decorourbano.org/images/marker_DU.png|700+E+9th+St+NY&sensor=false
+	$imgMappa = 'http://maps.google.com/maps/api/staticmap?size=285x215&markers=icon:'.$settings['sito']['url'].'images/marker_DU.png|' . $lat . ',' . $lng . '&sensor=false&zoom=14';
 
+} else {
+	
+	// costruisce l'url dell'immagine ridimensionata dell'immagine della segnalazione.
+	// l'url richiama lo script resize.php che ridimensiona l'immagine, con un meccanismo di cache
+	// finalizzato a conservare le immagini già ridimensionate
+	$foto_base_url = '';
+	$imgSegnalazione = '';
+	
+	// costruisce l'url per visualizzare la segnalazione su google maps in base alla latitudine
+	// e longitudine della segnalazione
+	// ad es.:
+	// http://maps.google.com/maps/api/staticmap?size=480x480&markers=icon:http://www.decorourbano.org/images/marker_DU.png|700+E+9th+St+NY&sensor=false
+	$imgMappa = 'http://maps.google.com/maps/api/staticmap?size=580x215&markers=icon:'.$settings['sito']['url'].'images/marker_DU.png|' . $lat . ',' . $lng . '&sensor=false&zoom=14';
 
-// inizializza le variabili per l'invio dell'email di notifica all'utente che ha inviato
-// la segnalazione
-$data['from'] = $settings['email']['nome'] . ' <' . $settings['email']['indirizzo'] . '>';
-$data['to'] = $user['nome'] . ' ' . $user['cognome'] . ' <' . $user['email'] . '>';
-$data['template'] = 'segnalazionePubblicazione';
-
-$variabili['nome_utente'] = trim($user['nome'] . ' ' . $user['cognome']);
-$variabili['link_segnalazione'] = $link_segnalazione;
-$variabili['imgSegnalazione'] = $imgSegnalazione;
-$variabili['imgMappa'] = $imgMappa;
-$variabili['via'] = $via;
-$variabili['citta'] = $citta;
-$variabili['messaggio'] = $descrizione;
-$variabili['categoria'] = $tipo[0]['nome'];
-$variabili['data'] = strftime('%e %B %Y %R');
-
-$data['variabili'] = $variabili;
+}
 
 // se il comune non è attivo, la segnalazione viene immediatamente pubblicata sul sito
 // di Decoro Urbano, senza moderazione preventiva. In questo caso l'email di notifica
 // all'utente viene inviata subito.
-if ($comune[0]['stato'] == 0) {
-    email_with_template($data);
+if (!$comune['stato']) {
+	
+	// inizializza le variabili per l'invio dell'email di notifica all'utente che ha inviato
+	// la segnalazione
+	$data['from'] = $settings['email']['nome'] . ' <' . $settings['email']['indirizzo'] . '>';
+	$data['to'] = $user['nome'] . ' ' . $user['cognome'] . ' <' . $user['email'] . '>';
+	$data['template'] = 'segnalazionePubblicazione';
+	
+	$variabili['nome_utente'] = trim($user['nome'] . ' ' . $user['cognome']);
+	$variabili['link_segnalazione'] = $link_segnalazione;
+	$variabili['imgSegnalazione'] = $imgSegnalazione;
+	$variabili['foto_base_url'] = $foto_base_url;
+	$variabili['foto'] = $foto;
+	$variabili['imgMappa'] = $imgMappa;
+	$variabili['via'] = $via;
+	$variabili['citta'] = $citta;
+	$variabili['messaggio'] = $descrizione;
+	$variabili['categoria'] = $tipo_nome;
+	$variabili['data'] = strftime('%e %B %Y %R');
+	
+	$data['variabili'] = $variabili;
+
+  email_with_template($data);
 }
 
 // nel caso in cui l'utente sia loggato tramite Facebook, e abbia consentito alla 

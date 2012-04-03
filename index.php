@@ -211,10 +211,10 @@ switch ($page) {
         break;
     // strumenti
     case 'mappa':
-		include('pagine/mappa.php');
-		$smarty->assign('pageTitle', $settings['sito']['title'][$page]);
-		$smarty->display($settings['sito']['percorso'].'templates/mappa.tpl');
-		break;
+				include('pagine/mappa.php');
+				$smarty->assign('pageTitle', $settings['sito']['title'][$page]);
+				$smarty->display($settings['sito']['percorso'].'templates/mappa.tpl');
+				break;
     case 'passDimenticata':
         include('pagine/passDimenticata.php');
         $smarty->assign('pageTitle', $settings['sito']['title'][$page]);
@@ -224,6 +224,11 @@ switch ($page) {
         include('pagine/inviaSegnalazione.php');
         $smarty->assign('pageTitle', $settings['sito']['title'][$page]);
         $smarty->display($settings['sito']['percorso'] . 'templates/inviaSegnalazione.tpl');
+        break;
+    case 'inviaBuonaPratica':
+        include('pagine/inviaBuonaPratica.php');
+        $smarty->assign('pageTitle', $settings['sito']['title'][$page]);
+        $smarty->display($settings['sito']['percorso'] . 'templates/inviaBuonaPratica.tpl');
         break;
     case 'listaSegnalazioni':
         $smarty->assign('pageTitle', $settings['sito']['title'][$page]);

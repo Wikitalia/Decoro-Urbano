@@ -33,9 +33,12 @@ Grazie per aver utilizzato <strong>Decoro Urbano</strong>, la tua segnalazione Ã
 
 <div class="fSSmall">{$via}</div>
 <div>{$messaggio}</div>
-<div class="fSSmall">{$categoria}</div>
+{if $genere == 'degrado' && $id_tipo != 0}<div class="fSSmall">{$categoria}</div>{/if}
 <div class="fSSmall">{$data}</div>
+
+{if $foto != '0'}
 <img src="{$imgSegnalazione}" alt="Abilita la visualizzazione delle immagini per vedere questa segnalazione" />
+{/if}
 <img src="{$imgMappa}" alt="Abilita la visualizzazione delle immagini per vedere questa segnalazione" />
 
 <div class="divider"></div>

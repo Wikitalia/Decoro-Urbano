@@ -136,7 +136,7 @@
 					
 					{foreach name="ultime_segnalazioni" from=$ultime_segnalazioni item=segnalazione}
 					
-					<div id="segnalazione_{$segnalazione.id_segnalazione}" class="ultimeSegnalazioni {if !$smarty.foreach.ultime_segnalazioni.last}borderBDashed{/if}" onclick="location.href='{$settings.sito.url}{$segnalazione.tipo_nome_url}/{$segnalazione.citta_url}/{$segnalazione.indirizzo_url}/{$segnalazione.id_segnalazione}/'">
+					<div id="segnalazione_{$segnalazione.id_segnalazione}" class="ultimeSegnalazioni {if !$smarty.foreach.ultime_segnalazioni.last}borderBDashed{/if}" onclick="location.href='{$segnalazione.url}'">
 						<div class="leftAvatar">
 							<a href="{$settings.sito.vediProfilo}?idu={$segnalazione.id_utente}"><img src="/resize.php?w=30&h=30&f={$segnalazione.avatar}" alt="{$segnalazione.nome} {$segnalazione.cognome}" /></a>
 						</div>
@@ -308,7 +308,7 @@ function nuova_segnalazione_scorri(seg) {
 	ultime_segnalazioni.unshift(temp);
 
 	segnalazioneHTML = '\
-		<div id="segnalazione_'+seg.id_segnalazione+'" class="ultimeSegnalazioni borderBDashed" style="display:none;" onclick="location.href=\'{$settings.sito.url}'+seg.tipo_nome_url+'/'+seg.citta_url+'/'+seg.indirizzo_url+'/'+seg.id_segnalazione+'/\'">\
+		<div id="segnalazione_'+seg.id_segnalazione+'" class="ultimeSegnalazioni borderBDashed" style="display:none;" onclick="location.href=\''+seg.url+'\'">\
 			<div class="leftAvatar"><a href="{$settings.sito.vediProfilo}?idu='+seg.id_utente+'"><img src="/resize.php?w=30&h=30&f='+seg.avatar+'" alt="'+seg.nome+' '+seg.cognome+'" /></a></div>\
 			<div class="rightContents">\
 				<img src="'+seg.foto_base_url+'85-55.jpg" class="marginL5 right" />\
@@ -345,7 +345,7 @@ function toggle_associazione() {
 window.onload=function() {
 	$('.segnListaText').ThreeDots({ max_rows:2 });
 	addListeners (controlFields);
-	interval = setInterval ( "segnalazione_nuova_get()", 30000 );
+	//interval = setInterval ( "segnalazione_nuova_get()", 30000 );
 }
 
 </script>

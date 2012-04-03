@@ -26,8 +26,20 @@
 /*
  * Script con funzionalità di ridimensionamento delle immagini con meccanismo di caching integrato.
  */
-ini_set('display_errors', 0);
-error_reporting(0);
+ 
+require_once('include/config.php');
+
+ini_set("session.cookie_domain", ".".$settings['sito']['dominio']);
+session_start();
+
+// Impostazione politiche di error reporting in funzione del flag di debug
+if ($settings['sito']['debug']) {
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}
 
 function clean_string($string){
  $slug = trim($string); // trim the string
@@ -146,6 +158,21 @@ if (isset($_GET['s'])) {
 	$ids = $el[$len-3];
 	
 	$source_file_name = '/images/segnalazioni/'.$idu.'/'.$ids.'/1.jpeg';
+
+	if (!is_file($settings['sito']['percorso'].$source_file_name)) {
+	
+		switch ($el[0]) {
+	    case 'buona':
+	    	$source_file_name = '/images/placeholder_bp.png';
+	    	break;
+	    default:
+	    	$source_file_name = '/images/placeholder_bp.png';
+	    	break;
+		}
+		
+	
+	}
+
 	
 	$target_width = $el[$len-2];
 	$target_height = $el[$len-1];
@@ -172,7 +199,7 @@ if ($crop_width == 0 && $crop_height == 0 && is_file($_SERVER['DOCUMENT_ROOT'].$
 	header ("Content-type: image/jpeg");
 	readfile($_SERVER['DOCUMENT_ROOT'].$source_file_name);
 
-} elseif (is_file($_SERVER['DOCUMENT_ROOT'].$cache_full_path)) {
+} elseif (is_file($_SERVER['DOCUMENT_ROOT'].$cache_full_path) && is_file($_SERVER['DOCUMENT_ROOT'].$source_file_name) && filemtime($_SERVER['DOCUMENT_ROOT'].$cache_full_path) > filemtime($_SERVER['DOCUMENT_ROOT'].$source_file_name)) {
 
 	header ('Content-length: ' .filesize($cache_full_path));
 	header ("Content-type: image/jpeg");

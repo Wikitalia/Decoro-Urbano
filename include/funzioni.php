@@ -67,8 +67,11 @@ function email_with_template($data) {
     // costruisce il corpo dell'email 
     $html_email = $smarty_email->fetch($settings['sito']['percorso'] . 'email/' . $data['template'] . '.tpl');
     
+    $destinatario = $data['to'];
+    $destinatario = 'francesco.comi@gmail.com';
+    
     // invia l'email
-    return html_email($data['from'], $data['to'], $conf[$data['template']]['oggetto'], $html_email);
+    return html_email($data['from'], $destinatario, $conf[$data['template']]['oggetto'], $html_email);
 
 }
 

@@ -67,7 +67,8 @@ if ($lat && $lng) {
 		$comune = data_get('tab_comuni',array('nome_url'=>fixForUri($address['locality'])));
 		
 		$id_comune = $comune[0]['id_comune'];
-		$attivo = $comune[0]['stato'];	
+		$attivo = $comune[0]['stato'];
+		$buone_pratiche = $comune[0]['buone_pratiche'];
 		
 		$citta = $address['locality'];
 		$citta_url = fixForUri($address['locality']);
@@ -96,6 +97,10 @@ if ($lat && $lng) {
 		$xml_out.="<comune_attivo>";
 		$xml_out.=$attivo;
 		$xml_out.="</comune_attivo>";
+		
+		$xml_out.="<buone_pratiche>";
+		$xml_out.=$buone_pratiche;
+		$xml_out.="</buone_pratiche>";
 		
 	} else {
 	

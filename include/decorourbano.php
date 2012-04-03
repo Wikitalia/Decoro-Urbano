@@ -79,7 +79,7 @@ function enti_get($id_comune) {
 	$q='SELECT tt.nome as nome_tipo, te.nome, te.email, tt.id_tipo, te.inoltro_attivo
 			FROM tab_tipi tt
 			LEFT JOIN tab_enti te
-			ON tt.id_tipo = te.id_tipo and id_comune = '.$id_comune;
+			ON tt.id_tipo = te.id_tipo and te.id_comune = '.$id_comune.' and te.eliminato = 0';
 	$enti_comune = data_query($q);
 	
 	return $enti_comune;
@@ -97,13 +97,15 @@ function enti_get($id_comune) {
  * @return array lista di utenti con relativo numero di segnalazioni
  */
 function segnalatori_top_get($limit = 10) {
+	global $settings;
+	
     $midnight = strtotime('midnight');
     
     // la query include solo le segnalazioni valide, non cancellate di utenti attivi
     $q = "SELECT u.*, COUNT(*) as n_segnalazioni
             FROM tab_segnalazioni as s, tab_utenti as u
             WHERE s.id_utente = u.id_utente AND
-                    s.stato >= 100 AND
+                    s.stato >= ".$settings['segnalazioni']['in_attesa']." AND
                     s.eliminata = 0 AND
                     s.archiviata = 0 AND
                     u.confermato = 1 AND
@@ -228,13 +230,13 @@ function user_avatar_get($user) {
 function user_segnalazioni_count($id_utente) {
     global $settings;
     
-    $q = "SELECT COUNT(*) as 
+    $q = "SELECT COUNT(*) as num_segnalazioni
             FROM tab_segnalazioni 
             WHERE stato >= ".$settings['segnalazioni']['in_attesa']. " AND
                     eliminata = 0 AND 
                     archiviata = 0 AND 
                     id_utente = ".$id_utente;
-    
+
     return data_query($q);
 }
 
@@ -267,7 +269,7 @@ function user_segnalazioni_count($id_utente) {
 function segnalazioni_get($parametri) {
     global $settings;
     
-    
+    $genere = (isset($parametri['genere']))?($parametri['genere']):0;
     $limit = (isset($parametri['limit']) && is_numeric($parametri['limit']))?((int)$parametri['limit']):(0);
     $commenti = ($parametri['commenti']==1)?(1):(0);
     $id_user = (isset($parametri['id_user']) && is_numeric($parametri['id_user']))?((int)$parametri['id_user']):(0);
@@ -309,7 +311,7 @@ function segnalazioni_get($parametri) {
     // INIZIO COSTRUZIONE SELECT
     $q_select = "SELECT s.id_segnalazione, s.id_tipo, s.lat, s.lng, s.id_comune, s.civico,
                  s.cap, s.indirizzo, s.citta, s.regione, s.regione_url, s.citta_url,
-                 s.indirizzo_url, s.id_utente, s.messaggio, s.stato, s.client, 
+                 s.indirizzo_url, s.id_utente, s.messaggio, s.stato, s.client, s.genere, s.foto,
                  s.data, s.data AS last_edit, u.id_fb, u.nome, u.cognome, u.mostra_cognome, 
                  u.id_ruolo, t.nome AS tipo_nome, t.nome_url AS tipo_nome_url, 
                  t.label AS tipo_label, e.id_ente, e.nome AS nome_ente,
@@ -317,16 +319,16 @@ function segnalazioni_get($parametri) {
     
     if ($user) {
         // se l'utente è loggato ed è necessario estrarre le informazioni sul follow
-            $q_select .= ", sf.id_follow as logged_user_following ";
+            $q_select .= ", sf.id_follow as logged_user_following";
     }
     
 	if ($conteggio_inappropriate) {
-		$q.=", (SELECT count(*) FROM tab_segnalazioni_improprie WHERE id_segnalazione = s.id_segnalazione) AS n_inappropriate ";
+		$q.=", (SELECT count(*) FROM tab_segnalazioni_improprie WHERE id_segnalazione = s.id_segnalazione) AS n_inappropriate";
 	}
     // FINE COSTRUZIONE SELECT
     
     // INIZIO COSTRUZIONE FROM
-    $q_from = "FROM tab_segnalazioni AS s
+    $q_from = " FROM tab_segnalazioni AS s
                 INNER JOIN tab_utenti AS u ON u.id_utente = s.id_utente
                 LEFT JOIN tab_enti AS e ON e.id_ente = s.id_ente
                 LEFT JOIN tab_competenze AS cz ON s.id_competenza = cz.id_competenza
@@ -346,9 +348,11 @@ function segnalazioni_get($parametri) {
                         s.eliminata = 0 AND 
                         s.archiviata = 0 ";
     
-    if ($includi_non_approvate) {
-        $q_where .= " ";
-    } else {
+    if ($genere) {
+        $q_where .= " AND s.genere = '$genere'";
+    }
+    
+    if (!$includi_non_approvate) {
         $q_where .= " AND s.stato >= ".$settings['segnalazioni']['in_attesa'];
     }
     
@@ -374,7 +378,7 @@ function segnalazioni_get($parametri) {
             if ($tipo)
                 $q_where .= " s.id_tipo = $key OR ";
         }
-        $q_where .= " 1=0) ";
+        $q_where .= " s.id_tipo = 0) ";
     }
     
     if ($recenti) {
@@ -415,8 +419,10 @@ function segnalazioni_get($parametri) {
         $q .= " LIMIT $limit";
     }
 
+		//echo $q;
+
     $segnalazioni = data_query($q);
-    
+
     if (count($segnalazioni)) {
         foreach ($segnalazioni as $key => $segnalazione) {
             // esclude il cognome di quegli utenti che hanno impostato come preferenza 
@@ -432,6 +438,9 @@ function segnalazioni_get($parametri) {
             
             // aggiunge l'url al marker corretto da utilizzare in base a tipo/stato/genere
             $segnalazioni[$key]['marker'] = segnalazione_marker_url_get($segnalazione);
+            
+            // aggiunge l'url della segnalazione
+		        $segnalazioni[$key]['url'] = segnalazione_url_get($segnalazione);
             
             // se richiesto, recupera di commenti della segnalazione
             if ($commenti) {
@@ -527,11 +536,11 @@ function segnalazioni_user_wall_get($parametri) {
     $q_where = " WHERE u.confermato = 1 AND 
                         u.eliminato = 0 AND
                         s.eliminata = 0 AND 
-                        s.archiviata = 0 AND  
+                        s.archiviata = 0 AND
+                        s.stato >= ".$settings['segnalazioni']['in_attesa']. " AND   
                         (s.id_utente = $id_user OR
                         c.id_utente = $id_user OR    
                         sf.id_utente = $id_user ) ";
-    
     
     if ($nuove) { 
         $q_where .= " AND GREATEST(s.data,IFNULL(c.data,0),IFNULL(sf.data,0)) > $nuove ";
@@ -565,6 +574,13 @@ function segnalazioni_user_wall_get($parametri) {
             
             // aggiunge il base url dell'immagine
             $segnalazioni[$key]['foto_base_url'] = segnalazione_image_url_get($segnalazione);
+            
+            // aggiunge l'url al marker corretto da utilizzare in base a tipo/stato/genere
+						$segnalazioni[$key]['marker'] = segnalazione_marker_url_get($segnalazione);
+            
+            // aggiunge l'url della segnalazione
+		        $segnalazioni[$key]['url'] = segnalazione_url_get($segnalazione);
+
         }
     }
     
@@ -572,38 +588,7 @@ function segnalazioni_user_wall_get($parametri) {
         return json_encode($segnalazioni);
     else
         return $segnalazioni;
-    
-    
-    
-    
-    
-    
-        if ($wall) {
-        if (count($segnalazioni))
-            usort($segnalazioni, 'sortByLastEdit');
 
-        if ($recenti) {
-            $t_min = (int) time() - $recenti * 24 * 60 * 60;
-            $segnalazioni_temp = array();
-            foreach ($segnalazioni as $segnalazione) {
-                if ($segnalazione['last_edit'] > $t_min)
-                    array_push($segnalazioni_temp, $segnalazione);
-            }
-            $segnalazioni = $segnalazioni_temp;
-        }
-
-        if ($vecchie) { // Usato per selezionare le segnalazioni precedenti quando si clicca sul link in fondo all'elenco
-            $segnalazioni_temp = array();
-            foreach ($segnalazioni as $segnalazione) {
-                if ($segnalazione['last_edit'] < $vecchie)
-                    array_push($segnalazioni_temp, $segnalazione);
-            }
-            $segnalazioni = $segnalazioni_temp;
-        }
-
-        if ($limit)
-            $segnalazioni = array_splice($segnalazioni, 0, $limit);
-    }
 }
 
 
@@ -621,17 +606,31 @@ function segnalazione_dettaglio_get($id) {
     
     $id = (int) $id;
 
+		$user = logged_user_get();
+
     $q = "SELECT s.*, u.id_fb, u.nome, u.cognome, u.mostra_cognome, u.id_ruolo, t.nome AS tipo_nome, t.label AS tipo_label, e.id_ente, e.nome AS nome_ente,
     				cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza,
                 (SELECT COUNT(*) 
                     FROM tab_segnalazioni_follow AS sf 
-                    WHERE sf.id_segnalazione = s.id_segnalazione) AS n_follower
-            FROM tab_segnalazioni AS s
+                    WHERE sf.id_segnalazione = s.id_segnalazione) AS n_follower";
+    
+		if ($user) {
+        // se l'utente è loggato è necessario estrarre le informazioni sul follow
+    		$q .= ", sf.id_follow as logged_user_following";
+    }
+		
+		$q .= " FROM tab_segnalazioni AS s
                 INNER JOIN tab_utenti AS u ON u.id_utente = s.id_utente 
                 LEFT JOIN tab_competenze AS cz ON s.id_competenza = cz.id_competenza
                 LEFT JOIN tab_tipi AS t ON s.id_tipo = t.id_tipo
-                LEFT JOIN tab_enti AS e ON e.id_ente = s.id_ente
-            WHERE u.confermato = 1 AND 
+                LEFT JOIN tab_enti AS e ON e.id_ente = s.id_ente ";
+
+    if ($user) {
+        // se l'utente è loggato è necessario estrarre le informazioni sul follow
+        $q .= "LEFT JOIN tab_segnalazioni_follow AS sf ON sf.id_utente = " . $user['id_utente'] . " and sf.id_segnalazione = s.id_segnalazione ";
+    }
+
+		$q .= "WHERE u.confermato = 1 AND 
                     u.eliminato = 0 AND
                     s.eliminata = 0 AND 
                     archiviata = 0 AND 
@@ -680,6 +679,9 @@ function segnalazione_dettaglio_get($id) {
 		
         // costruisce il link all'avater dell'utente
         $segnalazione[0]['avatar'] = user_avatar_get($segnalazione[0]);
+        
+        // aggiunge l'url della segnalazione
+        $segnalazione[0]['url'] = segnalazione_url_get($segnalazione[0]);
 
         return $segnalazione;
     } else {
@@ -772,7 +774,9 @@ function segnalazione_commenti_get($id) {
  */
 function segnalazione_marker_url_get($segnalazione) {
 
-  if ($segnalazione['id_competenza']) {
+	if ($segnalazione['id_tipo'] == 0) {
+		$marker = '/images/marker_'.$segnalazione['genere'].'.png';
+  } elseif ($segnalazione['id_competenza']) {
 	  if ($segnalazione['stato'] >= 300) {
 			$marker = '/images/'.$segnalazione[0]['nome_url_competenza'].'_risolta.png';
 	  } else if ($segnalazione['stato'] >= 200) {
@@ -780,7 +784,7 @@ function segnalazione_marker_url_get($segnalazione) {
 	  } else {
 		  $marker = '/images/'.$segnalazione['nome_url_competenza'].'_marker.png';
 	  }
-	} else {      
+	} else {
 	  if ($segnalazione['stato'] >= 300) {
 			$marker = '/images/risolta_'.$segnalazione['tipo_label'].'.png';
 	  } else if ($segnalazione['stato'] >= 200) {
@@ -937,8 +941,25 @@ function segnalazione_fb_share($segnalazione) {
  * @return string
  */
 function segnalazione_image_url_get($segnalazione) {
+	if (!$segnalazione['id_tipo']) $segnalazione['tipo_nome_url'] = fixForUri($segnalazione['genere']);
 	$base_url = '/images/segnalazioni/'.$segnalazione['tipo_nome_url'].'-'.$segnalazione['citta_url'].'-'.$segnalazione['indirizzo_url'].'-'.$segnalazione['id_utente'].'-'.$segnalazione['id_segnalazione'].'-';
 	return $base_url;
+}
+
+/**
+ * Restituisce l'URL della segnalazione
+ * 
+ * Costruisce l'url della segnalazione a partire da un array contenente
+ * i dati della segnalazione
+ * 
+ * @param array segnalazione 
+ * @return string
+ */
+function segnalazione_url_get($segnalazione) {
+	global $settings;
+	if (!$segnalazione['id_tipo']) $segnalazione['tipo_nome_url'] = fixForUri($segnalazione['genere']);
+	$url = $settings['sito']['url'] . $segnalazione['tipo_nome_url'] . '/' . $segnalazione['citta_url'] . '/' . $segnalazione['indirizzo_url'] . '/' . $segnalazione['id_segnalazione'] . '/';
+	return $url;
 }
 
 /**
@@ -1253,6 +1274,15 @@ function user_fb_insert($fb_user) {
         $fields['data'] = time();
 
         data_insert('tab_utenti', $fields);
+        
+        // invia l'email di benvenuto al nuovo utente
+				$data['from'] = $settings['email']['nome'].' <'.$settings['email']['indirizzo'].'>';
+				$data['to'] = $fb_user['email'];
+				$data['template'] = 'registrazioneBenvenuto';
+				$variabili['nome_utente'] = trim($fb_user['first_name'].' '.$fb_user['last_name']);
+				$data['variabili'] = $variabili;
+				email_with_template($data);
+        
     }
 }
 
@@ -1374,10 +1404,13 @@ function stats_segnalazioni_get($parametri) {
     if ($regione) {
         $q = "SELECT COUNT(*) AS totali,tc.*
                 FROM tab_segnalazioni AS s
-                    INNER JOIN tab_comuni AS tc ON s.id_comune = tc.id_comune 
-                WHERE s.stato >= 100 AND
+                    INNER JOIN tab_comuni AS tc ON s.id_comune = tc.id_comune
+                    INNER JOIN tab_utenti AS u ON s.id_utente = u.id_utente  
+                WHERE s.stato >= ".$settings['segnalazioni']['in_attesa']." AND
                       s.eliminata = 0 AND 
-                      s.archiviata = 0 ";
+                      s.archiviata = 0 AND 
+                      u.eliminato = 0 AND
+                      u.confermato = 1 ";
         
         if ($regione!='italia') {
             $q .= " AND s.regione = '$regione' ";
@@ -1392,25 +1425,91 @@ function stats_segnalazioni_get($parametri) {
         }
         
         return data_query($q.$q_tail);
-    } else {
-	$q = "SELECT *,
+    } else if ($comune || $id_comune) {
+    	$q = "SELECT stati, comune, count(*) AS num
+				FROM
+					(SELECT CASE WHEN s.stato >= 100 AND s.stato < 200 THEN 'in_attesa'
+					             WHEN s.stato >= 200 AND s.stato < 300 THEN 'in_carico'
+					             WHEN s.stato >= 300 THEN 'risolte'
+					             ELSE 'rimosse'
+					         END as stati, s.id_comune AS comune
+					FROM tab_segnalazioni AS s
+						LEFT JOIN tab_utenti AS u ON s.id_utente = u.id_utente 
+    					LEFT JOIN tab_comuni AS tc ON s.id_comune = tc.id_comune 
+					WHERE s.eliminata = 0 AND
+							s.archiviata = 0 AND
+							u.eliminato = 0 AND
+							u.confermato = 1 ";
+    	
+    	if ($comune) {
+            $q .= " AND tc.nome_url = '$comune' ";
+        } else if ($id_comune) {
+            $q .= " AND tc.id_comune = $id_comune ";
+        }
+        
+        
+		$q .= "	) AS stati_segnalazioni
+					GROUP BY stati,comune ";
+		
+    	$stats_res = data_query($q);
+    	
+    	$q = "SELECT * FROM tab_comuni AS tc WHERE ";
+        if ($comune) {
+            $q .= " tc.nome_url = '$comune' ";
+        } else if ($id_comune) {
+            $q .= " tc.id_comune = $id_comune ";
+        }
+        
+		$comune_res = data_query($q);
+		
+		if ($comune_res) {
+			$comune_res[0]['totali'] = 0;
+			$comune_res[0]['in_carico'] = 0;
+			$comune_res[0]['risolte'] = 0;
+			
+			foreach ($stats_res as $stat) {
+				if ($stat['comune']==$comune_res[0]['id_comune']) {
+					if ($stat['stati']=='risolte') {
+						$comune_res[0]['risolte'] += $stat['num'];
+						$comune_res[0]['totali'] += $stat['num'];
+					} else if ($stat['stati']=='in_carico') {
+						$comune_res[0]['in_carico'] += $stat['num'];
+						$comune_res[0]['totali'] += $stat['num'];
+					} else if ($stat['stati']=='in_attesa') {
+						$comune_res[0]['totali'] += $stat['num'];
+					}
+				}
+			}
+		}
+    	
+    	
+    	return $comune_res;
+    } else {	
+    	/*$q = "SELECT *,
 		(SELECT COUNT(*) FROM tab_segnalazioni WHERE id_comune = tc.id_comune AND stato >= 100 AND eliminata = 0 AND archiviata = 0) AS totali,
 		(SELECT COUNT(*) FROM tab_segnalazioni WHERE id_comune = tc.id_comune AND stato BETWEEN 200 AND 299 AND eliminata = 0 AND archiviata = 0) AS in_carico,
 		(SELECT COUNT(*) FROM tab_segnalazioni WHERE id_comune = tc.id_comune AND stato >= 300 AND eliminata = 0 AND archiviata = 0) AS risolte
 		FROM tab_comuni tc 
-                WHERE 1=1 ";
+                WHERE 1=1 ";*/
         
-        if ($comune) {
-            $q .= " AND nome_url = '$comune' ";
-        } else if ($id_comune) {
-            $q .= " AND id_comune = $id_comune ";
-        }
-        
+    	$q = "SELECT tc.*,COUNT(*) AS totali 
+    			FROM tab_segnalazioni AS s 
+    				LEFT JOIN tab_comuni AS tc ON s.id_comune = tc.id_comune
+    				LEFT JOIN tab_utenti AS u ON s.id_utente = u.id_utente
+    			WHERE s.stato >= ".$settings['segnalazioni']['in_attesa']." AND
+    					s.eliminata = 0 AND
+    					s.archiviata = 0 AND
+    					u.eliminato = 0 AND
+    					u.confermato = 1 ";
+       
         if ($comuni_attivi) {
-            $q .= " AND stato = 1 ";
+            $q .= " AND tc.stato = 1 ";
         }
-
-        return data_query($q);
+        
+        $q .= " GROUP BY s.id_comune ";
+       
+		$res = data_query($q);
+        return $res;
     }
 
     

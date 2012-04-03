@@ -89,7 +89,12 @@
         <li class="title">{#bigSegnalazioni#}</li>
 				{if isset($user)}
         <li {if $page=='inviaSegnalazione'}class="selected"{/if}><a href="{$settings.sito.inviaSegnalazione}">{#invia#}</a></li>
+        {/if}
+        
+        {if isset($user) && (($page=='listaSegnalazioni' && isset($locType) && $locType == 'comune' && $comune.buone_pratiche == 1) || $page=='inviaBuonaPratica')}
+        <li {if $page=='inviaBuonaPratica'}class="selected"{/if}><a href="{$settings.sito.inviaBuonaPratica}">{#inviaBuonaPratica#}</a></li>
 				{/if}
+
         <li {if $page=='listaSegnalazioni'}class="selected"{/if}><a href="{$settings.sito.listaSegnalazioni}">{#mostraTutte#}</a></li>
     </ul>
 </div>

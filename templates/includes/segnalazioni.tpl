@@ -103,25 +103,28 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 	  coloreStato = 'Grey';
 	  img_stato = 'DU_img_attesa.png';
 	}
+	
+	//alert(segnalazione.foto);
 
 	segnalazioneListaHTML='\
-		<div style="display:none;">'+encodeURIComponent(sito_url)+segnalazione.tipo_nome_url+'%2F'+segnalazione.citta_url+'%2F'+segnalazione.indirizzo_url+'%2F'+segnalazione.id_segnalazione+'%2F</div>\
+		<div style="display:none;">'+segnalazione.url+'</div>\
 		<div id="segnalazione_'+segnalazione.id_segnalazione+'" class="testoFumetto">\
 		<div class="segnUtente">\
 			<div class="auto left"><a href="{$settings.sito.vediProfilo}?idu='+segnalazione.id_utente+'"><img src="/resize.php?w=25&h=25&f='+segnalazione.avatar+'" alt="" /></a></div>\
 			<div class="auto left fBold"><a class="tdNone" href="{$settings.sito.vediProfilo}?idu='+segnalazione.id_utente+'">'+segnalazione.nome+' '+segnalazione.cognome+'</a>';
 		if (segnalazione.id_ruolo == 3) segnalazioneListaHTML+=' <span class="auto marginT5 fontS10 fLightGray">(Account verificato)</span>';
 		segnalazioneListaHTML+='</div>\
-			<div class="auto right">{if $page=="dettaglioSegnalazione"}<g:plusone size="medium" href="'+sito_url+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/"></g:plusone>{/if}</div>\
-      <div class="auto right"><fb:like href="'+sito_url+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/" show_faces="true" send="false" layout="button_count" width="110" show_faces="false" font=""></fb:like></div>\
-			<div class="auto right"><a href="http://twitter.com/share" class="twitter-share-button" data-url="'+sito_url+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/" data-text="#decorourbano : #'+segnalazione.tipo_nome+' a #'+segnalazione.citta+' #WeDU" data-count="horizontal">Tweet</a>\<script type="text/javascript" src="http://platform.twitter.com/widgets.js"\>\</script\></div>\
+			<div class="auto right">{if $page=="dettaglioSegnalazione"}<g:plusone size="medium" href="'+segnalazione.url+'"></g:plusone>{/if}</div>\
+      <div class="auto right"><fb:like href="'+segnalazione.url+'" show_faces="true" send="false" layout="button_count" width="110" show_faces="false" font=""></fb:like></div>\
+			<div class="auto right"><a href="http://twitter.com/share" class="twitter-share-button" data-url="'+segnalazione.url+'" data-text="#decorourbano : #'+segnalazione.tipo_nome+' a #'+segnalazione.citta+' #WeDU" data-count="horizontal">Tweet</a>\<script type="text/javascript" src="http://platform.twitter.com/widgets.js"\>\</script\></div>\
 		</div>\{*segnUtente*}
 		<div>\{*Senza nome 1*}
 			<div class="segnDettagli">\
 				<div class="segnDettagliLeft">\
 					<div class="marginB5 fontS10">'+segnalazione.indirizzo+' '+segnalazione.civico+', '+segnalazione.cap+' '+segnalazione.citta+'</div>\
-					<div class="fontS18 marginB5 fGeorgia"><a class="tdNone" href="{$settings.sito.url}'+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/">'+segnalazione.messaggio+'</a></div>\
-					<div class="fontS10 marginB5" style="float:left;width:180px;">{#categoria#}: '+segnalazione.tipo_nome+'</div>{*<div class="fontS10 marginB5" style="float:left;width:180px;">Stato: '+stato+'</div>*}\
+					<div class="fontS18 marginB5 fGeorgia"><a class="tdNone" href="'+segnalazione.url+'">'+segnalazione.messaggio+'</a></div>';
+					if (segnalazione.genere != 'buone-pratiche')
+						segnalazioneListaHTML += '<div class="fontS10 marginB5" style="float:left;width:180px;">{#categoria#}: '+segnalazione.tipo_nome+'</div>\
 					<div id="segnalazione_data_'+segnalazione.id_segnalazione+'" class="fontS10 marginB5">'+relativeTime(segnalazione.data); 
 						if (segnalazione.client=='iPhone')
 							segnalazioneListaHTML += ' via <a href="{$settings.sito.applicazioni}">iPhone</a>';
@@ -138,40 +141,45 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 						}
 						segnalazioneListaHTML += '</div>\
 					</div>\
-				</div>\{*segnDettagliRight*}
-				<div style="width:100%" id="infoSegnalazione">\
+				</div>';{*segnDettagliRight*}
+		if (segnalazione.genere != 'buone-pratiche') {
+				segnalazioneListaHTML+='<div style="width:100%" id="infoSegnalazione">\
 					<div id="statoSegnalazione" class="f'+coloreStato+'"><img src="{$settings.sito.url}/images/'+img_stato+'" alt="Stato Segnalazione" class="imgStato">'+stato+' <a href="#"  title="Cosa significa in carico?" id="b_c">{*<img src="{$settings.sito.url}/images/question.png" alt="informazioni" >*}</a>';
-		if (segnalazione.id_ente > 0) segnalazioneListaHTML+='<br />Inoltrata a: "'+segnalazione.nome_ente+'"';
+			if (segnalazione.id_ente > 0) segnalazioneListaHTML+='<br />Inoltrata a: "'+segnalazione.nome_ente+'"';
 					segnalazioneListaHTML+='</div>\
 					{*<div id="prioritaSegnalazione">\
-					Priorit&agrave;: <b class="highPriority fBrown">Media</b> <img src="{$settings.sito.url}/images/question.png" alt="informazioni"></div>*}\
-					<div id="doIT" style="float:right;display:block;margin-right:30px;"><div class="doITsubscrive">{*<img src="{$settings.sito.url}/images/question.png" alt="informazioni"> *}Sottoscrivi:</div>\
-					';
-						if (!logged_in) {
-							segnalazioneListaHTML+='<div id="followButtonDiv_'+segnalazione.id_segnalazione+'" class="doITfollow"><a id="followButton_'+segnalazione.id_segnalazione+'" href="javascript:alert(\'È necessario effettuare il login per sottoscrivere una segnalazione\');"></a></div>';
-						} else {
-							if (!segnalazione.logged_user_following) {
-								segnalazioneListaHTML+='<div id="followButtonDiv_'+segnalazione.id_segnalazione+'" class="doITfollow"><a id="followButton_'+segnalazione.id_segnalazione+'" href="javascript:segnalazioneFollow('+segnalazione.id_segnalazione+');"></a></div>';
-							} else {
-								segnalazioneListaHTML+='<div id="followButtonDiv_'+segnalazione.id_segnalazione+'" class="doITunfollow"><a id="followButton_'+segnalazione.id_segnalazione+'" href="javascript:segnalazioneUnFollow('+segnalazione.id_segnalazione+');"></a></div>';
-							}
-						}
-						segnalazioneListaHTML+='\
-						<span id="nFollower_'+segnalazione.id_segnalazione+'">'+segnalazione.n_follower+'</span></div>\{*doIT*}
-					</div>\{*infoSegnalazione*}
-				  </div>\{*segnDettagli*}
-				</div>\{*Senza nome 1*}
+					Priorit&agrave;: <b class="highPriority fBrown">Media</b> <img src="{$settings.sito.url}/images/question.png" alt="informazioni"></div>\*}
+					<div id="doIT" style="float:right;display:block;margin-right:30px;"><div class="doITsubscrive">{*<img src="{$settings.sito.url}/images/question.png" alt="informazioni"> *}Sottoscrivi:</div>';
+			if (!logged_in) {
+				segnalazioneListaHTML+='<div id="followButtonDiv_'+segnalazione.id_segnalazione+'" class="doITfollow"><a id="followButton_'+segnalazione.id_segnalazione+'" href="javascript:alert(\'È necessario effettuare il login per sottoscrivere una segnalazione\');"></a></div>';
+			} else {
+				if (!segnalazione.logged_user_following) {
+					segnalazioneListaHTML+='<div id="followButtonDiv_'+segnalazione.id_segnalazione+'" class="doITfollow"><a id="followButton_'+segnalazione.id_segnalazione+'" href="javascript:segnalazioneFollow('+segnalazione.id_segnalazione+');"></a></div>';
+				} else {
+					segnalazioneListaHTML+='<div id="followButtonDiv_'+segnalazione.id_segnalazione+'" class="doITunfollow"><a id="followButton_'+segnalazione.id_segnalazione+'" href="javascript:segnalazioneUnFollow('+segnalazione.id_segnalazione+');"></a></div>';
+				}
+			}
+			segnalazioneListaHTML+='\
+			<span id="nFollower_'+segnalazione.id_segnalazione+'">'+segnalazione.n_follower+'</span></div>';{*doIT*}
+		}
+		segnalazioneListaHTML+='</div>\{*infoSegnalazione*}
+		</div>\{*segnDettagli*}
+		</div>\{*Senza nome 1*}
 		<div class="segnListaBody">\
 		{if $user}
 			<div class="closeIcon right" style="position:relative; z-index:10000; right:-5px;" id="closeIcon_'+segnalazione.id_segnalazione+'">\
 			</div>\
 		{/if}
-			<div class="marginB15">\
-				<div class="segnImmagini" id="segnImmagini_'+segnalazione.id_segnalazione+'" onclick="showModal('+segnalazione.id_utente+', '+segnalazione.id_segnalazione+',\''+segnalazione.foto_base_url+'\');">\
+			<div class="marginB15">';
+			if (segnalazione.foto == 1) {
+				segnalazioneListaHTML+='<div class="segnImmagini" id="segnImmagini_'+segnalazione.id_segnalazione+'" onclick="showModal('+segnalazione.id_utente+', '+segnalazione.id_segnalazione+',\''+segnalazione.foto_base_url+'\');">\
 					<div class="auto marginR10"><img src="'+segnalazione.foto_base_url+'315-238.jpg" /></div>\
 				</div>\
-				<div style="width:315px;height:238px;float:right; margin-right:12px;"  id="mini_mappa_'+segnalazione.id_segnalazione+'"></div>\
-			</div>';
+				<div style="width:315px;height:238px;float:right; margin-right:12px;"  id="mini_mappa_'+segnalazione.id_segnalazione+'"></div>';
+			} else {
+				segnalazioneListaHTML+='<div style="width:100%;height:238px;float:right; margin-right:12px;"  id="mini_mappa_'+segnalazione.id_segnalazione+'"></div>';
+			}
+			segnalazioneListaHTML+='</div>';
 			if (segnalazione.commenti && segnalazione.commenti.length > max_commenti) segnalazioneListaHTML+='<div class="commentoBox marginB5">\
 			<a id="mostraCommenti" href="javascript:mostra_tutti_commenti('+segnalazione.id_segnalazione+');">{#mostraComm1#} '+segnalazione.commenti.length+' {#mostraComm2#}</a></div>';
 			segnalazioneListaHTML+='<div id="segnalazione_commenti_'+segnalazione.id_segnalazione+'"></div>\
@@ -389,12 +397,7 @@ function mappa_init(segnalazione, zoom) {
 	};
 	
 	var map = new google.maps.Map($(selector)[0], mapOptions);
-	
-  /*var image = new google.maps.MarkerImage('/images/marker_'+segnalazione.tipo_label+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(21, 37));*/
-      
+
   var image = new google.maps.MarkerImage(segnalazione.marker,
     new google.maps.Size(40, 40),
     new google.maps.Point(0,0),
@@ -800,10 +803,11 @@ function showModal(idu, ids, foto_base_url) {
 	$('#modalMappaToggle').css('right', '332px');
 
 
-  var image = new google.maps.MarkerImage('/images/marker_'+segnalazioni[ids].tipo_label+'.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(21, 37));
+  var image = new google.maps.MarkerImage(segnalazioni[ids].marker,
+    new google.maps.Size(40, 40),
+    new google.maps.Point(0,0),
+    new google.maps.Point(19, 40));
+	
 	
 	var posizione = new google.maps.LatLng(segnalazioni[ids].lat, segnalazioni[ids].lng);
 	
@@ -958,7 +962,7 @@ window.onload=function() {
 	
 	{if $page == 'principale' || $page == 'vediProfilo'}
 	//interval = setInterval ( "segnalazioni_nuove_get()", 1800000);
-	interval = setInterval ( "segnalazioni_nuove_get()", 300000);
+	//interval = setInterval ( "segnalazioni_nuove_get()", 300000);
 	{/if}
 	
 	initModal();

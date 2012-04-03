@@ -311,7 +311,7 @@ function ValidateForm_ (controlFields, sender) {
 	
 	if (error['type']) {
 		if (submit) {
-			smoothScroll(error['field_id']);
+			//smoothScroll(error['field_id']);
 			$('#modalControlli').html(error['msg']);
 			//alert($('#modalControlli').html());
 

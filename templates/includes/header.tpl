@@ -405,7 +405,7 @@
 		 </div>
 	</div>
 	
-	{if $page == 'inviaSegnalazione'}
+	{if $page == 'inviaSegnalazione' || $page == 'inviaBuonaPratica'}
 	<div id="loadingInviaSegnalazione" class="loadingMask" style="display:none;" >
 		<div class="loadingPopUp">
 			<img src="{$settings.sito.url}images/loading.gif" alt="Caricamento...."  /><br /><br />

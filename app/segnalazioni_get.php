@@ -136,5 +136,4 @@ if (count($segnalazioni)) {
 	$xml_out.="<decorourbano></decorourbano>";
 }
 
-
 echo $xml_out;

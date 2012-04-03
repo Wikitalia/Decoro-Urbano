@@ -157,7 +157,7 @@
 			});
 		
 			google.maps.event.addListener(marker, 'click', function() {
-				window.open('{$settings.sito.url}'+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/','_blank');
+				window.open(segnalazione.url,'_blank');
 			});
 			
 			if (!markerClusterer) {
@@ -214,7 +214,7 @@
     	<div class="title">&nbsp;Ultime Segnalazioni</div>
         <div id="segnalazioniWrap" >
         	{foreach name="ultime_segnalazioni" from=$ultime_segnalazioni item=segnalazione}
-	        	<div class="segnalazioni" onclick="window.open('{$settings.sito.url}{$segnalazione.tipo_nome_url}/{$segnalazione.citta_url}/{$segnalazione.indirizzo_url}/{$segnalazione.id_segnalazione}','_blank')">
+	        	<div class="segnalazioni" onclick="window.open('{$segnalazione.url}','_blank')">
             <div class="segnalazioni_box">
 	            	<img src="{$segnalazione['foto_base_url']}71-46.jpg" width="71" height="46" alt="1" align="right" />
 	            	<div class="segnalatore"><a href="{$settings.sito.vediProfilo}?idu={$segnalazione.id_utente}" class="tdNone"><span class="fBold fontS12">

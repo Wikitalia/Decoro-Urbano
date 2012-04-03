@@ -79,6 +79,7 @@ $civico = $result[0]["civico"];
 $lat = $result[0]["lat"];
 $lng = $result[0]["lng"];
 $foto_base_url = $result[0]["foto_base_url"];
+$marker = $result[0]["marker"];
 
 if ($result[0]["stato"] < $settings['segnalazioni']['in_carico']) {
     $stato = 'In attesa';
@@ -97,8 +98,6 @@ if ($result[0]["stato"] < $settings['segnalazioni']['in_carico']) {
 			<title><?= $settings['admin_comuni']['nome_sito'] ?></title>          
 			 
 <? require_once($settings['admin_comuni']['percorso'].'head_tag.php') ?>			 
-
-<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
 
   
 
@@ -150,11 +149,11 @@ du_map.init = function(selector, initialLocation, zoom) {
 	
 	du_map.map.setCenter(initialLocation);
 	
-  var image = new google.maps.MarkerImage('/images/marker_<?=$tipo_label?>.png',
-      new google.maps.Size(40, 40),
-      new google.maps.Point(0,0),
-      new google.maps.Point(21, 37));
-	
+	var image = new google.maps.MarkerImage('<?=$marker?>',
+    new google.maps.Size(40, 40),
+    new google.maps.Point(0,0),
+    new google.maps.Point(21, 37));
+                
 	var marker = new google.maps.Marker({
 	    position: initialLocation,
 	    map: du_map.map,

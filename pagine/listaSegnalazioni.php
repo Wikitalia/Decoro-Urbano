@@ -60,7 +60,7 @@ if ($subdomain && count($competenza = competenze_get(0,$subdomain))) {
 	// nel caso in cui il sottodominio rappresenti una competenza
 
 	$parametri['id_competenza'] = $competenza[0]['id_competenza'];
-	$segnalazioni = segnalazioni_get2($parametri);
+	$segnalazioni = segnalazioni_get($parametri);
 
 	$segnalazioni = json_encode($segnalazioni);
 	$segnalazioni = escapeJSON($segnalazioni);

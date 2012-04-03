@@ -115,8 +115,6 @@ function segnalazioni_filtra() {
 	var recenti=($('#filtro_recenti').is(":checked"))?1:0;
 
 	var stato = $('#listaSegnFiltersStato').val();
-	
-	//alert(stato);
 
 	subdomain = filtriLista.subd;
 	set_filtriLista_cookie();
@@ -133,11 +131,10 @@ function segnalazioni_filtra() {
 		var oldest_date = today/1000 - limit_giorni*24*60*60;
 
 		for (i in segnalazioni) {
-		
-			//alert(segnalazioni[i]['stato']+' '+stato);
 
 			if (
-				((tipo1 && segnalazioni[i]['id_tipo'] == 1) ||
+				(segnalazioni[i]['id_tipo'] == 0 ||
+				(tipo1 && segnalazioni[i]['id_tipo'] == 1) ||
 				(tipo2 && segnalazioni[i]['id_tipo'] == 2) ||
 				(tipo3 && segnalazioni[i]['id_tipo'] == 3) ||
 				(tipo4 && segnalazioni[i]['id_tipo'] == 4) ||
@@ -161,8 +158,7 @@ function segnalazioni_filtra() {
 }
 
 function segnalazioni_first_load() {
-	
-	//json_segnalazioni = jQuery.quoteString(json_segnalazioni);
+
 	segnalazioni = jQuery.secureEvalJSON(json_segnalazioni);
 
 	if (!filtriLista.subd || filtriLista.subd != subdomain) {

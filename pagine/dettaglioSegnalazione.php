@@ -43,7 +43,6 @@ if ($segnalazione) {
     $segnalatore_dati = user_get($segnalazione[0]['id_utente']);
     
     // assegna le variabili smarty
-    $smarty->assign('pageTitle', $segnalazione[0]['tipo_nome'] . ' a ' . $segnalazione[0]['citta'] . ' in ' . $segnalazione[0]['indirizzo']);
     $smarty->assign('user_profile', $segnalatore_dati);
     $smarty->assign('segnalazione', $segnalazione[0]);
     
@@ -53,14 +52,18 @@ if ($segnalazione) {
         $smarty->assign('segnalazioni', $segnalazione_json);
         $smarty->assign('metaDesc', $segnalazione[0]['messaggio']);
         $smarty->assign('segnalazione_valida', '1');
+        $smarty->assign('pageTitle', $segnalazione[0]['tipo_nome'] . ' a ' . $segnalazione[0]['citta'] . ' in ' . $segnalazione[0]['indirizzo']);
     } else if ($segnalazione[0]['stato'] == 0) {
         $smarty->assign('segnalazione_in_moderazione', '1');
+        $smarty->assign('pageTitle', 'Segnalazione in moderazione');
     } else if ($segnalazione[0]['stato'] >= 1) {
         $smarty->assign('segnalazione_rimossa', '1');
+        $smarty->assign('pageTitle', 'Segnalazione rimossa');
     }
 } else {
     // assegna una variabile smarty per mostrare il template di segnalazione non presente
     $smarty->assign('segnalazione_non_presente', '1');
+    $smarty->assign('pageTitle', 'Segnalazione non presente');
 }
 
 ?>

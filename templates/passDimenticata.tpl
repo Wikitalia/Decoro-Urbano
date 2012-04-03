@@ -26,56 +26,6 @@
 
 <script type="text/javascript" src="/js/controlli.js"></script>
 
-{*
-<script>
-
-function checkEmailPresent(email) {
-
-	$.ajax({
-		url: '/ajax/email_esistente_check.php?e='+email,
-		async: false,
-		success: function(data) {
-			if (data == '1') return true;
-			else {
-			
-				$('#modalControlli').html('Indirizzo email non presente nel sistema');
-			
-				$('#modalControlli').dialog({
-					height: 400,
-					width:550,
-					modal: true,
-					draggable:false,
-					resizable:false,
-					buttons: {
-						Ok: function() {
-							$( this ).dialog( "close" );
-						}
-					}
-				});
-				
-				alert('false');
-				return false;
-			
-			}
-		}
-	});
-
-}
-
-function localValidateForm() {
-
-	if (ValidateForm_(controlFields, 'submit')) {
-		// Controllo esistenza email in db
-		return checkEmailPresent($('#resetEmail').val());
-	} else {
-		return false;
-	}
-
-}
-
-</script>
-*}
-
 <div class="rightPageHeader">
 	<div class="rightHeadText"><h3 class="fontS18 marginB5 fBrown">{#titolo#}</h3>
 		{#intro#}

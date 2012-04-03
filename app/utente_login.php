@@ -71,7 +71,6 @@ if ($id_fb) {
 		$user=data_get('tab_utenti', array('id_fb'=>$id_fb));
 	} else if (!$user_data_with_fb_id['eliminato']) {
 		$user=data_get('tab_utenti', array('id_fb'=>$id_fb));
-	
 	}
 } else if ($email != '' && $password != '') {
 	

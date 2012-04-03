@@ -113,14 +113,14 @@ function aggiungi_segnalazione(posizione,segnalazione) {
 	});
 
 	google.maps.event.addListener(marker, 'click', function() {
-		//location.href='{$settings.sito.url}'+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/';
+		//location.href=segnalazione.url;
 		ib.close();
 		
 		
 		// Contenuto del popup
 		infoBoxHTML = '\
 			<img src="/images/popupFreccia.png" alt="" style="position:relative; left:-26px;  top:25px; margin-right:-26px; float:left;" />\
-			<div id="infoBoxContent" class="ultimeSegnalazioni" onclick="location.href=\'{$settings.sito.url}'+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/\'">\
+			<div id="infoBoxContent" class="ultimeSegnalazioni" onclick="location.href=\''+segnalazione.url+'\'">\
 					<div class="leftAvatar">\
 						<div style="width:35px; float:left;">\
 							<a href="{$settings.sito.vediProfilo}?idu='+segnalazione.id_utente+'"><img src="/resize.php?w=30&h=30&f='+segnalazione.avatar+'" alt="'+segnalazione.nome+' '+segnalazione.cognome+'" /></a>\
@@ -176,7 +176,7 @@ window.onload=function() {
 
 	//interval = setInterval ( "segnalazioni_nuove_get()", 1800000);
 	//interval = setInterval ( "segnalazioni_nuove_get()", 300000);
-	interval = setInterval ( "segnalazioni_nuove_get()", 15000);
+	//interval = setInterval ( "segnalazioni_nuove_get()", 15000);
 
 }
 		

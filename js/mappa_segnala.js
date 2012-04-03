@@ -194,8 +194,6 @@ function geocode() {
 			lng = results[0].geometry.location.lng();
 			
 			var res = decodeLocationField(results[0]['address_components']);
-			
-			//alert(dump(res));
 
 		  civico = (typeof(res['street_number']) == 'undefined')?'':res['street_number'].long_name;
 		  via = (typeof(res['route']) == 'undefined')?'':res['route'].long_name;
@@ -205,9 +203,7 @@ function geocode() {
 		  regione = (typeof(res['administrative_area_level_2']) == 'undefined')?'':res['administrative_area_level_1'].long_name;
 		  nazione = (typeof(res['country']) == 'undefined')?'':res['country'].long_name;
 		  codice_nazione = (typeof(res['country']) == 'undefined')?'':res['country'].short_name;
-		  
-		  aggiorna_enti(citta);
-		  
+
 		  verifica('indirizzo_mappa');
 
     } else {
@@ -231,9 +227,7 @@ function aggiorna_posizione_da_coordinate(llat,llng) {
         $('#indirizzo').val(results[0].formatted_address);
 
 				var res = decodeLocationField(results[0]['address_components']);
-				
-				//alert(dump(res));
-	
+
 			  civico = (typeof(res['street_number']) == 'undefined')?'':res['street_number'].short_name;
 			  via = (typeof(res['route']) == 'undefined')?'':res['route'].short_name;
 			  cap = (typeof(res['postal_code']) == 'undefined')?'':res['postal_code'].short_name;
@@ -242,10 +236,7 @@ function aggiorna_posizione_da_coordinate(llat,llng) {
 			  regione = (typeof(res['administrative_area_level_2']) == 'undefined')?'':res['administrative_area_level_1'].short_name;
 			  nazione = (typeof(res['country']) == 'undefined')?'':res['country'].long_name;
 			  codice_nazione = (typeof(res['country']) == 'undefined')?'':res['country'].short_name;
-			  
-			  aggiorna_enti(citta);
-			  
-			  //alert(via);
+
 			  verifica('indirizzo_mappa');
   	          
       }

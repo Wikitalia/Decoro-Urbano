@@ -152,7 +152,7 @@ $comune = data_get('tab_comuni', array('id_comune' => $user['id_comune']));
                 var latSpan = northEast.lat() - southWest.lat();
 
                 $.ajax({
-                    url: '/<?= $settings['sito']['directory'] ?>ajax/segnalazioni_get.php?idc=<?=$user['id_comune']?>&id_competenza=0',
+                    url: '/<?= $settings['sito']['directory'] ?>ajax/segnalazioni_get.php?idc=<?=$user['id_comune']?>&id_competenza=0&genere=degrado',
                     dataType: "json",
                     data: ({
                         minLat : Math.min(southWest.lat(),northEast.lat()),
@@ -184,30 +184,10 @@ $comune = data_get('tab_comuni', array('id_comune' => $user['id_comune']));
                     // increase in the X direction to the right and in
                     // the Y direction down.
 
-                    if (segnalazione['stato'] >= 300)
-                        var image = new google.maps.MarkerImage('/images/risolta_'+segnalazione['tipo_label']+'.png',
-                    // This marker is 20 pixels wide by 32 pixels tall.
-                    new google.maps.Size(40, 40),
-                    // The origin for this image is 0,0.
-                    new google.maps.Point(0,0),
-                    // The anchor for this image is the base of the flagpole at 0,32.
-                    new google.maps.Point(19, 40));
-                    else if (segnalazione['stato'] >= 200)
-                        var image = new google.maps.MarkerImage('/images/carico_'+segnalazione['tipo_label']+'.png',
-                    // This marker is 20 pixels wide by 32 pixels tall.
-                    new google.maps.Size(40, 40),
-                    // The origin for this image is 0,0.
-                    new google.maps.Point(0,0),
-                    // The anchor for this image is the base of the flagpole at 0,32.
-                    new google.maps.Point(19, 40));
-                    else
-                        var image = new google.maps.MarkerImage('/images/marker_'+segnalazione['tipo_label']+'.png',
-                    // This marker is 20 pixels wide by 32 pixels tall.
-                    new google.maps.Size(40, 40),
-                    // The origin for this image is 0,0.
-                    new google.maps.Point(0,0),
-                    // The anchor for this image is the base of the flagpole at 0,32.
-                    new google.maps.Point(19, 40));
+									  var image = new google.maps.MarkerImage(segnalazione['marker'],
+									    new google.maps.Size(40, 40),
+									    new google.maps.Point(0,0),
+									    new google.maps.Point(19, 40));
 
                     var marker = new google.maps.Marker({
                         position: myLatlng,

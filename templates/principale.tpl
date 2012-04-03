@@ -84,7 +84,7 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 	  stato = 'In attesa';
 
 		segnalazioneListaHTML='\
-				<div id="segnalazione_'+segnalazione.id_segnalazione+'" class="ultimeSegnalazioni borderBDashed" onclick="location.href=\'{$settings.sito.url}'+segnalazione.tipo_nome_url+'/'+segnalazione.citta_url+'/'+segnalazione.indirizzo_url+'/'+segnalazione.id_segnalazione+'/\'">\
+				<div id="segnalazione_'+segnalazione.id_segnalazione+'" class="ultimeSegnalazioni borderBDashed" onclick="location.href=\''+segnalazione.url+'\'">\
 					<div class="leftAvatar">\
 						<a href="{$settings.sito.vediProfilo}?idu='+segnalazione.id_utente+'"><img src="/resize.php?w=30&h=30&f='+segnalazione.avatar+'" alt="'+segnalazione.nome+' '+segnalazione.cognome+'" /></a>\
 					</div>\
@@ -260,7 +260,7 @@ function aggiorna_date() {
 
 window.onload=function() {
 	segnalazioni_first_load();
-	interval = setInterval ( "segnalazioni_nuove_get()", 300000);
+	//interval = setInterval ( "segnalazioni_nuove_get()", 300000);
 }
 	
 	
@@ -277,7 +277,7 @@ window.onload=function() {
 			{*<div class="principaleBox">
 				<div class="title">Segnalazioni seguite</div>
 
-				<div id="segnalazione_{$segnalazione.id_segnalazione}" class="ultimeSegnalazioni {if !$smarty.foreach.ultime_segnalazioni.last}borderBDashed{/if}" onclick="location.href='{$settings.sito.url}{$segnalazione.tipo_nome_url}/{$segnalazione.citta_url}/{$segnalazione.indirizzo_url}/{$segnalazione.id_segnalazione}/'">
+				<div id="segnalazione_{$segnalazione.id_segnalazione}" class="ultimeSegnalazioni {if !$smarty.foreach.ultime_segnalazioni.last}borderBDashed{/if}" onclick="location.href='{$segnalazione.url}'">
 					<div class="leftAvatar">
 						<a href="{$settings.sito.vediProfilo}?idu={$segnalazione.id_utente}"><img src="/resize.php?w=30&h=30&f={$segnalazione.avatar}" alt="{$segnalazione.nome} {$segnalazione.cognome}" /></a>
 					</div>
@@ -301,7 +301,7 @@ window.onload=function() {
 				<div id="boxNuoveSegnalazioni">
 				{foreach from=$ultime_segnalazioni item=segnalazione name="nuovaSegnalazione"}
 
-				<div id="segnalazione_{$segnalazione.id_segnalazione}" class="ultimeSegnalazioni {if !$smarty.foreach.nuovaSegnalazione.last}borderBDashed{/if}" onclick="location.href='{$settings.sito.url}{$segnalazione.tipo_nome_url}/{$segnalazione.citta_url}/{$segnalazione.indirizzo_url}/{$segnalazione.id_segnalazione}/'">
+				<div id="segnalazione_{$segnalazione.id_segnalazione}" class="ultimeSegnalazioni {if !$smarty.foreach.nuovaSegnalazione.last}borderBDashed{/if}" onclick="location.href='{$segnalazione.url}'">
 					<div class="leftAvatar">
 						<a href="{$settings.sito.vediProfilo}?idu={$segnalazione.id_utente}"><img src="/resize.php?w=30&h=30&f={$segnalazione.avatar}" alt="{$segnalazione.nome} {$segnalazione.cognome}" /></a>
 					</div>
@@ -328,7 +328,7 @@ window.onload=function() {
 				<div id="boxWallSegnalazioni">
 				{*{foreach from=$segnalazioni item=segnalazione name="nuovaSegnalazione"}
 
-				<div id="segnalazione_{$segnalazione.id_segnalazione}" class="ultimeSegnalazioni {if !$smarty.foreach.nuovaSegnalazione.last}borderBDashed{/if}" onclick="location.href='{$settings.sito.url}{$segnalazione.tipo_nome_url}/{$segnalazione.citta_url}/{$segnalazione.indirizzo_url}/{$segnalazione.id_segnalazione}/'">
+				<div id="segnalazione_{$segnalazione.id_segnalazione}" class="ultimeSegnalazioni {if !$smarty.foreach.nuovaSegnalazione.last}borderBDashed{/if}" onclick="location.href='{$segnalazione.url}'">
 					<div class="leftAvatar">
 						<a href="{$settings.sito.vediProfilo}?idu={$segnalazione.id_utente}"><img src="/resize.php?w=30&h=30&f={$segnalazione.avatar}" alt="{$segnalazione.nome} {$segnalazione.cognome}" /></a>
 					</div>

@@ -51,8 +51,6 @@ require_once('auth.php');
 $id_menu_principale = "20";
 $id_menu_secondario = "21";
 
-
-
 if (isset($_GET["p"])) {
     $p = $_GET["p"];
 } else {
@@ -60,6 +58,7 @@ if (isset($_GET["p"])) {
 }
 
 $comune = data_get('tab_comuni', array('id_comune' => $user['id_comune']));
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -164,6 +163,10 @@ $comune = data_get('tab_comuni', array('id_comune' => $user['id_comune']));
 // recupera la lista delle segnalazioni
 $parametri['id_comune'] = $user['id_comune'];
 $parametri['id_competenza'] = 0;
+$parametri['genere'] = 'degrado';
+
+$parametri = cleanArray($parametri);
+
 $segnalazioni = segnalazioni_get($parametri);
 
 if (count($segnalazioni))
