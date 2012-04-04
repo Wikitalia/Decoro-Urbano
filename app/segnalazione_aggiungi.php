@@ -41,7 +41,6 @@
 ini_set('display_errors', 0);
 error_reporting(0);
 
-
 require_once("../include/config.php");
 require_once("../include/db_open.php");
 require_once("../include/db_open_funzioni.php");
@@ -105,8 +104,21 @@ if ($fb_access_token) {
 	  'secret' => $settings['facebook']['app_secret'],
 	  'cookie' => true
 	));
-
-	$result = $facebook->api('/me',array('access_token' => $fb_access_token));
+	
+	
+	
+	try {
+		$result = $facebook->api('/me',array('access_token' => $fb_access_token));
+	} catch(FacebookApiException $e) {
+        $xml_out="";
+		$xml_out.="<decorourbano>";
+		$xml_out.="<status>";
+		$xml_out.="login_errato";
+		$xml_out.="</status>";
+		$xml_out.="</decorourbano>";
+		echo $xml_out;
+		exit;
+	}   
 
 	$user=data_get(
 		'tab_utenti',
@@ -126,7 +138,6 @@ if ($fb_access_token) {
 	);
 
 }
-
 
 $xml_out="";
 $xml_out.="<decorourbano>";
