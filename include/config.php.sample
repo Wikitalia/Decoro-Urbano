@@ -50,7 +50,7 @@ $settings['sito']['url'] = $settings['sito']['url_ns'].'/';
 $settings['sito']['debug'] = 0;
 $settings['sito']['hashsalt'] = '';
 $settings['sito']['encrypt_key'] = '';
-$settings['sito']['versione'] = '0.3.0';
+$settings['sito']['versione'] = '0.4.0';
 
 // Social 
 $settings['social']['twitter'] = 'http://twitter.com/decorourbano';
