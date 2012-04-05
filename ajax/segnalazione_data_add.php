@@ -164,9 +164,11 @@ if ($comune['stato'] == 1) {
 
 $fields = cleanArray($fields);
 
-if (!($id_segnalazione = data_insert('tab_segnalazioni', $fields)))
-    exit('ERRORE');
-
+if (!($id_segnalazione = data_insert('tab_segnalazioni', $fields))) {
+    $out['status'] = 'insert_error';
+    echo json_encode($out);
+    exit;
+}
 
 // Se l'inserimento è andato a buon fine, sposta le foto dalla cartella temporanea
 // a quella definitiva

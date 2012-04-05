@@ -134,8 +134,10 @@ var uploader = new qq.FileUploader({
 		$('#lista_file').html('');
 	},
 	onComplete: function(id, fileName, responseJSON){
-		upload_done = true;
-		verifica('foto');
+		if (responseJSON.success == 'true') {
+			upload_done = true;
+			verifica('foto');
+		}
 	},
 	params: {
 		sid: '{$sid}'

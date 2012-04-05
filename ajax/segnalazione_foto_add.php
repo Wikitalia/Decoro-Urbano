@@ -43,7 +43,8 @@ $user = logged_user_get();
 
 // se non c'è un utente loggato, esce
 if (!$user) {
-    exit;
+	echo "0";
+  exit;
 }
 
 // se non è stato uploadato alcun file
