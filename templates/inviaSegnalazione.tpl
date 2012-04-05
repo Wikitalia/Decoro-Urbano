@@ -134,7 +134,7 @@ var uploader = new qq.FileUploader({
 		$('#lista_file').html('');
 	},
 	onComplete: function(id, fileName, responseJSON){
-		if (responseJSON.success == 'true') {
+		if (responseJSON.success) {
 			upload_done = true;
 			verifica('foto');
 		}
@@ -244,7 +244,7 @@ function ajaxSubmit() {
 			buttons: {
 				Ok: function() {
 					//$( this ).dialog( "{#annulla#}" );
-					$( this ).remove();
+					$('#modalControlli').dialog('close');
 				}
 			}
 		});
