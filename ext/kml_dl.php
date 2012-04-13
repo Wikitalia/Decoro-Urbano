@@ -25,15 +25,11 @@
 
 header("Access-Control-Allow-Origin: *");
 
-require_once("../include/config.php");
-require_once("../include/db_open.php");
-require_once("../include/db_open_funzioni.php");
-require_once("../include/funzioni.php");
-require_once("../include/controlli.php");
-require_once("../include/SimpleImage.php");
-require_once('../include/decorourbano.php');
-require_once('../include/zipstream-php-0.2.2/zipstream.php');
+set_time_limit(600);
 
+require_once("../include/config.php");
+
+// Impostazione politiche di error reporting in funzione del flag di debug
 if ($settings['sito']['debug']) {
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
@@ -41,6 +37,14 @@ if ($settings['sito']['debug']) {
     ini_set('display_errors', 0);
     error_reporting(0);
 }
+
+require_once("../include/db_open.php");
+require_once("../include/db_open_funzioni.php");
+require_once("../include/funzioni.php");
+require_once("../include/controlli.php");
+require_once("../include/SimpleImage.php");
+require_once('../include/decorourbano.php');
+require_once('../include/zipstream-php-0.2.2/zipstream.php');
 
 $user=(isset($_GET['idu']))?(int) $_GET['idu']:0;
 $recenti=(isset($_GET['t_new']))?$_GET['t_new']:0;
