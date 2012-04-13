@@ -25,7 +25,19 @@
 
 header("Access-Control-Allow-Origin: *");
 
+set_time_limit(600);
+
 require_once("../include/config.php");
+
+// Impostazione politiche di error reporting in funzione del flag di debug
+if ($settings['sito']['debug']) {
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}
+
 require_once("../include/db_open.php");
 require_once("../include/db_open_funzioni.php");
 require_once("../include/funzioni.php");
