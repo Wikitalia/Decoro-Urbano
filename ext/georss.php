@@ -70,7 +70,7 @@ if ($comune!='') {
 		$parametri['id_comune'] = $res_comune[0]['id_comune'];
 	}
 } else {
-	$limit_numero = 100;
+	//$limit_numero = 100;
 }
 
 $parametri['id_user'] = $user;
