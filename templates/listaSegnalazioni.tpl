@@ -138,6 +138,8 @@ function aggiungi_segnalazione(posizione,segnalazione) {
 						<div class="auto fontS10 fGreen marginT5"> '+segnalazione.citta+' - '+segnalazione.indirizzo+' '+segnalazione.civico+'</div>';
 		if (segnalazione['client'] == 'iPhone') infoBoxHTML += '<div class="auto fontS10">via <a href="{$settings.sito.applicazioni}">iPhone</a></div>';
 		if (segnalazione['client'] == 'Android') infoBoxHTML += '<div class="auto fontS10">via <a href="{$settings.sito.applicazioni}">Android</a></div>';
+		if (segnalazione['client'] == 'Windows Phone') infoBoxHTML += '<div class="auto fontS10">via <a href="{$settings.sito.applicazioni}">Windows Phone</a></div>';
+
 		infoBoxHTML += '</div></div>';
 		
 		boxText.innerHTML = infoBoxHTML;

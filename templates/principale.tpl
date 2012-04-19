@@ -98,6 +98,7 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 						<div class="auto fontS10 fGreen" style="margin-top:-1px;"> '+segnalazione.citta+' - '+segnalazione.indirizzo+' '+segnalazione.civico+'</div>';
 		if (segnalazione.client == 'iPhone') segnalazioneListaHTML+='<div class="auto fontS10" style="clear:left;">via <a href="{$settings.sito.applicazioni}">iPhone</a></div>';
 		if (segnalazione.client == 'Android') segnalazioneListaHTML+='<div class="auto fontS10" style="clear:left;">via <a href="{$settings.sito.applicazioni}">Android</a></div>';
+		if (segnalazione.client == 'Windows Phone') segnalazioneListaHTML+='<div class="auto fontS10" style="clear:left;">via <a href="{$settings.sito.applicazioni}">Windows Phone</a></div>';
 		segnalazioneListaHTML+='\
 					</div>\
 				</div>\
@@ -291,6 +292,7 @@ window.onload=function() {
 						<div class="auto fontS10 fGreen" style="margin-top:-1px;"> {$segnalazione.citta} - {$segnalazione.indirizzo} {$segnalazione.civico}</div>
 						{if $segnalazione.client == 'iPhone'}<div class="auto fontS10 clear" style="clear:left;">via <a href="{$settings.sito.applicazioni}">iPhone</a></div>{/if}
 						{if $segnalazione.client == 'Android'}<div class="auto fontS10 clear" style="clear:left;">via <a href="{$settings.sito.applicazioni}">Android</a></div>{/if}
+						{if $segnalazione.client == 'Windows Phone'}<div class="auto fontS10 clear" style="clear:left;">via <a href="{$settings.sito.applicazioni}">Windows Phone</a></div>{/if}
 					</div>
 				</div>			
 
@@ -315,6 +317,8 @@ window.onload=function() {
 						<div class="auto fontS10 fGreen" style="margin-top:-1px;"> {$segnalazione.citta} - {$segnalazione.indirizzo} {$segnalazione.civico}</div>
 						{if $segnalazione.client == 'iPhone'}<div class="auto fontS10 clear"  style="clear:left;">via <a href="{$settings.sito.applicazioni}">iPhone</a></div>{/if}
 						{if $segnalazione.client == 'Android'}<div class="auto fontS10 clear"  style="clear:left;">via <a href="{$settings.sito.applicazioni}">Android</a></div>{/if}
+						{if $segnalazione.client == 'Windows Phone'}<div class="auto fontS10 clear"  style="clear:left;">via <a href="{$settings.sito.applicazioni}">Windows Phone</a></div>{/if}
+
 					</div>
 				</div>
 				
@@ -342,6 +346,7 @@ window.onload=function() {
 						<div class="auto fontS10 fGreen" style="margin-top:-1px;"> {$segnalazione.citta} - {$segnalazione.indirizzo} {$segnalazione.civico}</div>
 						{if $segnalazione.client == 'iPhone'}<div class="auto fontS10 clear" style="clear:left;">via <a href="{$settings.sito.applicazioni}">iPhone</a></div>{/if}
 						{if $segnalazione.client == 'Android'}<div class="auto fontS10 clear" style="clear:left;">via <a href="{$settings.sito.applicazioni}">Android</a></div>{/if}
+						{if $segnalazione.client == 'Windows Phone'}<div class="auto fontS10 clear" style="clear:left;">via <a href="{$settings.sito.applicazioni}">Windows Phone</a></div>{/if}
 					</div>
 				</div>
 				

@@ -268,6 +268,7 @@ if ($infobox == 'true') {
 						<div class="auto fontS10 fGreen marginT5"> '+segnalazione.citta+' - '+segnalazione.indirizzo+' '+segnalazione.civico+'</div></div>';
 		if (segnalazione['client'] == 'iPhone') infoBoxHTML += '<div class="auto fontS10">via <a href="<?=$settings['sito']['applicazioni']?>" target="_blank">iPhone</a></div>';
 		if (segnalazione['client'] == 'Android') infoBoxHTML += '<div class="auto fontS10">via <a href="<?=$settings['sito']['applicazioni']?>" target="_blank">Android</a></div>';
+		if (segnalazione['client'] == 'Windows Phone') infoBoxHTML += '<div class="auto fontS10">via <a href="<?=$settings['sito']['applicazioni']?>" target="_blank">Windows Phone</a></div>';
 		infoBoxHTML += '</div></div>';
 		
 		boxText.innerHTML = infoBoxHTML;

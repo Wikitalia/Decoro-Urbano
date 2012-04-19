@@ -225,6 +225,7 @@
 	                <div class="piattaforma" style="display:none;">
 	                	{if $segnalazione.client == 'iPhone'}via <a href="{$settings.sito.applicazioni}">iPhone</a>{/if}
 						{if $segnalazione.client == 'Android'}via <a href="{$settings.sito.applicazioni}">Android</a>{/if}
+						{if $segnalazione.client == 'Windows Phone'}via <a href="{$settings.sito.applicazioni}">Windows Phone</a>{/if}
 	          		</div>
                 </div>
 			       </div>

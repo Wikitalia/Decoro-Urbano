@@ -59,8 +59,10 @@ $settings['social']['facebook'] = 'https://www.facebook.com/decorourbano';
 // Parametri Apps 
 $settings['apps']['iPhone'] = 'http://itunes.apple.com/it/app/wedu-decoro-urbano/id441229423';
 $settings['apps']['android'] = 'https://market.android.com/details?id=it.maioralabs.decorourbano';
+$settings['apps']['WindowsPhone'] = '';
 $settings['apps']['currentiPhoneVersion'] = '1.3';
 $settings['apps']['currentAndroidVersion'] = '8';
+$settings['apps']['currentWindowsPhoneVersion'] = '1.0.0';
 
 // Documenti 
 $settings['docs']['presentazione'] = $settings['sito']['url'].'docs/Decoro_Urbano.pdf';

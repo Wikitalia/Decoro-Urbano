@@ -130,6 +130,8 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 							segnalazioneListaHTML += ' via <a href="{$settings.sito.applicazioni}">iPhone</a>';
 						if (segnalazione.client=='Android')
 							segnalazioneListaHTML += ' via <a href="{$settings.sito.applicazioni}">Android</a>'; 
+						if (segnalazione.client=='Windows Phone')
+							segnalazioneListaHTML += ' via <a href="{$settings.sito.applicazioni}">Windows Phone</a>'; 
 						segnalazioneListaHTML += '</div>\
 				</div>\{*segnDettagliLeft*}
 				<div class="segnDettagliRight">\

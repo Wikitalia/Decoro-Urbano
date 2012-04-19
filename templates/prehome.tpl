@@ -150,6 +150,8 @@
 							<div class="auto fontS10 fGreen" style="margin-top:-1px;"> {$segnalazione.citta} - {$segnalazione.indirizzo} {$segnalazione.civico}</div>
 							{if $segnalazione.client == 'iPhone'}<div class="auto fontS10 clear" style="margin-top:-10px;">via <a href="{$settings.sito.applicazioni}">iPhone</a></div>{/if}
 							{if $segnalazione.client == 'Android'}<div class="auto fontS10 clear" style="margin-top:-10px;">via <a href="{$settings.sito.applicazioni}">Android</a></div>{/if}
+							{if $segnalazione.client == 'Windows Phone'}<div class="auto fontS10 clear" style="margin-top:-10px;">via <a href="{$settings.sito.applicazioni}">Windows Phone</a></div>{/if}
+
 						</div>
 					</div>
 					
