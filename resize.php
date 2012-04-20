@@ -157,16 +157,16 @@ if (isset($_GET['s'])) {
 	$idu = $el[$len-4];
 	$ids = $el[$len-3];
 	
-	$source_file_name = '/images/segnalazioni/'.$idu.'/'.$ids.'/1.jpeg';
+	$source_file_name = 'images/segnalazioni/'.$idu.'/'.$ids.'/1.jpeg';
 
 	if (!is_file($settings['sito']['percorso'].$source_file_name)) {
 	
 		switch ($el[0]) {
 	    case 'buona':
-	    	$source_file_name = '/images/placeholder_bp.png';
+	    	$source_file_name = 'images/placeholder_bp.png';
 	    	break;
 	    default:
-	    	$source_file_name = '/images/placeholder_bp.png';
+	    	$source_file_name = '';
 	    	break;
 		}
 		
@@ -188,40 +188,54 @@ if (isset($_GET['s'])) {
 
 }
 
+
 $cache_file = clean_string($crop_width.'_'.$crop_height.'_'.$source_file_name);
 $cache_path = 'images/cache/';
 
 $cache_full_path = $cache_path.$cache_file;
 
-if ($crop_width == 0 && $crop_height == 0 && is_file($_SERVER['DOCUMENT_ROOT'].$source_file_name)) {
+if (substr($source_file_name,0,7) == 'http://' || substr($source_file_name,0,8) == 'https://') {
 
-	header ('Content-length: ' .filesize($_SERVER['DOCUMENT_ROOT'].$source_file_name));
-	header ("Content-type: image/jpeg");
-	readfile($_SERVER['DOCUMENT_ROOT'].$source_file_name);
+	if (is_file($cache_full_path)) {
 
-} elseif (is_file($_SERVER['DOCUMENT_ROOT'].$cache_full_path) && is_file($_SERVER['DOCUMENT_ROOT'].$source_file_name) && filemtime($_SERVER['DOCUMENT_ROOT'].$cache_full_path) > filemtime($_SERVER['DOCUMENT_ROOT'].$source_file_name)) {
-
-	header ('Content-length: ' .filesize($cache_full_path));
-	header ("Content-type: image/jpeg");
-	readfile($cache_full_path);
-
-} else {
-
-	if (substr($source_file_name,0,7) == 'http://' || substr($source_file_name,0,8) == 'https://') {
-	
-		$data = file_get_contents($source_file_name);
-	
-		$original_image_gd = imagecreatefromstring($data);
-		$cropped_image_gd = resize_crop($original_image_gd,$crop_height,$crop_width);
-
-		imagejpeg($cropped_image_gd,$cache_full_path);
 		header ('Content-length: ' .filesize($cache_full_path));
 		header ("Content-type: image/jpeg");
 		readfile($cache_full_path);
 	
 	} else {
+
+		$data = file_get_contents($source_file_name);
 	
-		$file_name=$_SERVER['DOCUMENT_ROOT'].$source_file_name;
+		$original_image_gd = imagecreatefromstring($data);
+		if ($crop_width != 0 || $crop_height != 0) $cropped_image_gd = resize_crop($original_image_gd,$crop_height,$crop_width);
+		else $cropped_image_gd = $original_image_gd;
+
+		imagejpeg($cropped_image_gd,$cache_full_path);
+		header ('Content-length: ' .filesize($cache_full_path));
+		header ("Content-type: image/jpeg");
+		readfile($cache_full_path);
+
+	}
+
+} else {
+
+	if (substr($source_file_name,0,1) == '/') $source_file_name = substr($source_file_name,1);
+
+	if ($crop_width == 0 && $crop_height == 0 && is_file($source_file_name)) {
+	
+		header ('Content-length: ' .filesize($source_file_name));
+		header ("Content-type: image/jpeg");
+		readfile($source_file_name);
+	
+	} elseif (is_file($cache_full_path) && is_file($source_file_name) && filemtime($cache_full_path) > filemtime($source_file_name)) {
+
+		header ('Content-length: ' .filesize($cache_full_path));
+		header ("Content-type: image/jpeg");
+		readfile($cache_full_path);
+	
+	} else {
+
+		$file_name=$source_file_name;
 	
 		if (!is_file($file_name)) {
 			header("HTTP/1.0 404 Not Found");
@@ -261,4 +275,5 @@ if ($crop_width == 0 && $crop_height == 0 && is_file($_SERVER['DOCUMENT_ROOT'].$
 	}
 
 }
+
 ?>
