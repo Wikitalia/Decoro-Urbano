@@ -33,7 +33,7 @@
 			<p align="justify"> Le  		presenti Clausole di Utilizzo (&ldquo;CdU&rdquo;) regolano e disciplinano  		l'utilizzo della piattaforma &ldquo;Decoro Urbano&rdquo; presente  		all'indirizzo web {$settings.sito.dominio} da parte dell'Utente nonché le  		responsabilità di quest'ultimo relativamente all'utilizzo della  		piattaforma anzidetta.</p>
 		</li>
 		<li>
-			<p align="justify"> Per  		&ldquo;Decoro Urbano&rdquo; si intende una piattaforma raggiungibile  		all'indirizzo web {$settings.sito.dominio} tramite la quale l'Utente può  		segnalare gratuitamente situazioni di degrado cittadino. Detta  		piattaforma è di esclusiva proprietà di Maiora Labs S.r.l.  		(&ldquo;Maiora&rdquo;) con sede in Roma, Viale Parioli, 12 (P.IVA  		10964071004);</p>
+			<p align="justify"> Per  		&ldquo;Decoro Urbano&rdquo; si intende una piattaforma raggiungibile  		all'indirizzo web {$settings.sito.dominio} tramite la quale l'Utente può  		segnalare gratuitamente situazioni di degrado cittadino. Detta  		piattaforma è di esclusiva proprietà di Maiora Labs S.r.l.  		(&ldquo;Maiora&rdquo;) con sede in Roma, Via del Gazometro, 50 (P.IVA  		10964071004);</p>
 		</li>
 		<li>
 			<p align="justify"> Per  		&ldquo;Utente&rdquo; si intende la persona fisica o giuridica registrata ai  		sensi dell'art. 2 che effettua le segnalazioni di degrado cittadino  		alla piattaforma &ldquo;Decoro Urbano&rdquo;;</p>
