@@ -45,15 +45,25 @@ $infobox=(isset($_GET['infobox']))?$_GET['infobox']:'false'; // Default = false
 $cluster=(isset($_GET['cluster']))?$_GET['cluster']:'true'; // Default = true
 $limit_numero=(isset($_GET['l']))?(int) $_GET['l']:0;
 $nome_url_comune=(isset($_GET['comune']))?cleanField($_GET['comune']):'';
+$nome_url_competenza=(isset($_GET['competenza']))?cleanField($_GET['competenza']):'';
 
 $q = 'SELECT * FROM tab_comuni WHERE nome_url = "'.$nome_url_comune.'"';
 $comune = data_query($q);
 
+$q = 'SELECT * FROM tab_competenze WHERE nome_url = "'.$nome_url_competenza.'"';
+$competenza = data_query($q);
+
+$zoom = 11;
+
 if (count($comune)) $parametri['id_comune'] = $comune[0]['id_comune'];
 else {
-	$comune[0]['lat'] = 42;
-	$comune[0]['lng'] = 12;
+	$comune[0]['lat'] = 42.744388161339;
+	$comune[0]['lng'] = 12.0809380292276;
+	$zoom = 6;
 }
+
+if (count($competenza)) $parametri['id_competenza'] = $competenza[0]['id_competenza'];
+
 $parametri['limit'] = $limit_numero;
 $parametri['formato'] = 0;
 
@@ -82,7 +92,7 @@ $segnalazioni_json = escapeJSON($segnalazioni_json);
 var json_segnalazioni='<?=$segnalazioni_json?>';
 var segnalazioni=[];
 var initialLocation = new google.maps.LatLng(<?=$comune[0]['lat']?>, <?=$comune[0]['lng']?>);
-var zoom = 11;
+var zoom = <?=$zoom?>;
 
 var du_map;
 var markerClusterer = null;
