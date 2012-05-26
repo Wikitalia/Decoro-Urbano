@@ -10,13 +10,9 @@ class Auth {
 	private static $cookie = null;
 
 	public static function init() {
-	
-		global $page;
-		$logout_page_name = 'logout';
 
 		if ($user = Auth::check_session()) {
 			Auth::user_update($user);
-			//if ($page != $logout_page_name) echo "check_session<br />";
 			return;
 		} else {
 			Auth::clear_session();
@@ -24,13 +20,11 @@ class Auth {
 		
 		if($user = Auth::check_post()) {
 			Auth::user_update($user);
-			//if ($page != $logout_page_name) echo "check_post<br />";
 			return;
 		}
 		
 		if($user = Auth::check_cookie()) {
 			Auth::user_update($user);
-			//if ($page != $logout_page_name) echo "check_cookie<br />";
 			return;
 		} else {
 			Auth::clear_cookie();
@@ -39,11 +33,9 @@ class Auth {
 		if($user = Auth::check_session_fb()) {
 			Auth::user_set_session_fb(Auth::$fb_user);
 			Auth::user_update($user);
-			//if ($page != $logout_page_name) echo "check_session_fb<br />";
 			return;
 		}
 		
-		//Auth::user_logout();
 
 	}
 	
@@ -53,15 +45,6 @@ class Auth {
 			&& trim($_SESSION['user']['id_utente']) != ''
 			&& ($temp_user = user_get($_SESSION['user']['id_utente'])))
 		{
-			/*if ($temp_user['id_fb'] == 0) {
-				return $temp_user;
-			} else if (isset($_SESSION['fb_user']) && isset($_SESSION['fb_user']['id']) && $temp_user['id_fb'] == $_SESSION['fb_user']['id']) {
-				Auth::$fb_user = $_SESSION['fb_user'];
-				return $temp_user;
-			} else {
-				return null;
-			}*/
-			
 			if (isset($_SESSION['fb_user']) && isset($_SESSION['fb_user']['id']) && $temp_user['id_fb'] == $_SESSION['fb_user']['id']) {
 				Auth::$fb_user = $_SESSION['fb_user'];
 			}
@@ -176,11 +159,7 @@ class Auth {
 	}
 	
 	public static function clear_session() {
-		session_unset();		
-    //unset($_SESSION['user']);
-    //unset($_SESSION['fb_user']);
-    //unset($_SESSION['fb_session']);
-    //unset($_SESSION['fb_access_token']);
+		session_unset();
 	}
 	
 	public static function clear_cookie() {
