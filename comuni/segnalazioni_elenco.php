@@ -187,9 +187,9 @@ if (count($segnalazioni))
         }
         ?>
                                                     <tr class="gradeA"><td><?= left($messaggio, 30) ?></td><td><?= $indirizzo ?></td><td><?= $data ?></td><td><?= $stato ?></td><td valign="bottom" style="vertical-align:bottom;" nowrap><a href="segnalazione_gestione.php?id=<?= $id_segnalazione ?>"><img src="images/icona_mini_modifica.png" style="border:0;margin-right:4px;margin-bottom:-4px;" /></a></td></tr>
-                                                    <?
-                                                }
-                                            ?>
+		<?
+		}
+		?>
 
                                         </tbody>
                                     </table>
