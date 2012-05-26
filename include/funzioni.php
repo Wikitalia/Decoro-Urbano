@@ -66,15 +66,29 @@ function email_with_template($data) {
     
     // costruisce il corpo dell'email 
     $html_email = $smarty_email->fetch($settings['sito']['percorso'] . 'email/' . $data['template'] . '.tpl');
-    
-    $destinatario = $data['to'];
-    $destinatario = 'francesco.comi@gmail.com';
-    
+
+    // Verifica formato destinatario ed estrazione tipologia email (PEC o normale)
+    $format_check = explode ('<',$data['to']);
+    if (count($format_check) == 2) {
+    	$dest_nome = $format_check[0];
+    	$format_check = explode ('>',$format_check[1]);
+    	$pec_check = explode ('@',$format_check[0]);
+    	$dest_email = $pec_check[0].'@'.$pec_check[1];
+    	$destinatario = $dest_nome.'<'.$dest_email.'>';
+    } else {
+    	$pec_check = explode ('@',$format_check[0]);
+    	$dest_email = $pec_check[0].'@'.$pec_check[1];
+    	$destinatario = $dest_email;
+    }
+
     // invia l'email
-    return html_email($data['from'], $destinatario, $conf[$data['template']]['oggetto'], $html_email);
+    if ($pec_check[2] == 'PEC') {
+			return html_email_PEC('maioralabs@legalmail.it', $dest_email, $conf[$data['template']]['oggetto'], $html_email);
+		} else {
+			return html_email($data['from'], $destinatario, $conf[$data['template']]['oggetto'], $html_email);
+		}
 
 }
-
 
 /**
  * Invia un'email HTML
@@ -99,6 +113,48 @@ function html_email($from, $to, $subject, $message) {
 
     // invia l'email
     return mail($to, $subject, $message, $headers);
+}
+
+/**
+ * Invia un'email HTML
+ * 
+ * Questa funzione invia un'email HTML
+ * 
+ * @param string $from indirizzo email mittente
+ * @param string $to indirizzo email destinatario
+ * @param string $subject oggetto dell'email
+ * @param string $message corpo dell'email
+ * @return boolean 
+ */
+function html_email_PEC($from, $to, $subject, $message) {
+
+		require("class.phpmailer.php");
+		
+		error_log ('PEC to:'.$to,1,'f.comi@maioralabs.it');
+		
+		global $settings;
+		
+		$mail = new PHPMailer();
+		$mail->IsSMTP();
+		
+		$mail->Mailer = "smtp";
+		$mail->Timeout= '10';
+		$mail->SMTPAuth = true;
+		
+		$mail->Host = $settings['email']['SMTP_host'];
+		$mail->Port = $settings['email']['SMTP_port'];
+		$mail->SMTPSecure = $settings['email']['SMTP_secure'];
+		$mail->Username = $settings['email']['SMTP_username'];
+		$mail->Password = $settings['email']['SMTP_password'];
+		
+		$mail->From = $from;
+		$mail->AddAddress($to);
+		
+		$mail->Subject  = $subject;
+		$mail->MsgHTML($message);
+		
+		if ($mail->Send()) return true;
+		else error_log ('Mail Error info:'.$mail->ErrorInfo,1,'f.comi@maioralabs.it');
 }
 
 /**
