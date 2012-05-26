@@ -68,7 +68,12 @@ if ($subdomain && count($competenza = competenze_get(0,$subdomain))) {
 	$smarty->assign('segnalazioni',$segnalazioni);
 	$smarty->assign('locType','competenza');
 	
-	$smarty->assign('pageTitle','Segnalazioni in gestione '.$competenza[0]['nome']);
+	if ($competenza[0]['stato'] == 1) $smarty->assign('pageTitle','Segnalazioni in gestione '.$competenza[0]['nome']);
+	else $smarty->assign('pageTitle','Segnalazioni '.$competenza[0]['nome']);
+	
+	$smarty->assign('nomeCompetenzaUrl',$competenza[0]['nome_url']);
+	$smarty->assign('testoCompetenza',$competenza[0]['testo_mappa']);
+	$smarty->assign('urlCompetenza',$competenza[0]['url']);
 
 } else if (array_key_exists($subdomain,$regioni)) {
     // altrimenti nel caso in cui il sottodominio rappresenti una regione
