@@ -293,6 +293,8 @@ function ajaxSubmit() {
 	    	$('#invSegnRiepilogo').show();*/
 	    	window.location.href=result.link_segnalazione;
     	} else {
+    		$('#loadingInviaSegnalazione').hide();
+    		$('#formInviaSegnalazione').show();
     		alert('{#erroreInvio#}');
 			}
     	//window.location.href='{$settings.sito.url}';
