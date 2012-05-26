@@ -27,6 +27,7 @@
  * Chiamata AJAX per effettuare l'upload della foto di una segnalazione
  * 
  */
+
 session_start();
 
 require_once("../include/funzioni.php");
@@ -39,7 +40,8 @@ require_once('../include/decorourbano.php');
 
 
 // recupera i dati dell'utente loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 // se non c'è un utente loggato, esce
 if (!$user) {
@@ -48,7 +50,7 @@ if (!$user) {
 }
 
 // se non è stato uploadato alcun file
-if (empty($_GET['qqfile'])) {
+if (empty($_FILES['qqfile']) && empty($_GET['qqfile'])) {
 	echo "0";
 	exit;
 }
