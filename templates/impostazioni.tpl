@@ -79,7 +79,7 @@
 </div>
 {/if}
 
-{if isset($smarty.session.fb_session)}
+{if $fb_user}
 <div class="testoFumetto">
 	<div><h3 class="pageTitle marginB5">{#socialTitolo#}</h3></div>
 	<form class="skinnedForm" method="post">

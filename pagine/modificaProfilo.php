@@ -60,7 +60,8 @@ if (isset($_POST['form_profilo_utente1'])) {
     // aggiorna il profilo dell'utente con i dati inseriti nel form
     if (data_update('tab_utenti', $fields, array('id_utente' => $id_utente))) {
         // aggiorna i dati di sessione con quelli nuovi
-        $user = user_session_update($id_utente);
+		    $user = user_get($id_utente);
+				Auth::user_update($user);
         $smarty->assign('user', $user);
     } else {
         header('Location: '.$settings['sito']['url'].'errore');

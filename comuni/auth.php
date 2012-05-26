@@ -27,32 +27,14 @@
  * Gestione dell'autenticazione utente
  */
 
-$user = logged_user_get();
-
-// Se non c'è utente da session vediamo se i dati dal post o i cookie ci consentono di fare login
-if (!$user) {
-    // Se ho fatto il post dal form di login OPPURE se ho i dati dai cookie posso procedere ad effettuare il login
-    if (isset($_POST['login_form']) || $cookie = cookie_data_get()) {
-
-        if (isset($cookie))
-            $smarty->assign('cookie', $cookie);
-
-        $email = (isset($_POST['email'])) ? cleanField($_POST['email']) : cleanField($cookie['user_email']);
-        $password = (isset($_POST['password'])) ? cleanField($_POST['password']) : cleanField($cookie['user_password']);
-        $setcookie = (isset($_POST['restaCollegato']) && $_POST['restaCollegato'] == 'on') ? 1 : 0;
-        //Controllo credenziali di accesso. se sono giuste metti i dati in cookie e session e procedo normalmente.
-
-        if (!user_login($email, $password, $setcookie)) {
-            
-        } else {
-            $user = logged_user_get();
-        }
-    }
-}
-
+Auth::init();
+$user = Auth::user_get();
+$fb_user = Auth::user_fb_get();
+$user_eliminato = Auth::user_is_eliminato();
+$cookie = Auth::cookie_get();
 
 if (!$user || $user['id_ruolo'] != $settings['user']['ruolo_utente_comune']) {
-    user_logout();
+    Auth::user_logout();
     header("location: login-form.php");
     exit();
 }

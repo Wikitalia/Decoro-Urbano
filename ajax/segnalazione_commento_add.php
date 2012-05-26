@@ -47,7 +47,8 @@ if (!$_POST['ids'] || !$_POST['commento'] || !checkNumericField($_POST['ids'])) 
 
 
 // verifico che l'utente sia loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 if (!$user) {
     echo '0';

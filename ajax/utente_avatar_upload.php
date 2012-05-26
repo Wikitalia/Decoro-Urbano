@@ -39,7 +39,8 @@ require_once("../include/SimpleImage.php");
 require_once("../include/file_upload.php");
 
 // recupera i dati dell'utente loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 // se non c'è un utente loggato, esce
 if (!$user) {

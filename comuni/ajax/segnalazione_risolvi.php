@@ -38,7 +38,8 @@ require_once("../../include/controlli.php");
 require_once('../../include/decorourbano.php');
 
 // recupera l'utente loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 // controlla la presenza dell'utente e i privilegi del comune
 if (!$user || $user['id_ruolo'] != $settings['user']['ruolo_utente_comune']) {

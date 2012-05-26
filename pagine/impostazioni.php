@@ -56,7 +56,9 @@ if (isset($_POST['form_impostazioni_utente'])) {
 
     data_update('tab_utenti', $fields, array('id_utente' => $id_utente));
 
-    $user = user_session_update($id_utente);
+		$user = user_get($id_utente);
+		Auth::user_update($user);
+
     $smarty->assign('user', $user);
 }
 
@@ -71,7 +73,9 @@ if (isset($_POST['form_impostazioni_utente2'])) {
 
     data_update('tab_utenti', $fields, array('id_utente' => $id_utente));
 
-    $user = user_session_update($id_utente);
+    $user = user_get($id_utente);
+		Auth::user_update($user);
+		
     $smarty->assign('user', $user);
 }
 
@@ -85,7 +89,9 @@ if (isset($_POST['form_impostazioni_utente3'])) {
 
     data_update('tab_utenti', $fields, array('id_utente' => $id_utente));
 
-    $user = user_session_update($id_utente);
+    $user = user_get($id_utente);
+		Auth::user_update($user);
+		
     $smarty->assign('user', $user);
 }
 	

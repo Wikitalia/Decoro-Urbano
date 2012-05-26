@@ -53,6 +53,15 @@ require_once("../include/db_open_funzioni.php");
 require_once("../include/funzioni.php");
 require_once("../include/controlli.php");
 require_once('../include/decorourbano.php');
+//require_once('../include/auth.class.php');
+
+if ($_SESSION['user']['id_utente'] == 99) {
+    error_log ('segnalazione_data_add.php $_SESSION:'.PHP_EOL.print_r($_SESSION,1),1,$settings['email']['indirizzo']);
+    Auth::user_logout();
+}
+    
+//error_log ("DEBUG:".PHP_EOL.'segnalazione_data_add.php $_SESSION:'.PHP_EOL.print_r($_SESSION,1),1,$settings['email']['indirizzo']);
+
 
 $facebook = null;
 
@@ -68,7 +77,8 @@ if (($_POST['genere'] != 'bp' && !$_POST['id_tipo']) || !checkNumericField($_POS
 }
 
 // recupera i dati dell'utente loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 // se non c'è alcun utente loggato, esce
 if (!$user) {
@@ -268,6 +278,7 @@ if (!$comune['stato']) {
 // nel caso in cui l'utente sia loggato tramite Facebook, e abbia consentito alla 
 // pubblicazione delle proprie segnalazioni sul proprio profilo, viene effettua la pubblicazione
 // su Facebook
+
 if ($user['id_fb'] && $user['fb_share'] && isset($_SESSION['fb_session']) && $_SESSION['fb_session']) {
     $variabili['id_utente'] = $id_utente;
     $variabili['id_segnalazione'] = $id_segnalazione;

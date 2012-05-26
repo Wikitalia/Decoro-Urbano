@@ -275,10 +275,10 @@ window.onload=function() {
 	</script>
 	<div id="listaSegnCompetenza">
 		<div id="listaSegnCompetenzaTitolo">
-			<div class="fontS20  ">{#gestioneCompetenza#}</div>
+			<div class="fontS20  ">{$testoCompetenza}</div>
 		</div>
-		<div id="listaSegnCompetenzaLogo">
-			<img style="width:100%;" src="{$settings.sito.url}images/loghi_competenze/agcom.png" />
+		<div style="text-align:right;" id="listaSegnCompetenzaLogo">
+			<a href="{$urlCompetenza}" target="_blank"><img src="{$settings.sito.url}images/loghi_competenze/{$nomeCompetenzaUrl}.png" /></a>
 		</div>
 	</div>
 	{else}
@@ -355,7 +355,7 @@ window.onload=function() {
 							<option value="200">{#filtraInCarico#}</option>
 							<option value="300">{#filtraRisolte#}</option>
 						</select>
-						<input type="checkbox" id="filtro_recenti" name="recenti" checked="checked"  onclick="segnalazioni_filtra();" value="recenti" />
+						<input type="checkbox" id="filtro_recenti" name="recenti" {if $locType != "competenza"}checked="checked" {/if}onclick="segnalazioni_filtra();" value="recenti" />
 						<label for="filtro_recenti">
 							<span class="ui-button-text">{#filtraRecenti#}</span>
 						</label>

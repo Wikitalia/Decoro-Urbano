@@ -46,6 +46,6 @@ require_once('../include/funzioni.php');
 require_once('../include/controlli.php');
 require_once('../include/decorourbano.php');
 
-user_logout();
+Auth::user_logout();
 
 header('Location: login-form.php');

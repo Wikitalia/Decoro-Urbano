@@ -36,7 +36,8 @@ require_once("../include/controlli.php");
 require_once('../include/decorourbano.php');
 
 // recupera i dati dell'utente loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 // se non c'è alcun utente loggato restituisci un errore
 if (!$user) {

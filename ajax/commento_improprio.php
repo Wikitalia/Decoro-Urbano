@@ -47,7 +47,8 @@ if (!$_GET['idc']) {
 $idc = (int) $_GET['idc'];
 
 // verifico che l'utente sia loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 // se l'utente non è loggato esce
 if (!$user) {

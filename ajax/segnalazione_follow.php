@@ -44,7 +44,8 @@ if (!$_GET['ids'] || !checkNumericField($_GET['ids'])) {
 }
 
 // recupero le informazioni dell'utente loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 if (!$user) {
     echo "-1";

@@ -125,6 +125,22 @@ if ($fb_access_token) {
 		array('id_fb'=>$result['id'],'confermato'=>1,'eliminato'=>0)
 	);
 
+    if ($user[0]['id_utente'] == 99) {
+        error_log ('segnalazione_aggiungi.php $_POST:'.PHP_EOL.print_r($_POST,1).PHP_EOL."Risposta FB:".PHP_EOL.print_r($result,1),1,$settings['email']['indirizzo']);
+        $xml_out="";
+		$xml_out.="<decorourbano>";
+		$xml_out.="<status>";
+		$xml_out.="login_errato";
+		$xml_out.="</status>";
+		$xml_out.="</decorourbano>";
+		echo $xml_out;
+		exit;
+    }
+    
+    //error_log ("DEBUG:".PHP_EOL.'segnalazione_aggiungi.php $_POST:'.PHP_EOL.print_r($_POST,1).PHP_EOL."Risposta FB:".PHP_EOL.print_r($result,1),1,$settings['email']['indirizzo']);
+
+
+
 } elseif ($id_fb) {
 
 	// Invio email di avviso al team di DU.

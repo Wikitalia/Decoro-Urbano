@@ -24,7 +24,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//IT" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="it" />
+
 <title>{$pageTitle} - We DU! </title>
+
+
+
 
 <link rel="image_src" type="image/jpeg" href="{$settings.sito.url}images/DU_FB.jpg" />
 
@@ -46,8 +52,8 @@
 <meta property="og:site_name" content="Decoro Urbano{$siteNameTail}" />
 <meta property="fb:app_id" content="{$settings.facebook.app_id}" />
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="content-language" content="it" />
+
+
 
 
 
@@ -80,7 +86,7 @@
 
 <script type="text/javascript">
 
-	function check_fb_status_PHP_JS() {
+	/*function check_fb_status_PHP_JS() {
 
 		FB.getLoginStatus(function(response) {
 			if (!response.authResponse) {
@@ -88,7 +94,7 @@
 				if ('{$fb_user}' != '') location.href="{$settings.sito.logout}";
 			}
 		});
-	}
+	}*/
 
 	function check_fb_status() {
 
@@ -153,7 +159,7 @@
 	<div id="header">
 		<div class="container" id="banner" > 
 			
-				{if !isset($user)}
+				{if !$user}
 
 				<div class="auto left"><a href="{$settings.sito.prehome}" style="float:left;"><img src="/images/logo.png" id="logo" alt="{#logoAlt#}" /></a></div>
 				<div id="topBox">
@@ -206,13 +212,11 @@
 						<div class="fontS12" style="background:none !important;">
 							 <a href="javascript:show_login_dialog();" style="background:none !important;">Entra</a> <span class="fGreen">|</span> 
 							 <a href="{$settings.sito.registrati}" style="background:none !important;">{#registrati#}</a> <span class="fGreen">|</span> 
-							 
-							
 								
 								<fb:login-button scope="{$settings.facebook.perms}" style="width:72px; height:16px;  margin-top:-3px;" show-faces="false" width="200" max-rows="1" onlogin="check_fb_status();" autologoutlink="false"></fb:login-button>
 								
 								<div id="fb-root"></div>
-			       	<script src="http://connect.facebook.net/it_IT/all.js" type="text/javascript"></script>
+								<script src="http://connect.facebook.net/it_IT/all.js" type="text/javascript"></script>
 								<script>
 									window.fbAsyncInit = function() {
 									
@@ -272,7 +276,7 @@
 							oauth  : true
 						});
 						
-						check_fb_status_PHP_JS();
+						//check_fb_status_PHP_JS();
 						
        		};
        	</script>

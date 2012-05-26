@@ -30,13 +30,25 @@
 $params['next'] = $settings['sito']['url'];
 
 // in caso di utente FB deve essere invocato il logout da Facebook
-if (isset($_SESSION['fb_session'])) {
-    user_logout();
-    $facebook->logout($params);
+if(isset($_SESSION['fb_session']) && $_SESSION['fb_session']) {
+	Auth::user_logout();
+	try {
+	  require_once($settings['sito']['percorso'] . 'include/facebook_3.1.1/facebook.php');
+	  // Create Application instance.
+	  $facebook = new Facebook(array(
+			'appId' => $settings['facebook']['app_id'],
+			'secret' => $settings['facebook']['app_secret'],
+			'cookie' => true
+		));
+		$facebook->logout($params);
+	} catch (Exception $e) {
+		header('Location: ' . $params['next']);
+		exit;
+	}
 } else {
-    user_logout();
-    header('Location: ' . $params['next']);
-    die();
+	Auth::user_logout();
+	header('Location: ' . $params['next']);
+	exit;
 }
 
 ?>

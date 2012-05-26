@@ -47,14 +47,15 @@ if (strpos($decrypted, $salt)===FALSE) {
     // se l'id utente è stato recuperato in modo corretto, aggiorna lo stato dell'utente
     // nel database
     if (is_numeric($id_utente) && data_update('tab_utenti', array('confermato' => 1), array('id_utente' => $id_utente))) {
-        $user = user_session_update($id_utente);
-        unset($_SESSION['ERRMSG_ARR']);
+    
+    		unset($_SESSION['ERRMSG_ARR']);
+    		Auth::user_set_session($user);
 
         // invia email di conferma attivazione
         $data['from'] = $settings['email']['nome'] . ' <' . $settings['email']['indirizzo'] . '>';
         $data['to'] = $user['email'];
         $data['template'] = 'registrazioneBenvenuto';
-        $variabili['nome_utente'] = trim($user['nome'] . ' ' . $user['cognome']);
+        $variabili['nome_utente'] = stripslashes(trim($user['nome'] . ' ' . $user['cognome']));
         $data['variabili'] = $variabili;
         email_with_template($data);
 
