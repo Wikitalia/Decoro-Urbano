@@ -28,6 +28,7 @@
  * DecoroUrbano nel DB 
  */
 
+require_once('auth.class.php');
 
 /**
  * Restituisce i dati di un comune
@@ -306,7 +307,7 @@ function segnalazioni_get($parametri) {
 
     $formato = $parametri['formato'];
 
-    $user = logged_user_get();
+		$user = Auth::user_get();
     
     // INIZIO COSTRUZIONE SELECT
     $q_select = "SELECT s.id_segnalazione, s.id_tipo, s.lat, s.lng, s.id_comune, s.civico,
@@ -315,7 +316,7 @@ function segnalazioni_get($parametri) {
                  s.data, s.data AS last_edit, u.id_fb, u.nome, u.cognome, u.mostra_cognome, 
                  u.id_ruolo, t.nome AS tipo_nome, t.nome_url AS tipo_nome_url, 
                  t.label AS tipo_label, e.id_ente, e.nome AS nome_ente,
-								 cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza";
+								 cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza, cz.stato as stato_competenza, cz.testo_mappa as testo_competenza, cz.testo_twitter as testo_twitter_competenza";
     
     if ($user) {
         // se l'utente è loggato ed è necessario estrarre le informazioni sul follow
@@ -368,8 +369,10 @@ function segnalazioni_get($parametri) {
         $q_where .= " AND s.id_comune = ".$id_comune;
     }
     
-		if ($id_competenza >= 0) {
+		if ($id_competenza > 0) {
 				$q_where .= " AND s.id_competenza =".$id_competenza;
+		} else if ($id_competenza == 0) {
+				$q_where .= " AND (s.id_competenza =".$id_competenza." OR cz.stato = 2)";
 		}
 
     if (count($tipi)) {
@@ -606,10 +609,10 @@ function segnalazione_dettaglio_get($id) {
     
     $id = (int) $id;
 
-		$user = logged_user_get();
+		$user = Auth::user_get();
 
     $q = "SELECT s.*, u.id_fb, u.nome, u.cognome, u.mostra_cognome, u.id_ruolo, t.nome AS tipo_nome, t.label AS tipo_label, e.id_ente, e.nome AS nome_ente,
-    				cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza,
+    				cz.id_competenza as id_competenza, cz.nome as nome_competenza, cz.nome_url as nome_url_competenza, cz.stato as stato_competenza, cz.testo_mappa as testo_competenza, cz.testo_twitter as testo_twitter_competenza,
                 (SELECT COUNT(*) 
                     FROM tab_segnalazioni_follow AS sf 
                     WHERE sf.id_segnalazione = s.id_segnalazione) AS n_follower";
@@ -776,9 +779,9 @@ function segnalazione_marker_url_get($segnalazione) {
 
 	if ($segnalazione['id_tipo'] == 0) {
 		$marker = '/images/marker_'.$segnalazione['genere'].'.png';
-  } elseif ($segnalazione['id_competenza']) {
+  } elseif ($segnalazione['id_competenza'] && $segnalazione['stato_competenza'] == 1) {
 	  if ($segnalazione['stato'] >= 300) {
-			$marker = '/images/'.$segnalazione[0]['nome_url_competenza'].'_risolta.png';
+			$marker = '/images/'.$segnalazione['nome_url_competenza'].'_risolta.png';
 	  } else if ($segnalazione['stato'] >= 200) {
 		  $marker = '/images/'.$segnalazione['nome_url_competenza'].'_carico.png';
 	  } else {
@@ -911,8 +914,18 @@ function segnalazione_impropria_insert($id_segnalazione,$id_utente) {
 function segnalazione_fb_share($segnalazione) {
     global $facebook,$settings;
 
+    require_once($settings['sito']['percorso'] . 'include/facebook_3.1.1/facebook.php');
+
+    // Create Application instance.
+    $facebook = new Facebook(array(
+                'appId' => $settings['facebook']['app_id'],
+                'secret' => $settings['facebook']['app_secret'],
+                'cookie' => true
+            ));
+
     // costruisce i campi per lo share su FB
     $campi_per_fb = array(
+    		'access_token' => $_SESSION['fb_access_token'],
         'link' => $segnalazione['link_segnalazione'],
         'name' => $segnalazione['categoria'] . ' a ' . $segnalazione['citta'] . ' in ' . $segnalazione['via'],
         'caption' => parse_url($settings['sito']['url'], PHP_URL_HOST),
@@ -1080,22 +1093,6 @@ function commento_improrio_insert($id,$id_utente) {
 
 
 /**
- * Aggiorna la sessione dell'utente
- * 
- * Aggiorna le informazioni relative all'utente memorizzate nella sessione, recuperando
- * quelle aggiornate dal database
- * 
- * @param int $id id utente di cui inserire i dati in sessione
- * @return array array contenente i dati dell'utente appena inseriti in sessione
- */
-function user_session_update($id) {
-
-    $user = user_get($id);
-    $_SESSION['user'] = $user;
-    return $user;
-}
-
-/**
  * Restituisce i dati di un utente
  * 
  * Questa funzione recupera dal database i dati di utente identificato dall'id passato
@@ -1225,6 +1222,23 @@ function user_fb_get() {
     }
 }
 
+function user_fb_access_token() {
+    global $settings;
+    global $facebook;
+
+    require_once($settings['sito']['percorso'] . 'include/facebook_3.1.1/facebook.php');
+
+    // Create Application instance.
+    $facebook = new Facebook(array(
+                'appId' => $settings['facebook']['app_id'],
+                'secret' => $settings['facebook']['app_secret'],
+                'cookie' => true
+            ));
+
+    return $facebook->getAccessToken();
+
+}
+
 // Restituisce l'id utente dell'utente sul DB locale corrispondente all'id FB passato oppure false se non è presente
 
 /**
@@ -1279,66 +1293,13 @@ function user_fb_insert($fb_user) {
 				$data['from'] = $settings['email']['nome'].' <'.$settings['email']['indirizzo'].'>';
 				$data['to'] = $fb_user['email'];
 				$data['template'] = 'registrazioneBenvenuto';
-				$variabili['nome_utente'] = trim($fb_user['first_name'].' '.$fb_user['last_name']);
+				$variabili['nome_utente'] = stripslashes(trim($fb_user['first_name'].' '.$fb_user['last_name']));
 				$data['variabili'] = $variabili;
 				email_with_template($data);
         
     }
 }
 
-
-/**
- * Esegue il logout dell'utente
- * 
- * Questa funzione effettua il logout dell'utente cancellando la sessione e i cookie
- *
- */
-function user_logout() {
-
-    unset($_SESSION['fb_session']);
-    unset($_SESSION['user']);
-    unset($_SESSION['ERRMSG_ARR']);
-    setcookie("user_email", '', time() - 60 * 60 * 24, "/", ".".$settings['sito']['dominio']);
-    setcookie("user_password", '', time() - 60 * 60 * 24, "/", ".".$settings['sito']['dominio']);
-}
-
-
-/**
- * Restituisce l'utente loggato
- * 
- * Restituisce un array con i dati dell'utente loggato oppure false se non c'è utente loggato.
- * La funzione gestisce la differenza tra utente locale e utente Facebook 
- * 
- * @global array $settings
- * @global type $fb_user
- * @return mixed restituisce un array con i dati dell'utente o false 
- */
-
-function logged_user_get() {
-    global $settings;
-    global $fb_user;
-    
-    // controlla se in session sono presenti i dati di un utente
-    if (isset($_SESSION['user']) && isset($_SESSION['user']['id_utente']) && (trim($_SESSION['user']['id_utente']) != '')) {
-        // controlla se in sessione è presente per l'utente un id facebook
-        if ($_SESSION['fb_session']) {
-            // Controllo se l'utente è attualmente loggato su FB e se il suo id corrisponde con quello che ho in sessione
-            $fb_user = user_fb_get();
-            if ($fb_user && (int) $_SESSION['fb_session'] === (int) $fb_user['id']) {
-                // se gli id corrispondono, l'utente è loggato, aggiorno la sessione
-                return user_session_update(trim($_SESSION['user']['id_utente']));
-            } else {
-                // se gli id sono diversi, l'utente non è loggato
-                return false;
-            }
-        } else {
-            // l'utente è loggato, aggiorno la sessione
-            return user_session_update(trim($_SESSION['user']['id_utente']));
-        }
-    } else {
-        return false;
-    }
-}
 
 /**
  * Statistiche sullo stato dei comuni di una regione
@@ -1491,25 +1452,30 @@ function stats_segnalazioni_get($parametri) {
 		(SELECT COUNT(*) FROM tab_segnalazioni WHERE id_comune = tc.id_comune AND stato >= 300 AND eliminata = 0 AND archiviata = 0) AS risolte
 		FROM tab_comuni tc 
                 WHERE 1=1 ";*/
-        
-    	$q = "SELECT tc.*,COUNT(*) AS totali 
-    			FROM tab_segnalazioni AS s 
-    				LEFT JOIN tab_comuni AS tc ON s.id_comune = tc.id_comune
-    				LEFT JOIN tab_utenti AS u ON s.id_utente = u.id_utente
-    			WHERE s.stato >= ".$settings['segnalazioni']['in_attesa']." AND
-    					s.eliminata = 0 AND
-    					s.archiviata = 0 AND
-    					u.eliminato = 0 AND
-    					u.confermato = 1 ";
-       
+
         if ($comuni_attivi) {
-            $q .= " AND tc.stato = 1 ";
+            $comuni = data_get('tab_comuni',array('stato'=>1)); 
+        } else {
+        	$comuni = data_get('tab_comuni',array());
         }
-        
-        $q .= " GROUP BY s.id_comune ";
-       
-		$res = data_query($q);
-        return $res;
+    	   
+    
+    	for ($i=0;$i<count($comuni);$i++) {
+	    	$q = "SELECT COUNT(*) AS totali 
+	    			FROM tab_segnalazioni AS s 
+	    				LEFT JOIN tab_utenti AS u ON s.id_utente = u.id_utente
+	    			WHERE s.stato >= ".$settings['segnalazioni']['in_attesa']." AND
+	    					s.id_comune = ".$comuni[$i]['id_comune']." AND 
+	    					s.eliminata = 0 AND
+	    					s.archiviata = 0 AND
+	    					u.eliminato = 0 AND
+	    					u.confermato = 1 ";
+
+	    	$res = data_query($q);
+	    	$comuni[$i]['totali'] = $res[0]['totali'];
+    	}
+
+        return $comuni;
     }
 
     
@@ -1534,55 +1500,6 @@ function cookie_data_get() {
     } else
         return false;
 }
-
-
-/**
- * Effettua il login di un utente
- * 
- * Questa funzione controlla la validità dei dai di login passati come parametri.
- * In caso positivo effettua il login dell'utente impostando sessione e cookie,
- * altrimenti restituisce false
- * 
- * @param string $email email dell'utente
- * @param string $password password dell'utente
- * @param boolean $setcookie impostare o meno i cookie
- * @return boolean
- */
-function user_login($email, $password, $setcookie) {
-
-    // validazione dei parametri di login
-    if ($email == '') // email non vuota
-        $errmsg_arr[] = 'Nome utente non inserito';
-    
-    if ($password == '') // password non vuota
-        $errmsg_arr[] = 'Password non inserita';
-
-    // se l'utente è presente nel db, è attivo, confermato e la password è corretta
-    // procedi con il login
-    $result = data_get('tab_utenti', array('email' => $email, 'password' => sha1($password), 'confermato' => 1, 'eliminato' => 0));
-    if ($result) {
-        // aggiorna i dati in sessione
-        $user = user_session_update($result[0]['id_utente']);
-
-        unset($_SESSION['ERRMSG_ARR']);
-
-        // se richiesto imposta i cookie relativi all'email e alla password encodata
-        if ($setcookie) {
-            setcookie("user_email", $user['email'], time() + 60 * 60 * 24 * 100, "/", ".".$settings['sito']['dominio']);
-            setcookie("user_password", base64_encode($password), time() + 60 * 60 * 24 * 100, "/", ".".$settings['sito']['dominio']);
-        } else {
-            setcookie("user_email", '', time() - 60 * 60 * 24, "/", ".".$settings['sito']['dominio']);
-            setcookie("user_password", '', time() - 60 * 60 * 24, "/", ".".$settings['sito']['dominio']);
-        }
-        return true;
-    }
-    
-    // imposta gli errori di login
-    $errmsg_arr[] = 'Dati errati';
-    $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-    return false;
-}
-
 
 
 /**
