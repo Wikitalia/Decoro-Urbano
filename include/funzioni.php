@@ -154,7 +154,7 @@ function html_email_PEC($from, $to, $subject, $message) {
 		$mail->MsgHTML($message);
 		
 		if ($mail->Send()) return true;
-		else error_log ('Mail Error info:'.$mail->ErrorInfo,1,'f.comi@maioralabs.it');
+		else return false;
 }
 
 /**
