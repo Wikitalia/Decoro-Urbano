@@ -41,7 +41,7 @@ require_once("../include/funzioni.php");
 require_once("../include/controlli.php");
 require_once("../include/decorourbano.php");
 
-$id_fb=(isset($_POST['id_fb']))?cleanField($_POST['id_fb']):0;
+$id_fb=(isset($_POST['id_fb']))?cleanField((int)$_POST['id_fb']):0;
 $email=(isset($_POST['email']))?cleanField($_POST['email']):'';
 $password=(isset($_POST['password']))?sha1($_POST['password']):'';
 
@@ -63,7 +63,7 @@ if ($id_fb) {
 		$data['from'] = $settings['email']['nome'].' <'.$settings['email']['indirizzo'].'>';
 		$data['to'] = $email;
 		$data['template'] = 'registrazioneBenvenuto';
-		$variabili['nome_utente'] = trim($fb_user['first_name'].' '.$fb_user['last_name']);
+		$variabili['nome_utente'] = stripslashes(trim($fb_user['first_name'].' '.$fb_user['last_name']));
 		$data['variabili'] = $variabili;
 		email_with_template($data);
 		
