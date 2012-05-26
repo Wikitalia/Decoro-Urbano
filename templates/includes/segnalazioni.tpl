@@ -105,6 +105,11 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 	}
 	
 	//alert(segnalazione.foto);
+	
+	if (segnalazione.testo_twitter_competenza && segnalazione.testo_twitter_competenza != '')
+		twit = '#decorourbano : #'+segnalazione.tipo_nome+' #'+segnalazione.citta+' '+segnalazione.testo_twitter_competenza+' WeDU';
+	else
+		twit = '#decorourbano : #'+segnalazione.tipo_nome+' #'+segnalazione.citta+' WeDU';
 
 	segnalazioneListaHTML='\
 		<div style="display:none;">'+segnalazione.url+'</div>\
@@ -116,7 +121,7 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 		segnalazioneListaHTML+='</div>\
 			<div class="auto right">{if $page=="dettaglioSegnalazione"}<g:plusone size="medium" href="'+segnalazione.url+'"></g:plusone>{/if}</div>\
       <div class="auto right"><fb:like href="'+segnalazione.url+'" show_faces="true" send="false" layout="button_count" width="110" show_faces="false" font=""></fb:like></div>\
-			<div class="auto right"><a href="http://twitter.com/share" class="twitter-share-button" data-url="'+segnalazione.url+'" data-text="#decorourbano : #'+segnalazione.tipo_nome+' a #'+segnalazione.citta+' #WeDU" data-count="horizontal">Tweet</a>\<script type="text/javascript" src="http://platform.twitter.com/widgets.js"\>\</script\></div>\
+			<div class="auto right"><a href="http://twitter.com/share" class="twitter-share-button" data-url="'+segnalazione.url+'" data-text="'+twit+'" data-count="horizontal">Tweet</a>\<script type="text/javascript" src="http://platform.twitter.com/widgets.js"\>\</script\></div>\
 		</div>\{*segnUtente*}
 		<div>\{*Senza nome 1*}
 			<div class="segnDettagli">\
@@ -138,7 +143,7 @@ function aggiungi_segnalazione_lista(posizione, segnalazione) {
 					<div class="auto right textRight">\
 						<div class="marginT5 textRight marginB5">';
 						if (segnalazione.id_competenza) {
-							segnalazioneListaHTML += '<span>{#gestioneCompetenza#}</span>\
+							segnalazioneListaHTML += '<span>'+segnalazione.testo_competenza+'</span>\
 							<img src="{$settings.sito.url}images/loghi_competenze/'+segnalazione.nome_url_competenza+'.png" />';
 						}
 						segnalazioneListaHTML += '</div>\
@@ -776,6 +781,7 @@ function showModal(idu, ids, foto_base_url) {
 				$(this).css('height', finalHeight+'px');
 			}
 	
+			$('#modalFoto').append('<div class="bigCloseIcon right" style="position:relative;margin-bottom:-18px;" onclick="hideModal();"></div>');
 			$('#modalFoto').append(this);
 			
 			$('#modalInner').show();
