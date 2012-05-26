@@ -42,7 +42,8 @@ require_once('../../include/decorourbano.php');
 
 
 // recupera l'utente loggato
-$user = logged_user_get();
+Auth::init();
+$user = Auth::user_get();
 
 // controlla la presenza dell'utente e i privilegi del comune
 if (!$user || $user['id_ruolo'] != $settings['user']['ruolo_utente_comune']) {
@@ -69,11 +70,6 @@ if (data_update('tab_segnalazioni', array('stato' => $settings['segnalazioni']['
     $utente = user_get($segnalazione[0]['id_utente']);
 
     if ($utente['email_gestione_comune']) {
-        // recupera la categoria della segnalaione
-        $tipo = data_get('tab_tipi', array('id_tipo' => $segnalazione[0]['id_tipo']));
-        // costruisce il link alla segnalazione
-        $link_segnalazione = $settings['sito']['url'] . $tipo[0]['nome_url'] . '/' . $segnalazione[0]['citta_url'] . '/' . $segnalazione[0]['indirizzo_url'] . '/' . $id . '/';
-        
         // configura parametri e variabili per l'invio della notifica
         $data['from'] = $settings['email']['nome'] . ' <' . $settings['email']['indirizzo'] . '>';
         $data['to'] = $utente['nome'] . ' ' . $utente['cognome'] . ' <' . $utente['email'] . '>';
@@ -83,7 +79,7 @@ if (data_update('tab_segnalazioni', array('stato' => $settings['segnalazioni']['
         $variabili['data'] = strftime('%e %B %Y', $segnalazione[0]['data']);
         $variabili['citta'] = $segnalazione[0]['citta'];
         $variabili['indirizzo'] = $segnalazione[0]['indirizzo'] . ' ' . $segnalazione[0]['civico'];
-        $variabili['link_segnalazione'] = $link_segnalazione;
+        $variabili['link_segnalazione'] = $segnalazione[0]['url'];
         $data['variabili'] = $variabili;
         // invia la notifica
         email_with_template($data);
