@@ -1590,3 +1590,53 @@ function competenze_get($id_competenza = 0, $nome_url_competenza = '') {
 	return $competenze;
 
 }
+
+/**
+ * Richiamato da cronjob effettua l'invio della newsletter a tutti gli utenti che hanno accettato la ricezione di comunicazioni tramite email.
+ * Il template utilizzato è newsletterUtentiAttivi.tpl e richiede la modifica manuale dei contenuti.
+ */ 
+function invio_newsletter() {
+
+	global $settings;
+	
+	$q='select * from tab_utenti where confermato = 1 and eliminato = 0 and email_comunicazioni = 1 and inviato = 0 limit 200';
+	$utenti = data_query($q);
+	
+	if ($utenti) {
+	
+		foreach ($utenti as $key => $utente) {
+		
+			$nome = '';
+			$cognome = '';
+			$email = '';
+			
+			$nome = $utenti[$key]['nome'];
+			$cognome = $utenti[$key]['cognome'];
+			$email = $utenti[$key]['email'];
+			
+			
+			$from = $settings['email']['nome'].' <'.$settings['email']['indirizzo'].'>';
+			$to = $email;
+			$ccn = "";
+			
+			$data['from'] = $from;
+			$data['to'] = $to;
+			$data['ccn'] = $ccn;
+			
+			$data['template'] = 'newsletterUtentiAttivi';
+			$variabili['nome_utente'] = $nome;
+			$data['variabili'] = $variabili;
+			
+			if ($email) {
+				email_with_template($data);
+				
+				$table = "tab_utenti";
+				$fields = array ( 'inviato' => 1);
+				$conditions = array ( 'id_utente' => $utenti[$key]['id_utente']);
+				data_update($table, $fields, $conditions);
+				
+			}
+		
+		}
+	}
+}
